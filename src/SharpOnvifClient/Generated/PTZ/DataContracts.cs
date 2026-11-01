@@ -104,6 +104,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AbsoluteMoveRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AbsoluteMove", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((AbsoluteMoveRequest)o).ProfileToken, (o, v) => ((AbsoluteMoveRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Position", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZVector), typeof(SharpOnvifCommon.Onvif.PTZVector), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Position", Ns.Ver20Ptz, 1, false, o => ((AbsoluteMoveRequest)o).Position, (o, v) => ((AbsoluteMoveRequest)o).Position = (SharpOnvifCommon.Onvif.PTZVector)v, null, null, () => new SharpOnvifCommon.Onvif.PTZVector(), () => new SharpOnvifCommon.Onvif.PTZVector(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Speed", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Speed", Ns.Ver20Ptz, 2, true, o => ((AbsoluteMoveRequest)o).Speed, (o, v) => ((AbsoluteMoveRequest)o).Speed = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -117,6 +151,37 @@ namespace SharpOnvifClient.PTZ
     {
         public AbsoluteMoveResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AbsoluteMoveResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AbsoluteMoveResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -360,6 +425,40 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Capabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((Capabilities)o).Any, (o, v) => ((Capabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EFlip", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EFlip", null, 0, true, o => ((Capabilities)o).EFlip, (o, v) => ((Capabilities)o).EFlip = (bool)v, o => ((Capabilities)o).EFlipSpecified, (o, v) => ((Capabilities)o).EFlipSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Reverse", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Reverse", null, 0, true, o => ((Capabilities)o).Reverse, (o, v) => ((Capabilities)o).Reverse = (bool)v, o => ((Capabilities)o).ReverseSpecified, (o, v) => ((Capabilities)o).ReverseSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("GetCompatibleConfigurations", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "GetCompatibleConfigurations", null, 0, true, o => ((Capabilities)o).GetCompatibleConfigurations, (o, v) => ((Capabilities)o).GetCompatibleConfigurations = (bool)v, o => ((Capabilities)o).GetCompatibleConfigurationsSpecified, (o, v) => ((Capabilities)o).GetCompatibleConfigurationsSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MoveStatus", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MoveStatus", null, 0, true, o => ((Capabilities)o).MoveStatus, (o, v) => ((Capabilities)o).MoveStatus = (bool)v, o => ((Capabilities)o).MoveStatusSpecified, (o, v) => ((Capabilities)o).MoveStatusSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StatusPosition", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StatusPosition", null, 0, true, o => ((Capabilities)o).StatusPosition, (o, v) => ((Capabilities)o).StatusPosition = (bool)v, o => ((Capabilities)o).StatusPositionSpecified, (o, v) => ((Capabilities)o).StatusPositionSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MoveAndTrack", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string[]), typeof(string[]), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MoveAndTrack", null, 0, true, o => ((Capabilities)o).MoveAndTrack, (o, v) => ((Capabilities)o).MoveAndTrack = (string[])v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Capabilities)o).AnyAttr, (o, v) => ((Capabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -444,6 +543,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ContinuousMoveRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ContinuousMove", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((ContinuousMoveRequest)o).ProfileToken, (o, v) => ((ContinuousMoveRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Velocity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Velocity", Ns.Ver20Ptz, 1, false, o => ((ContinuousMoveRequest)o).Velocity, (o, v) => ((ContinuousMoveRequest)o).Velocity = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Timeout", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Timeout", Ns.Ver20Ptz, 2, true, o => ((ContinuousMoveRequest)o).Timeout, (o, v) => ((ContinuousMoveRequest)o).Timeout = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -456,6 +589,37 @@ namespace SharpOnvifClient.PTZ
     {
         public ContinuousMoveResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ContinuousMoveResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ContinuousMoveResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -501,6 +665,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreatePresetTourRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreatePresetTour", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((CreatePresetTourRequest)o).ProfileToken, (o, v) => ((CreatePresetTourRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -542,6 +738,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreatePresetTourResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreatePresetTourResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PresetTourToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetTourToken", Ns.Ver20Ptz, 0, false, o => ((CreatePresetTourResponse)o).PresetTourToken, (o, v) => ((CreatePresetTourResponse)o).PresetTourToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -701,6 +929,42 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GeoMoveRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GeoMove", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GeoMoveRequest)o).ProfileToken, (o, v) => ((GeoMoveRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Target", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.GeoLocation), typeof(SharpOnvifCommon.Onvif.GeoLocation), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Target", Ns.Ver20Ptz, 1, false, o => ((GeoMoveRequest)o).Target, (o, v) => ((GeoMoveRequest)o).Target = (SharpOnvifCommon.Onvif.GeoLocation)v, null, null, () => new SharpOnvifCommon.Onvif.GeoLocation(), () => new SharpOnvifCommon.Onvif.GeoLocation(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Speed", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Speed", Ns.Ver20Ptz, 2, true, o => ((GeoMoveRequest)o).Speed, (o, v) => ((GeoMoveRequest)o).Speed = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AreaHeight", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AreaHeight", Ns.Ver20Ptz, 3, true, o => ((GeoMoveRequest)o).AreaHeight, (o, v) => ((GeoMoveRequest)o).AreaHeight = (float)v, o => ((GeoMoveRequest)o).AreaHeightSpecified, (o, v) => ((GeoMoveRequest)o).AreaHeightSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AreaWidth", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AreaWidth", Ns.Ver20Ptz, 4, true, o => ((GeoMoveRequest)o).AreaWidth, (o, v) => ((GeoMoveRequest)o).AreaWidth = (float)v, o => ((GeoMoveRequest)o).AreaWidthSpecified, (o, v) => ((GeoMoveRequest)o).AreaWidthSpecified = v, () => default(float), () => default(float), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -716,6 +980,37 @@ namespace SharpOnvifClient.PTZ
     {
         public GeoMoveResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GeoMoveResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GeoMoveResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -766,6 +1061,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleConfigurations", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GetCompatibleConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -830,6 +1157,38 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.pTZConfigurationField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleConfigurationsResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZConfiguration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZConfiguration[]), typeof(SharpOnvifCommon.Onvif.PTZConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "PTZConfiguration", Ns.Ver20Ptz, 0, true, o => ((GetCompatibleConfigurationsResponse)o).PTZConfiguration, (o, v) => ((GetCompatibleConfigurationsResponse)o).PTZConfiguration = (SharpOnvifCommon.Onvif.PTZConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.PTZConfiguration[0], () => new SharpOnvifCommon.Onvif.PTZConfiguration(), n => new SharpOnvifCommon.Onvif.PTZConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -881,6 +1240,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationOptions", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver20Ptz, 0, false, o => ((GetConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -930,6 +1321,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationOptionsResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZConfigurationOptions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZConfigurationOptions), typeof(SharpOnvifCommon.Onvif.PTZConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PTZConfigurationOptions", Ns.Ver20Ptz, 0, false, o => ((GetConfigurationOptionsResponse)o).PTZConfigurationOptions, (o, v) => ((GetConfigurationOptionsResponse)o).PTZConfigurationOptions = (SharpOnvifCommon.Onvif.PTZConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.PTZConfigurationOptions(), () => new SharpOnvifCommon.Onvif.PTZConfigurationOptions(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -990,6 +1413,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfiguration", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PTZConfigurationToken", Ns.Ver20Ptz, 0, false, o => ((GetConfigurationRequest)o).PTZConfigurationToken, (o, v) => ((GetConfigurationRequest)o).PTZConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1048,6 +1503,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZConfiguration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZConfiguration), typeof(SharpOnvifCommon.Onvif.PTZConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PTZConfiguration", Ns.Ver20Ptz, 0, false, o => ((GetConfigurationResponse)o).PTZConfiguration, (o, v) => ((GetConfigurationResponse)o).PTZConfiguration = (SharpOnvifCommon.Onvif.PTZConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.PTZConfiguration(), () => new SharpOnvifCommon.Onvif.PTZConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1070,6 +1557,37 @@ namespace SharpOnvifClient.PTZ
     {
         public GetConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurations", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1141,6 +1659,38 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.pTZConfigurationField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationsResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZConfiguration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZConfiguration[]), typeof(SharpOnvifCommon.Onvif.PTZConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "PTZConfiguration", Ns.Ver20Ptz, 0, true, o => ((GetConfigurationsResponse)o).PTZConfiguration, (o, v) => ((GetConfigurationsResponse)o).PTZConfiguration = (SharpOnvifCommon.Onvif.PTZConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.PTZConfiguration[0], () => new SharpOnvifCommon.Onvif.PTZConfiguration(), n => new SharpOnvifCommon.Onvif.PTZConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1185,6 +1735,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetNodeRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetNode", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NodeToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NodeToken", Ns.Ver20Ptz, 0, false, o => ((GetNodeRequest)o).NodeToken, (o, v) => ((GetNodeRequest)o).NodeToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1233,6 +1815,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetNodeResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetNodeResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZNode", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZNode), typeof(SharpOnvifCommon.Onvif.PTZNode), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PTZNode", Ns.Ver20Ptz, 0, false, o => ((GetNodeResponse)o).PTZNode, (o, v) => ((GetNodeResponse)o).PTZNode = (SharpOnvifCommon.Onvif.PTZNode)v, null, null, () => new SharpOnvifCommon.Onvif.PTZNode(), () => new SharpOnvifCommon.Onvif.PTZNode(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1246,6 +1860,37 @@ namespace SharpOnvifClient.PTZ
     {
         public GetNodesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetNodesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetNodes", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1308,6 +1953,38 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.pTZNodeField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetNodesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetNodesResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZNode", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZNode[]), typeof(SharpOnvifCommon.Onvif.PTZNode), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "PTZNode", Ns.Ver20Ptz, 0, true, o => ((GetNodesResponse)o).PTZNode, (o, v) => ((GetNodesResponse)o).PTZNode = (SharpOnvifCommon.Onvif.PTZNode[])v, null, null, () => new SharpOnvifCommon.Onvif.PTZNode[0], () => new SharpOnvifCommon.Onvif.PTZNode(), n => new SharpOnvifCommon.Onvif.PTZNode[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1366,6 +2043,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetTourOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetTourOptions", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GetPresetTourOptionsRequest)o).ProfileToken, (o, v) => ((GetPresetTourOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetTourToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetTourToken", Ns.Ver20Ptz, 1, true, o => ((GetPresetTourOptionsRequest)o).PresetTourToken, (o, v) => ((GetPresetTourOptionsRequest)o).PresetTourToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1407,6 +2117,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetTourOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetTourOptionsResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZPresetTourOptions), typeof(SharpOnvifCommon.Onvif.PTZPresetTourOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver20Ptz, 0, false, o => ((GetPresetTourOptionsResponse)o).Options, (o, v) => ((GetPresetTourOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.PTZPresetTourOptions)v, null, null, () => new SharpOnvifCommon.Onvif.PTZPresetTourOptions(), () => new SharpOnvifCommon.Onvif.PTZPresetTourOptions(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1467,6 +2209,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetTourRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetTour", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GetPresetTourRequest)o).ProfileToken, (o, v) => ((GetPresetTourRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetTourToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetTourToken", Ns.Ver20Ptz, 1, false, o => ((GetPresetTourRequest)o).PresetTourToken, (o, v) => ((GetPresetTourRequest)o).PresetTourToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1510,6 +2285,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetTourResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetTourResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PresetTour", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PresetTour), typeof(SharpOnvifCommon.Onvif.PresetTour), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PresetTour", Ns.Ver20Ptz, 0, false, o => ((GetPresetTourResponse)o).PresetTour, (o, v) => ((GetPresetTourResponse)o).PresetTour = (SharpOnvifCommon.Onvif.PresetTour)v, null, null, () => new SharpOnvifCommon.Onvif.PresetTour(), () => new SharpOnvifCommon.Onvif.PresetTour(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1551,6 +2358,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetToursRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetTours", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GetPresetToursRequest)o).ProfileToken, (o, v) => ((GetPresetToursRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1607,6 +2446,38 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.presetTourField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetToursResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetToursResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PresetTour", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PresetTour[]), typeof(SharpOnvifCommon.Onvif.PresetTour), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "PresetTour", Ns.Ver20Ptz, 0, true, o => ((GetPresetToursResponse)o).PresetTour, (o, v) => ((GetPresetToursResponse)o).PresetTour = (SharpOnvifCommon.Onvif.PresetTour[])v, null, null, () => new SharpOnvifCommon.Onvif.PresetTour[0], () => new SharpOnvifCommon.Onvif.PresetTour(), n => new SharpOnvifCommon.Onvif.PresetTour[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1652,6 +2523,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresets", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GetPresetsRequest)o).ProfileToken, (o, v) => ((GetPresetsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1712,6 +2615,38 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.presetField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPresetsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPresetsResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Preset", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZPreset[]), typeof(SharpOnvifCommon.Onvif.PTZPreset), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Preset", Ns.Ver20Ptz, 0, true, o => ((GetPresetsResponse)o).Preset, (o, v) => ((GetPresetsResponse)o).Preset = (SharpOnvifCommon.Onvif.PTZPreset[])v, null, null, () => new SharpOnvifCommon.Onvif.PTZPreset[0], () => new SharpOnvifCommon.Onvif.PTZPreset(), n => new SharpOnvifCommon.Onvif.PTZPreset[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1722,6 +2657,37 @@ namespace SharpOnvifClient.PTZ
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1770,6 +2736,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Capabilities), typeof(Capabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver20Ptz, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (Capabilities)v, null, null, () => new Capabilities(), () => new Capabilities(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1816,6 +2814,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetStatusRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetStatus", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GetStatusRequest)o).ProfileToken, (o, v) => ((GetStatusRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1860,6 +2890,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetStatusResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetStatusResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZStatus", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZStatus), typeof(SharpOnvifCommon.Onvif.PTZStatus), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PTZStatus", Ns.Ver20Ptz, 0, false, o => ((GetStatusResponse)o).PTZStatus, (o, v) => ((GetStatusResponse)o).PTZStatus = (SharpOnvifCommon.Onvif.PTZStatus)v, null, null, () => new SharpOnvifCommon.Onvif.PTZStatus(), () => new SharpOnvifCommon.Onvif.PTZStatus(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1928,6 +2990,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GotoHomePositionRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GotoHomePosition", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GotoHomePositionRequest)o).ProfileToken, (o, v) => ((GotoHomePositionRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Speed", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Speed", Ns.Ver20Ptz, 1, true, o => ((GotoHomePositionRequest)o).Speed, (o, v) => ((GotoHomePositionRequest)o).Speed = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1939,6 +3034,37 @@ namespace SharpOnvifClient.PTZ
     {
         public GotoHomePositionResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GotoHomePositionResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GotoHomePositionResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2025,6 +3151,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GotoPresetRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GotoPreset", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((GotoPresetRequest)o).ProfileToken, (o, v) => ((GotoPresetRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetToken", Ns.Ver20Ptz, 1, false, o => ((GotoPresetRequest)o).PresetToken, (o, v) => ((GotoPresetRequest)o).PresetToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Speed", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Speed", Ns.Ver20Ptz, 2, true, o => ((GotoPresetRequest)o).Speed, (o, v) => ((GotoPresetRequest)o).Speed = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2036,6 +3196,37 @@ namespace SharpOnvifClient.PTZ
     {
         public GotoPresetResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GotoPresetResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GotoPresetResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2096,6 +3287,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyPresetTourRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyPresetTour", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((ModifyPresetTourRequest)o).ProfileToken, (o, v) => ((ModifyPresetTourRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetTour", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PresetTour), typeof(SharpOnvifCommon.Onvif.PresetTour), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PresetTour", Ns.Ver20Ptz, 1, false, o => ((ModifyPresetTourRequest)o).PresetTour, (o, v) => ((ModifyPresetTourRequest)o).PresetTour = (SharpOnvifCommon.Onvif.PresetTour)v, null, null, () => new SharpOnvifCommon.Onvif.PresetTour(), () => new SharpOnvifCommon.Onvif.PresetTour(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2106,6 +3330,37 @@ namespace SharpOnvifClient.PTZ
     {
         public ModifyPresetTourResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyPresetTourResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyPresetTourResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2267,6 +3522,44 @@ namespace SharpOnvifClient.PTZ
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new MoveAndStartTrackingRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("MoveAndStartTracking", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((MoveAndStartTrackingRequest)o).ProfileToken, (o, v) => ((MoveAndStartTrackingRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetToken", Ns.Ver20Ptz, 1, true, o => ((MoveAndStartTrackingRequest)o).PresetToken, (o, v) => ((MoveAndStartTrackingRequest)o).PresetToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("GeoLocation", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.GeoLocation), typeof(SharpOnvifCommon.Onvif.GeoLocation), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "GeoLocation", Ns.Ver20Ptz, 2, true, o => ((MoveAndStartTrackingRequest)o).GeoLocation, (o, v) => ((MoveAndStartTrackingRequest)o).GeoLocation = (SharpOnvifCommon.Onvif.GeoLocation)v, null, null, () => new SharpOnvifCommon.Onvif.GeoLocation(), () => new SharpOnvifCommon.Onvif.GeoLocation(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("TargetPosition", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZVector), typeof(SharpOnvifCommon.Onvif.PTZVector), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "TargetPosition", Ns.Ver20Ptz, 3, true, o => ((MoveAndStartTrackingRequest)o).TargetPosition, (o, v) => ((MoveAndStartTrackingRequest)o).TargetPosition = (SharpOnvifCommon.Onvif.PTZVector)v, null, null, () => new SharpOnvifCommon.Onvif.PTZVector(), () => new SharpOnvifCommon.Onvif.PTZVector(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Speed", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Speed", Ns.Ver20Ptz, 4, true, o => ((MoveAndStartTrackingRequest)o).Speed, (o, v) => ((MoveAndStartTrackingRequest)o).Speed = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ObjectID", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ObjectID", Ns.Ver20Ptz, 5, true, o => ((MoveAndStartTrackingRequest)o).ObjectID, (o, v) => ((MoveAndStartTrackingRequest)o).ObjectID = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 6, false, o => ((MoveAndStartTrackingRequest)o).Any, (o, v) => ((MoveAndStartTrackingRequest)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2283,6 +3576,37 @@ namespace SharpOnvifClient.PTZ
     {
         public MoveAndStartTrackingResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new MoveAndStartTrackingResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("MoveAndStartTrackingResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2358,6 +3682,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new OperatePresetTourRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("OperatePresetTour", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((OperatePresetTourRequest)o).ProfileToken, (o, v) => ((OperatePresetTourRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetTourToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetTourToken", Ns.Ver20Ptz, 1, false, o => ((OperatePresetTourRequest)o).PresetTourToken, (o, v) => ((OperatePresetTourRequest)o).PresetTourToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Operation", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZPresetTourOperation), typeof(SharpOnvifCommon.Onvif.PTZPresetTourOperation), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "Operation", Ns.Ver20Ptz, 2, false, o => ((OperatePresetTourRequest)o).Operation, (o, v) => ((OperatePresetTourRequest)o).Operation = (SharpOnvifCommon.Onvif.PTZPresetTourOperation)v, null, null, () => default(SharpOnvifCommon.Onvif.PTZPresetTourOperation), () => default(SharpOnvifCommon.Onvif.PTZPresetTourOperation), null, () => SharpOnvifCommon.Onvif.EnumXml.ValuesOfPTZPresetTourOperation(), null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2368,6 +3726,37 @@ namespace SharpOnvifClient.PTZ
     {
         public OperatePresetTourResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new OperatePresetTourResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("OperatePresetTourResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2456,6 +3845,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RelativeMoveRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RelativeMove", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((RelativeMoveRequest)o).ProfileToken, (o, v) => ((RelativeMoveRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Translation", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZVector), typeof(SharpOnvifCommon.Onvif.PTZVector), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Translation", Ns.Ver20Ptz, 1, false, o => ((RelativeMoveRequest)o).Translation, (o, v) => ((RelativeMoveRequest)o).Translation = (SharpOnvifCommon.Onvif.PTZVector)v, null, null, () => new SharpOnvifCommon.Onvif.PTZVector(), () => new SharpOnvifCommon.Onvif.PTZVector(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Speed", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZSpeed), typeof(SharpOnvifCommon.Onvif.PTZSpeed), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Speed", Ns.Ver20Ptz, 2, true, o => ((RelativeMoveRequest)o).Speed, (o, v) => ((RelativeMoveRequest)o).Speed = (SharpOnvifCommon.Onvif.PTZSpeed)v, null, null, () => new SharpOnvifCommon.Onvif.PTZSpeed(), () => new SharpOnvifCommon.Onvif.PTZSpeed(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2470,6 +3893,37 @@ namespace SharpOnvifClient.PTZ
     {
         public RelativeMoveResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RelativeMoveResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RelativeMoveResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2537,6 +3991,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemovePresetRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemovePreset", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((RemovePresetRequest)o).ProfileToken, (o, v) => ((RemovePresetRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetToken", Ns.Ver20Ptz, 1, false, o => ((RemovePresetRequest)o).PresetToken, (o, v) => ((RemovePresetRequest)o).PresetToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2548,6 +4035,37 @@ namespace SharpOnvifClient.PTZ
     {
         public RemovePresetResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemovePresetResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemovePresetResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2608,6 +4126,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemovePresetTourRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemovePresetTour", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((RemovePresetTourRequest)o).ProfileToken, (o, v) => ((RemovePresetTourRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetTourToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetTourToken", Ns.Ver20Ptz, 1, false, o => ((RemovePresetTourRequest)o).PresetTourToken, (o, v) => ((RemovePresetTourRequest)o).PresetTourToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2618,6 +4169,37 @@ namespace SharpOnvifClient.PTZ
     {
         public RemovePresetTourResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemovePresetTourResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemovePresetTourResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2685,6 +4267,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SendAuxiliaryCommandRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SendAuxiliaryCommand", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((SendAuxiliaryCommandRequest)o).ProfileToken, (o, v) => ((SendAuxiliaryCommandRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AuxiliaryData", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AuxiliaryData", Ns.Ver20Ptz, 1, false, o => ((SendAuxiliaryCommandRequest)o).AuxiliaryData, (o, v) => ((SendAuxiliaryCommandRequest)o).AuxiliaryData = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2730,6 +4345,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SendAuxiliaryCommandResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SendAuxiliaryCommandResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AuxiliaryResponse", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AuxiliaryResponse", Ns.Ver20Ptz, 0, false, o => ((SendAuxiliaryCommandResponse)o).AuxiliaryResponse, (o, v) => ((SendAuxiliaryCommandResponse)o).AuxiliaryResponse = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2794,6 +4441,39 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetConfiguration", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PTZConfiguration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZConfiguration), typeof(SharpOnvifCommon.Onvif.PTZConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "PTZConfiguration", Ns.Ver20Ptz, 0, false, o => ((SetConfigurationRequest)o).PTZConfiguration, (o, v) => ((SetConfigurationRequest)o).PTZConfiguration = (SharpOnvifCommon.Onvif.PTZConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.PTZConfiguration(), () => new SharpOnvifCommon.Onvif.PTZConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver20Ptz, 1, false, o => ((SetConfigurationRequest)o).ForcePersistence, (o, v) => ((SetConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2804,6 +4484,37 @@ namespace SharpOnvifClient.PTZ
     {
         public SetConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetConfigurationResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2854,6 +4565,38 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetHomePositionRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetHomePosition", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((SetHomePositionRequest)o).ProfileToken, (o, v) => ((SetHomePositionRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2866,6 +4609,37 @@ namespace SharpOnvifClient.PTZ
     {
         public SetHomePositionResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetHomePositionResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetHomePositionResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2957,6 +4731,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetPresetRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetPreset", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((SetPresetRequest)o).ProfileToken, (o, v) => ((SetPresetRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetName", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetName", Ns.Ver20Ptz, 1, true, o => ((SetPresetRequest)o).PresetName, (o, v) => ((SetPresetRequest)o).PresetName = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PresetToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetToken", Ns.Ver20Ptz, 2, true, o => ((SetPresetRequest)o).PresetToken, (o, v) => ((SetPresetRequest)o).PresetToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3008,6 +4816,38 @@ namespace SharpOnvifClient.PTZ
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetPresetResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetPresetResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("PresetToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PresetToken", Ns.Ver20Ptz, 0, false, o => ((SetPresetResponse)o).PresetToken, (o, v) => ((SetPresetResponse)o).PresetToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3130,6 +4970,40 @@ namespace SharpOnvifClient.PTZ
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StopRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("Stop", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver20Ptz, 0, false, o => ((StopRequest)o).ProfileToken, (o, v) => ((StopRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PanTilt", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PanTilt", Ns.Ver20Ptz, 1, true, o => ((StopRequest)o).PanTilt, (o, v) => ((StopRequest)o).PanTilt = (bool)v, o => ((StopRequest)o).PanTiltSpecified, (o, v) => ((StopRequest)o).PanTiltSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Zoom", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Zoom", Ns.Ver20Ptz, 2, true, o => ((StopRequest)o).Zoom, (o, v) => ((StopRequest)o).Zoom = (bool)v, o => ((StopRequest)o).ZoomSpecified, (o, v) => ((StopRequest)o).ZoomSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3142,6 +5016,37 @@ namespace SharpOnvifClient.PTZ
     {
         public StopResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StopResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("StopResponse", "http://www.onvif.org/ver20/ptz/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }

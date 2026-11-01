@@ -53,6 +53,18 @@ namespace SharpOnvifClient.Thermal
                     return default(Polarity);
             }
         }
+
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfPolarity;
+
+        /// <summary>The values of <see cref="Polarity"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfPolarity()
+        {
+            return s_valuesOfPolarity ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfPolarity, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(Polarity.WhiteHot, "WhiteHot", "WhiteHot"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(Polarity.BlackHot, "BlackHot", "BlackHot"),
+            });
+        }
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
@@ -142,6 +154,35 @@ namespace SharpOnvifClient.Thermal
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Capabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((Capabilities)o).Any, (o, v) => ((Capabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Radiometry", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Radiometry", null, 0, true, o => ((Capabilities)o).Radiometry, (o, v) => ((Capabilities)o).Radiometry = (bool)v, o => ((Capabilities)o).RadiometrySpecified, (o, v) => ((Capabilities)o).RadiometrySpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Capabilities)o).AnyAttr, (o, v) => ((Capabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -257,6 +298,37 @@ namespace SharpOnvifClient.Thermal
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ColorPalette();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Thermal, 0, false, o => ((ColorPalette)o).Name, (o, v) => ((ColorPalette)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((ColorPalette)o).Any, (o, v) => ((ColorPalette)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("token", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "token", null, 0, false, o => ((ColorPalette)o).token, (o, v) => ((ColorPalette)o).token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Type", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Type", null, 0, false, o => ((ColorPalette)o).Type, (o, v) => ((ColorPalette)o).Type = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ColorPalette)o).AnyAttr, (o, v) => ((ColorPalette)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -385,6 +457,38 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Configuration();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ColorPalette", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ColorPalette), typeof(ColorPalette), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ColorPalette", Ns.Ver10Thermal, 0, false, o => ((Configuration)o).ColorPalette, (o, v) => ((Configuration)o).ColorPalette = (ColorPalette)v, null, null, () => new ColorPalette(), () => new ColorPalette(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Polarity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Polarity), typeof(Polarity), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "Polarity", Ns.Ver10Thermal, 1, false, o => ((Configuration)o).Polarity, (o, v) => ((Configuration)o).Polarity = (Polarity)v, null, null, () => default(Polarity), () => default(Polarity), null, () => EnumXml.ValuesOfPolarity(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("NUCTable", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(NUCTable), typeof(NUCTable), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "NUCTable", Ns.Ver10Thermal, 2, true, o => ((Configuration)o).NUCTable, (o, v) => ((Configuration)o).NUCTable = (NUCTable)v, null, null, () => new NUCTable(), () => new NUCTable(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Cooler", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Cooler), typeof(Cooler), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Cooler", Ns.Ver10Thermal, 3, true, o => ((Configuration)o).Cooler, (o, v) => ((Configuration)o).Cooler = (Cooler)v, null, null, () => new Cooler(), () => new Cooler(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 4, false, o => ((Configuration)o).Any, (o, v) => ((Configuration)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Configuration)o).AnyAttr, (o, v) => ((Configuration)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
@@ -508,6 +612,37 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ConfigurationOptions();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ColorPalette", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ColorPalette[]), typeof(ColorPalette), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ColorPalette", Ns.Ver10Thermal, 0, false, o => ((ConfigurationOptions)o).ColorPalette, (o, v) => ((ConfigurationOptions)o).ColorPalette = (ColorPalette[])v, null, null, () => new ColorPalette[0], () => new ColorPalette(), n => new ColorPalette[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("NUCTable", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(NUCTable[]), typeof(NUCTable), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "NUCTable", Ns.Ver10Thermal, 1, true, o => ((ConfigurationOptions)o).NUCTable, (o, v) => ((ConfigurationOptions)o).NUCTable = (NUCTable[])v, null, null, () => new NUCTable[0], () => new NUCTable(), n => new NUCTable[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("CoolerOptions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(CoolerOptions), typeof(CoolerOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "CoolerOptions", Ns.Ver10Thermal, 2, true, o => ((ConfigurationOptions)o).CoolerOptions, (o, v) => ((ConfigurationOptions)o).CoolerOptions = (CoolerOptions)v, null, null, () => new CoolerOptions(), () => new CoolerOptions(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 3, false, o => ((ConfigurationOptions)o).Any, (o, v) => ((ConfigurationOptions)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ConfigurationOptions)o).AnyAttr, (o, v) => ((ConfigurationOptions)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
@@ -603,6 +738,36 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Configurations();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Configuration), typeof(Configuration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Thermal, 0, false, o => ((Configurations)o).Configuration, (o, v) => ((Configurations)o).Configuration = (Configuration)v, null, null, () => new Configuration(), () => new Configuration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((Configurations)o).Any, (o, v) => ((Configurations)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("token", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "token", null, 0, false, o => ((Configurations)o).token, (o, v) => ((Configurations)o).token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Configurations)o).AnyAttr, (o, v) => ((Configurations)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -693,6 +858,35 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Cooler();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Enabled", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Enabled", Ns.Ver10Thermal, 0, false, o => ((Cooler)o).Enabled, (o, v) => ((Cooler)o).Enabled = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RunTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RunTime", Ns.Ver10Thermal, 1, true, o => ((Cooler)o).RunTime, (o, v) => ((Cooler)o).RunTime = (float)v, o => ((Cooler)o).RunTimeSpecified, (o, v) => ((Cooler)o).RunTimeSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 2, false, o => ((Cooler)o).Any, (o, v) => ((Cooler)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -768,6 +962,34 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CoolerOptions();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Enabled", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Enabled", Ns.Ver10Thermal, 0, true, o => ((CoolerOptions)o).Enabled, (o, v) => ((CoolerOptions)o).Enabled = (bool)v, o => ((CoolerOptions)o).EnabledSpecified, (o, v) => ((CoolerOptions)o).EnabledSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((CoolerOptions)o).Any, (o, v) => ((CoolerOptions)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -814,6 +1036,38 @@ namespace SharpOnvifClient.Thermal
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationOptions", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Thermal, 0, false, o => ((GetConfigurationOptionsRequest)o).VideoSourceToken, (o, v) => ((GetConfigurationOptionsRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -864,6 +1118,38 @@ namespace SharpOnvifClient.Thermal
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationOptionsResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationOptions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ConfigurationOptions), typeof(ConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ConfigurationOptions", Ns.Ver10Thermal, 0, false, o => ((GetConfigurationOptionsResponse)o).ConfigurationOptions, (o, v) => ((GetConfigurationOptionsResponse)o).ConfigurationOptions = (ConfigurationOptions)v, null, null, () => new ConfigurationOptions(), () => new ConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -908,6 +1194,38 @@ namespace SharpOnvifClient.Thermal
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfiguration", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Thermal, 0, false, o => ((GetConfigurationRequest)o).VideoSourceToken, (o, v) => ((GetConfigurationRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -956,6 +1274,38 @@ namespace SharpOnvifClient.Thermal
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Configuration), typeof(Configuration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Thermal, 0, false, o => ((GetConfigurationResponse)o).Configuration, (o, v) => ((GetConfigurationResponse)o).Configuration = (Configuration)v, null, null, () => new Configuration(), () => new Configuration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -966,6 +1316,37 @@ namespace SharpOnvifClient.Thermal
     {
         public GetConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurations", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1025,6 +1406,38 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetConfigurationsResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Configurations[]), typeof(Configurations), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Thermal, 0, true, o => ((GetConfigurationsResponse)o).Configurations, (o, v) => ((GetConfigurationsResponse)o).Configurations = (Configurations[])v, null, null, () => new Configurations[0], () => new Configurations(), n => new Configurations[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1071,6 +1484,38 @@ namespace SharpOnvifClient.Thermal
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRadiometryConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRadiometryConfigurationOptions", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Thermal, 0, false, o => ((GetRadiometryConfigurationOptionsRequest)o).VideoSourceToken, (o, v) => ((GetRadiometryConfigurationOptionsRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1121,6 +1566,38 @@ namespace SharpOnvifClient.Thermal
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRadiometryConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRadiometryConfigurationOptionsResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationOptions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RadiometryConfigurationOptions), typeof(RadiometryConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ConfigurationOptions", Ns.Ver10Thermal, 0, false, o => ((GetRadiometryConfigurationOptionsResponse)o).ConfigurationOptions, (o, v) => ((GetRadiometryConfigurationOptionsResponse)o).ConfigurationOptions = (RadiometryConfigurationOptions)v, null, null, () => new RadiometryConfigurationOptions(), () => new RadiometryConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1165,6 +1642,38 @@ namespace SharpOnvifClient.Thermal
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRadiometryConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRadiometryConfiguration", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Thermal, 0, false, o => ((GetRadiometryConfigurationRequest)o).VideoSourceToken, (o, v) => ((GetRadiometryConfigurationRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1213,6 +1722,38 @@ namespace SharpOnvifClient.Thermal
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRadiometryConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRadiometryConfigurationResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RadiometryConfiguration), typeof(RadiometryConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Thermal, 0, false, o => ((GetRadiometryConfigurationResponse)o).Configuration, (o, v) => ((GetRadiometryConfigurationResponse)o).Configuration = (RadiometryConfiguration)v, null, null, () => new RadiometryConfiguration(), () => new RadiometryConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1223,6 +1764,37 @@ namespace SharpOnvifClient.Thermal
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1269,6 +1841,38 @@ namespace SharpOnvifClient.Thermal
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Capabilities), typeof(Capabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Thermal, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (Capabilities)v, null, null, () => new Capabilities(), () => new Capabilities(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1435,6 +2039,38 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new NUCTable();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Thermal, 0, false, o => ((NUCTable)o).Name, (o, v) => ((NUCTable)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((NUCTable)o).Any, (o, v) => ((NUCTable)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("token", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "token", null, 0, false, o => ((NUCTable)o).token, (o, v) => ((NUCTable)o).token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("LowTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "LowTemperature", null, 0, true, o => ((NUCTable)o).LowTemperature, (o, v) => ((NUCTable)o).LowTemperature = (float)v, o => ((NUCTable)o).LowTemperatureSpecified, (o, v) => ((NUCTable)o).LowTemperatureSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("HighTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "HighTemperature", null, 0, true, o => ((NUCTable)o).HighTemperature, (o, v) => ((NUCTable)o).HighTemperature = (float)v, o => ((NUCTable)o).HighTemperatureSpecified, (o, v) => ((NUCTable)o).HighTemperatureSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((NUCTable)o).AnyAttr, (o, v) => ((NUCTable)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
@@ -1511,6 +2147,35 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RadiometryConfiguration();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RadiometryGlobalParameters", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RadiometryGlobalParameters), typeof(RadiometryGlobalParameters), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "RadiometryGlobalParameters", Ns.Ver10Thermal, 0, true, o => ((RadiometryConfiguration)o).RadiometryGlobalParameters, (o, v) => ((RadiometryConfiguration)o).RadiometryGlobalParameters = (RadiometryGlobalParameters)v, null, null, () => new RadiometryGlobalParameters(), () => new RadiometryGlobalParameters(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((RadiometryConfiguration)o).Any, (o, v) => ((RadiometryConfiguration)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((RadiometryConfiguration)o).AnyAttr, (o, v) => ((RadiometryConfiguration)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/thermal/wsdl")]
@@ -1585,6 +2250,35 @@ namespace SharpOnvifClient.Thermal
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RadiometryConfigurationOptions();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RadiometryGlobalParameterOptions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RadiometryGlobalParameterOptions), typeof(RadiometryGlobalParameterOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "RadiometryGlobalParameterOptions", Ns.Ver10Thermal, 0, true, o => ((RadiometryConfigurationOptions)o).RadiometryGlobalParameterOptions, (o, v) => ((RadiometryConfigurationOptions)o).RadiometryGlobalParameterOptions = (RadiometryGlobalParameterOptions)v, null, null, () => new RadiometryGlobalParameterOptions(), () => new RadiometryGlobalParameterOptions(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((RadiometryConfigurationOptions)o).Any, (o, v) => ((RadiometryConfigurationOptions)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((RadiometryConfigurationOptions)o).AnyAttr, (o, v) => ((RadiometryConfigurationOptions)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1783,6 +2477,42 @@ namespace SharpOnvifClient.Thermal
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RadiometryGlobalParameterOptions();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ReflectedAmbientTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ReflectedAmbientTemperature", Ns.Ver10Thermal, 0, false, o => ((RadiometryGlobalParameterOptions)o).ReflectedAmbientTemperature, (o, v) => ((RadiometryGlobalParameterOptions)o).ReflectedAmbientTemperature = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Emissivity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Emissivity", Ns.Ver10Thermal, 1, false, o => ((RadiometryGlobalParameterOptions)o).Emissivity, (o, v) => ((RadiometryGlobalParameterOptions)o).Emissivity = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DistanceToObject", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "DistanceToObject", Ns.Ver10Thermal, 2, false, o => ((RadiometryGlobalParameterOptions)o).DistanceToObject, (o, v) => ((RadiometryGlobalParameterOptions)o).DistanceToObject = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RelativeHumidity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "RelativeHumidity", Ns.Ver10Thermal, 3, true, o => ((RadiometryGlobalParameterOptions)o).RelativeHumidity, (o, v) => ((RadiometryGlobalParameterOptions)o).RelativeHumidity = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AtmosphericTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "AtmosphericTemperature", Ns.Ver10Thermal, 4, true, o => ((RadiometryGlobalParameterOptions)o).AtmosphericTemperature, (o, v) => ((RadiometryGlobalParameterOptions)o).AtmosphericTemperature = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AtmosphericTransmittance", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "AtmosphericTransmittance", Ns.Ver10Thermal, 5, true, o => ((RadiometryGlobalParameterOptions)o).AtmosphericTransmittance, (o, v) => ((RadiometryGlobalParameterOptions)o).AtmosphericTransmittance = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtOpticsTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ExtOpticsTemperature", Ns.Ver10Thermal, 6, true, o => ((RadiometryGlobalParameterOptions)o).ExtOpticsTemperature, (o, v) => ((RadiometryGlobalParameterOptions)o).ExtOpticsTemperature = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtOpticsTransmittance", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FloatRange), typeof(SharpOnvifCommon.Onvif.FloatRange), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ExtOpticsTransmittance", Ns.Ver10Thermal, 7, true, o => ((RadiometryGlobalParameterOptions)o).ExtOpticsTransmittance, (o, v) => ((RadiometryGlobalParameterOptions)o).ExtOpticsTransmittance = (SharpOnvifCommon.Onvif.FloatRange)v, null, null, () => new SharpOnvifCommon.Onvif.FloatRange(), () => new SharpOnvifCommon.Onvif.FloatRange(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 8, false, o => ((RadiometryGlobalParameterOptions)o).Any, (o, v) => ((RadiometryGlobalParameterOptions)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((RadiometryGlobalParameterOptions)o).AnyAttr, (o, v) => ((RadiometryGlobalParameterOptions)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2067,6 +2797,42 @@ namespace SharpOnvifClient.Thermal
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RadiometryGlobalParameters();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ReflectedAmbientTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ReflectedAmbientTemperature", Ns.Ver10Thermal, 0, false, o => ((RadiometryGlobalParameters)o).ReflectedAmbientTemperature, (o, v) => ((RadiometryGlobalParameters)o).ReflectedAmbientTemperature = (float)v, null, null, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Emissivity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Emissivity", Ns.Ver10Thermal, 1, false, o => ((RadiometryGlobalParameters)o).Emissivity, (o, v) => ((RadiometryGlobalParameters)o).Emissivity = (float)v, null, null, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DistanceToObject", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DistanceToObject", Ns.Ver10Thermal, 2, false, o => ((RadiometryGlobalParameters)o).DistanceToObject, (o, v) => ((RadiometryGlobalParameters)o).DistanceToObject = (float)v, null, null, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RelativeHumidity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RelativeHumidity", Ns.Ver10Thermal, 3, true, o => ((RadiometryGlobalParameters)o).RelativeHumidity, (o, v) => ((RadiometryGlobalParameters)o).RelativeHumidity = (float)v, o => ((RadiometryGlobalParameters)o).RelativeHumiditySpecified, (o, v) => ((RadiometryGlobalParameters)o).RelativeHumiditySpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AtmosphericTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AtmosphericTemperature", Ns.Ver10Thermal, 4, true, o => ((RadiometryGlobalParameters)o).AtmosphericTemperature, (o, v) => ((RadiometryGlobalParameters)o).AtmosphericTemperature = (float)v, o => ((RadiometryGlobalParameters)o).AtmosphericTemperatureSpecified, (o, v) => ((RadiometryGlobalParameters)o).AtmosphericTemperatureSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AtmosphericTransmittance", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AtmosphericTransmittance", Ns.Ver10Thermal, 5, true, o => ((RadiometryGlobalParameters)o).AtmosphericTransmittance, (o, v) => ((RadiometryGlobalParameters)o).AtmosphericTransmittance = (float)v, o => ((RadiometryGlobalParameters)o).AtmosphericTransmittanceSpecified, (o, v) => ((RadiometryGlobalParameters)o).AtmosphericTransmittanceSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtOpticsTemperature", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ExtOpticsTemperature", Ns.Ver10Thermal, 6, true, o => ((RadiometryGlobalParameters)o).ExtOpticsTemperature, (o, v) => ((RadiometryGlobalParameters)o).ExtOpticsTemperature = (float)v, o => ((RadiometryGlobalParameters)o).ExtOpticsTemperatureSpecified, (o, v) => ((RadiometryGlobalParameters)o).ExtOpticsTemperatureSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtOpticsTransmittance", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ExtOpticsTransmittance", Ns.Ver10Thermal, 7, true, o => ((RadiometryGlobalParameters)o).ExtOpticsTransmittance, (o, v) => ((RadiometryGlobalParameters)o).ExtOpticsTransmittance = (float)v, o => ((RadiometryGlobalParameters)o).ExtOpticsTransmittanceSpecified, (o, v) => ((RadiometryGlobalParameters)o).ExtOpticsTransmittanceSpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 8, false, o => ((RadiometryGlobalParameters)o).Any, (o, v) => ((RadiometryGlobalParameters)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((RadiometryGlobalParameters)o).AnyAttr, (o, v) => ((RadiometryGlobalParameters)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2131,6 +2897,39 @@ namespace SharpOnvifClient.Thermal
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetConfiguration", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Thermal, 0, false, o => ((SetConfigurationRequest)o).VideoSourceToken, (o, v) => ((SetConfigurationRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Configuration), typeof(Configuration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Thermal, 1, false, o => ((SetConfigurationRequest)o).Configuration, (o, v) => ((SetConfigurationRequest)o).Configuration = (Configuration)v, null, null, () => new Configuration(), () => new Configuration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2141,6 +2940,37 @@ namespace SharpOnvifClient.Thermal
     {
         public SetConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetConfigurationResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2207,6 +3037,39 @@ namespace SharpOnvifClient.Thermal
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetRadiometryConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetRadiometryConfiguration", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Thermal, 0, false, o => ((SetRadiometryConfigurationRequest)o).VideoSourceToken, (o, v) => ((SetRadiometryConfigurationRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RadiometryConfiguration), typeof(RadiometryConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Thermal, 1, false, o => ((SetRadiometryConfigurationRequest)o).Configuration, (o, v) => ((SetRadiometryConfigurationRequest)o).Configuration = (RadiometryConfiguration)v, null, null, () => new RadiometryConfiguration(), () => new RadiometryConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2217,6 +3080,37 @@ namespace SharpOnvifClient.Thermal
     {
         public SetRadiometryConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetRadiometryConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetRadiometryConfigurationResponse", "http://www.onvif.org/ver10/thermal/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }

@@ -84,6 +84,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioDecoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioDecoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddAudioDecoderConfigurationRequest)o).ProfileToken, (o, v) => ((AddAudioDecoderConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddAudioDecoderConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddAudioDecoderConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -95,6 +128,37 @@ namespace SharpOnvifServer.Media
     {
         public AddAudioDecoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioDecoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioDecoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -164,6 +228,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddAudioEncoderConfigurationRequest)o).ProfileToken, (o, v) => ((AddAudioEncoderConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddAudioEncoderConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddAudioEncoderConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -177,6 +274,37 @@ namespace SharpOnvifServer.Media
     {
         public AddAudioEncoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -244,6 +372,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioOutputConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioOutputConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddAudioOutputConfigurationRequest)o).ProfileToken, (o, v) => ((AddAudioOutputConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddAudioOutputConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddAudioOutputConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -255,6 +416,37 @@ namespace SharpOnvifServer.Media
     {
         public AddAudioOutputConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioOutputConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioOutputConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -322,6 +514,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddAudioSourceConfigurationRequest)o).ProfileToken, (o, v) => ((AddAudioSourceConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddAudioSourceConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddAudioSourceConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -333,6 +558,37 @@ namespace SharpOnvifServer.Media
     {
         public AddAudioSourceConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddAudioSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddAudioSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -402,6 +658,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddMetadataConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddMetadataConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddMetadataConfigurationRequest)o).ProfileToken, (o, v) => ((AddMetadataConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddMetadataConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddMetadataConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -415,6 +704,37 @@ namespace SharpOnvifServer.Media
     {
         public AddMetadataConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddMetadataConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddMetadataConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -484,6 +804,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddPTZConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddPTZConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddPTZConfigurationRequest)o).ProfileToken, (o, v) => ((AddPTZConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddPTZConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddPTZConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -497,6 +850,37 @@ namespace SharpOnvifServer.Media
     {
         public AddPTZConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddPTZConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddPTZConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -570,6 +954,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddVideoAnalyticsConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddVideoAnalyticsConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddVideoAnalyticsConfigurationRequest)o).ProfileToken, (o, v) => ((AddVideoAnalyticsConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddVideoAnalyticsConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddVideoAnalyticsConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -587,6 +1004,37 @@ namespace SharpOnvifServer.Media
     {
         public AddVideoAnalyticsConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddVideoAnalyticsConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddVideoAnalyticsConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -656,6 +1104,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddVideoEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddVideoEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddVideoEncoderConfigurationRequest)o).ProfileToken, (o, v) => ((AddVideoEncoderConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddVideoEncoderConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddVideoEncoderConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -669,6 +1150,37 @@ namespace SharpOnvifServer.Media
     {
         public AddVideoEncoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddVideoEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddVideoEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -736,6 +1248,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddVideoSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddVideoSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((AddVideoSourceConfigurationRequest)o).ProfileToken, (o, v) => ((AddVideoSourceConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 1, false, o => ((AddVideoSourceConfigurationRequest)o).ConfigurationToken, (o, v) => ((AddVideoSourceConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -747,6 +1292,37 @@ namespace SharpOnvifServer.Media
     {
         public AddVideoSourceConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AddVideoSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AddVideoSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1042,6 +1618,42 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Capabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileCapabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ProfileCapabilities), typeof(ProfileCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ProfileCapabilities", Ns.Ver10Media, 0, false, o => ((Capabilities)o).ProfileCapabilities, (o, v) => ((Capabilities)o).ProfileCapabilities = (ProfileCapabilities)v, null, null, () => new ProfileCapabilities(), () => new ProfileCapabilities(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StreamingCapabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(StreamingCapabilities), typeof(StreamingCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "StreamingCapabilities", Ns.Ver10Media, 1, false, o => ((Capabilities)o).StreamingCapabilities, (o, v) => ((Capabilities)o).StreamingCapabilities = (StreamingCapabilities)v, null, null, () => new StreamingCapabilities(), () => new StreamingCapabilities(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 2, false, o => ((Capabilities)o).Any, (o, v) => ((Capabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SnapshotUri", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SnapshotUri", null, 0, true, o => ((Capabilities)o).SnapshotUri, (o, v) => ((Capabilities)o).SnapshotUri = (bool)v, o => ((Capabilities)o).SnapshotUriSpecified, (o, v) => ((Capabilities)o).SnapshotUriSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Rotation", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Rotation", null, 0, true, o => ((Capabilities)o).Rotation, (o, v) => ((Capabilities)o).Rotation = (bool)v, o => ((Capabilities)o).RotationSpecified, (o, v) => ((Capabilities)o).RotationSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceMode", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceMode", null, 0, true, o => ((Capabilities)o).VideoSourceMode, (o, v) => ((Capabilities)o).VideoSourceMode = (bool)v, o => ((Capabilities)o).VideoSourceModeSpecified, (o, v) => ((Capabilities)o).VideoSourceModeSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("OSD", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "OSD", null, 0, true, o => ((Capabilities)o).OSD, (o, v) => ((Capabilities)o).OSD = (bool)v, o => ((Capabilities)o).OSDSpecified, (o, v) => ((Capabilities)o).OSDSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("TemporaryOSDText", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "TemporaryOSDText", null, 0, true, o => ((Capabilities)o).TemporaryOSDText, (o, v) => ((Capabilities)o).TemporaryOSDText = (bool)v, o => ((Capabilities)o).TemporaryOSDTextSpecified, (o, v) => ((Capabilities)o).TemporaryOSDTextSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EXICompression", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EXICompression", null, 0, true, o => ((Capabilities)o).EXICompression, (o, v) => ((Capabilities)o).EXICompression = (bool)v, o => ((Capabilities)o).EXICompressionSpecified, (o, v) => ((Capabilities)o).EXICompressionSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Capabilities)o).AnyAttr, (o, v) => ((Capabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1105,6 +1717,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateOSDRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateOSD", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSD", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.OSDConfiguration), typeof(SharpOnvifCommon.Onvif.OSDConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "OSD", Ns.Ver10Media, 0, false, o => ((CreateOSDRequest)o).OSD, (o, v) => ((CreateOSDRequest)o).OSD = (SharpOnvifCommon.Onvif.OSDConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.OSDConfiguration(), () => new SharpOnvifCommon.Onvif.OSDConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((CreateOSDRequest)o).Any, (o, v) => ((CreateOSDRequest)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1166,6 +1811,39 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateOSDResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateOSDResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSDToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "OSDToken", Ns.Ver10Media, 0, false, o => ((CreateOSDResponse)o).OSDToken, (o, v) => ((CreateOSDResponse)o).OSDToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((CreateOSDResponse)o).Any, (o, v) => ((CreateOSDResponse)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1235,6 +1913,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateProfile", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Media, 0, false, o => ((CreateProfileRequest)o).Name, (o, v) => ((CreateProfileRequest)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Media, 1, true, o => ((CreateProfileRequest)o).Token, (o, v) => ((CreateProfileRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1281,6 +1992,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateProfileResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Profile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.Profile), typeof(SharpOnvifCommon.Onvif.Profile), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Profile", Ns.Ver10Media, 0, false, o => ((CreateProfileResponse)o).Profile, (o, v) => ((CreateProfileResponse)o).Profile = (SharpOnvifCommon.Onvif.Profile)v, null, null, () => new SharpOnvifCommon.Onvif.Profile(), () => new SharpOnvifCommon.Onvif.Profile(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1346,6 +2089,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteOSDRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteOSD", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSDToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "OSDToken", Ns.Ver10Media, 0, false, o => ((DeleteOSDRequest)o).OSDToken, (o, v) => ((DeleteOSDRequest)o).OSDToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((DeleteOSDRequest)o).Any, (o, v) => ((DeleteOSDRequest)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1386,6 +2162,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteOSDResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteOSDResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((DeleteOSDResponse)o).Any, (o, v) => ((DeleteOSDResponse)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1435,6 +2243,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteProfile", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((DeleteProfileRequest)o).ProfileToken, (o, v) => ((DeleteProfileRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1446,6 +2286,37 @@ namespace SharpOnvifServer.Media
     {
         public DeleteProfileResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteProfileResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1514,6 +2385,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioDecoderConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioDecoderConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetAudioDecoderConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetAudioDecoderConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetAudioDecoderConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetAudioDecoderConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1563,6 +2467,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioDecoderConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioDecoderConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioDecoderConfigurationOptions), typeof(SharpOnvifCommon.Onvif.AudioDecoderConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetAudioDecoderConfigurationOptionsResponse)o).Options, (o, v) => ((GetAudioDecoderConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.AudioDecoderConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.AudioDecoderConfigurationOptions(), () => new SharpOnvifCommon.Onvif.AudioDecoderConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1608,6 +2544,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioDecoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioDecoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetAudioDecoderConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetAudioDecoderConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1657,6 +2625,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioDecoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioDecoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration), typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetAudioDecoderConfigurationResponse)o).Configuration, (o, v) => ((GetAudioDecoderConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.AudioDecoderConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration(), () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1668,6 +2668,37 @@ namespace SharpOnvifServer.Media
     {
         public GetAudioDecoderConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioDecoderConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioDecoderConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1726,6 +2757,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.configurationsField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioDecoderConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioDecoderConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetAudioDecoderConfigurationsResponse)o).Configurations, (o, v) => ((GetAudioDecoderConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioDecoderConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration(), n => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1795,6 +2858,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioEncoderConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioEncoderConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetAudioEncoderConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetAudioEncoderConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetAudioEncoderConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetAudioEncoderConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1845,6 +2941,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioEncoderConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioEncoderConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioEncoderConfigurationOptions), typeof(SharpOnvifCommon.Onvif.AudioEncoderConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetAudioEncoderConfigurationOptionsResponse)o).Options, (o, v) => ((GetAudioEncoderConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.AudioEncoderConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.AudioEncoderConfigurationOptions(), () => new SharpOnvifCommon.Onvif.AudioEncoderConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1890,6 +3018,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetAudioEncoderConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetAudioEncoderConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1939,6 +3099,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration), typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetAudioEncoderConfigurationResponse)o).Configuration, (o, v) => ((GetAudioEncoderConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.AudioEncoderConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration(), () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1950,6 +3142,37 @@ namespace SharpOnvifServer.Media
     {
         public GetAudioEncoderConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioEncoderConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioEncoderConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2008,6 +3231,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.configurationsField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioEncoderConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioEncoderConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetAudioEncoderConfigurationsResponse)o).Configurations, (o, v) => ((GetAudioEncoderConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioEncoderConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration(), n => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2077,6 +3332,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetAudioOutputConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetAudioOutputConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetAudioOutputConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetAudioOutputConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2127,6 +3415,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions), typeof(SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetAudioOutputConfigurationOptionsResponse)o).Options, (o, v) => ((GetAudioOutputConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions(), () => new SharpOnvifCommon.Onvif.AudioOutputConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2172,6 +3492,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetAudioOutputConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetAudioOutputConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2221,6 +3573,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration), typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetAudioOutputConfigurationResponse)o).Configuration, (o, v) => ((GetAudioOutputConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.AudioOutputConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration(), () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2232,6 +3616,37 @@ namespace SharpOnvifServer.Media
     {
         public GetAudioOutputConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2292,6 +3707,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetAudioOutputConfigurationsResponse)o).Configurations, (o, v) => ((GetAudioOutputConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioOutputConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration(), n => new SharpOnvifCommon.Onvif.AudioOutputConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2302,6 +3749,37 @@ namespace SharpOnvifServer.Media
     {
         public GetAudioOutputsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputs", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2359,6 +3837,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.audioOutputsField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioOutputsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioOutputsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AudioOutputs", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioOutput[]), typeof(SharpOnvifCommon.Onvif.AudioOutput), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AudioOutputs", Ns.Ver10Media, 0, true, o => ((GetAudioOutputsResponse)o).AudioOutputs, (o, v) => ((GetAudioOutputsResponse)o).AudioOutputs = (SharpOnvifCommon.Onvif.AudioOutput[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioOutput[0], () => new SharpOnvifCommon.Onvif.AudioOutput(), n => new SharpOnvifCommon.Onvif.AudioOutput[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2430,6 +3940,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourceConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourceConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetAudioSourceConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetAudioSourceConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetAudioSourceConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetAudioSourceConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2482,6 +4025,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourceConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourceConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions), typeof(SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetAudioSourceConfigurationOptionsResponse)o).Options, (o, v) => ((GetAudioSourceConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions(), () => new SharpOnvifCommon.Onvif.AudioSourceConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2527,6 +4102,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetAudioSourceConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetAudioSourceConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2576,6 +4183,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration), typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetAudioSourceConfigurationResponse)o).Configuration, (o, v) => ((GetAudioSourceConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.AudioSourceConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration(), () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2588,6 +4227,37 @@ namespace SharpOnvifServer.Media
     {
         public GetAudioSourceConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourceConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourceConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2649,6 +4319,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourceConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourceConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetAudioSourceConfigurationsResponse)o).Configurations, (o, v) => ((GetAudioSourceConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioSourceConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration(), n => new SharpOnvifCommon.Onvif.AudioSourceConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2659,6 +4361,37 @@ namespace SharpOnvifServer.Media
     {
         public GetAudioSourcesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourcesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSources", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2718,6 +4451,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.audioSourcesField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAudioSourcesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAudioSourcesResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AudioSources", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioSource[]), typeof(SharpOnvifCommon.Onvif.AudioSource), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AudioSources", Ns.Ver10Media, 0, true, o => ((GetAudioSourcesResponse)o).AudioSources, (o, v) => ((GetAudioSourcesResponse)o).AudioSources = (SharpOnvifCommon.Onvif.AudioSource[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioSource[0], () => new SharpOnvifCommon.Onvif.AudioSource(), n => new SharpOnvifCommon.Onvif.AudioSource[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2764,6 +4529,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioDecoderConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioDecoderConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleAudioDecoderConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleAudioDecoderConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2826,6 +4623,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioDecoderConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioDecoderConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleAudioDecoderConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleAudioDecoderConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioDecoderConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration(), n => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2873,6 +4702,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioEncoderConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioEncoderConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleAudioEncoderConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleAudioEncoderConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2936,6 +4797,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioEncoderConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioEncoderConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleAudioEncoderConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleAudioEncoderConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioEncoderConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration(), n => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2982,6 +4875,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioOutputConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioOutputConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleAudioOutputConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleAudioOutputConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3043,6 +4968,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioOutputConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioOutputConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleAudioOutputConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleAudioOutputConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioOutputConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration(), n => new SharpOnvifCommon.Onvif.AudioOutputConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3090,6 +5047,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioSourceConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioSourceConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleAudioSourceConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleAudioSourceConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3152,6 +5141,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleAudioSourceConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleAudioSourceConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration[]), typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleAudioSourceConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleAudioSourceConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.AudioSourceConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration[0], () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration(), n => new SharpOnvifCommon.Onvif.AudioSourceConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3199,6 +5220,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleMetadataConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleMetadataConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleMetadataConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleMetadataConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3261,6 +5314,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleMetadataConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleMetadataConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MetadataConfiguration[]), typeof(SharpOnvifCommon.Onvif.MetadataConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleMetadataConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleMetadataConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.MetadataConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.MetadataConfiguration[0], () => new SharpOnvifCommon.Onvif.MetadataConfiguration(), n => new SharpOnvifCommon.Onvif.MetadataConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3308,6 +5393,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleVideoAnalyticsConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleVideoAnalyticsConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleVideoAnalyticsConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleVideoAnalyticsConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3371,6 +5488,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleVideoAnalyticsConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleVideoAnalyticsConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[]), typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleVideoAnalyticsConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleVideoAnalyticsConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[0], () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration(), n => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3418,6 +5567,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleVideoEncoderConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleVideoEncoderConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleVideoEncoderConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleVideoEncoderConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3481,6 +5662,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleVideoEncoderConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleVideoEncoderConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration[]), typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleVideoEncoderConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleVideoEncoderConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.VideoEncoderConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration[0], () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration(), n => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3528,6 +5741,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleVideoSourceConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleVideoSourceConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetCompatibleVideoSourceConfigurationsRequest)o).ProfileToken, (o, v) => ((GetCompatibleVideoSourceConfigurationsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3590,6 +5835,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetCompatibleVideoSourceConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetCompatibleVideoSourceConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration[]), typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetCompatibleVideoSourceConfigurationsResponse)o).Configurations, (o, v) => ((GetCompatibleVideoSourceConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.VideoSourceConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration[0], () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration(), n => new SharpOnvifCommon.Onvif.VideoSourceConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3635,6 +5912,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetGuaranteedNumberOfVideoEncoderInstancesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetGuaranteedNumberOfVideoEncoderInstances", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetGuaranteedNumberOfVideoEncoderInstancesRequest)o).ConfigurationToken, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3793,6 +6102,41 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetGuaranteedNumberOfVideoEncoderInstancesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetGuaranteedNumberOfVideoEncoderInstancesResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("TotalNumber", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "TotalNumber", Ns.Ver10Media, 0, false, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).TotalNumber, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).TotalNumber = (int)v, null, null, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("JPEG", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "JPEG", Ns.Ver10Media, 1, true, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).JPEG, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).JPEG = (int)v, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).JPEGSpecified, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).JPEGSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("H264", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "H264", Ns.Ver10Media, 2, true, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).H264, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).H264 = (int)v, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).H264Specified, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).H264Specified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MPEG4", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MPEG4", Ns.Ver10Media, 3, true, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).MPEG4, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).MPEG4 = (int)v, o => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).MPEG4Specified, (o, v) => ((GetGuaranteedNumberOfVideoEncoderInstancesResponse)o).MPEG4Specified = v, () => default(int), () => default(int), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3860,6 +6204,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetMetadataConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetMetadataConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetMetadataConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetMetadataConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3910,6 +6287,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MetadataConfigurationOptions), typeof(SharpOnvifCommon.Onvif.MetadataConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetMetadataConfigurationOptionsResponse)o).Options, (o, v) => ((GetMetadataConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.MetadataConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.MetadataConfigurationOptions(), () => new SharpOnvifCommon.Onvif.MetadataConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3955,6 +6364,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetMetadataConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetMetadataConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4004,6 +6445,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MetadataConfiguration), typeof(SharpOnvifCommon.Onvif.MetadataConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetMetadataConfigurationResponse)o).Configuration, (o, v) => ((GetMetadataConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.MetadataConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.MetadataConfiguration(), () => new SharpOnvifCommon.Onvif.MetadataConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4015,6 +6488,37 @@ namespace SharpOnvifServer.Media
     {
         public GetMetadataConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -4073,6 +6577,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.configurationsField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MetadataConfiguration[]), typeof(SharpOnvifCommon.Onvif.MetadataConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetMetadataConfigurationsResponse)o).Configurations, (o, v) => ((GetMetadataConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.MetadataConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.MetadataConfiguration[0], () => new SharpOnvifCommon.Onvif.MetadataConfiguration(), n => new SharpOnvifCommon.Onvif.MetadataConfiguration[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4139,6 +6675,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetOSDOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetOSDOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetOSDOptionsRequest)o).ConfigurationToken, (o, v) => ((GetOSDOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((GetOSDOptionsRequest)o).Any, (o, v) => ((GetOSDOptionsRequest)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4197,6 +6766,39 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetOSDOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetOSDOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSDOptions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.OSDConfigurationOptions), typeof(SharpOnvifCommon.Onvif.OSDConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "OSDOptions", Ns.Ver10Media, 0, false, o => ((GetOSDOptionsResponse)o).OSDOptions, (o, v) => ((GetOSDOptionsResponse)o).OSDOptions = (SharpOnvifCommon.Onvif.OSDConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.OSDConfigurationOptions(), () => new SharpOnvifCommon.Onvif.OSDConfigurationOptions(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((GetOSDOptionsResponse)o).Any, (o, v) => ((GetOSDOptionsResponse)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4262,6 +6864,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetOSDRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetOSD", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSDToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "OSDToken", Ns.Ver10Media, 0, false, o => ((GetOSDRequest)o).OSDToken, (o, v) => ((GetOSDRequest)o).OSDToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((GetOSDRequest)o).Any, (o, v) => ((GetOSDRequest)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4325,6 +6960,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetOSDResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetOSDResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSD", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.OSDConfiguration), typeof(SharpOnvifCommon.Onvif.OSDConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "OSD", Ns.Ver10Media, 0, false, o => ((GetOSDResponse)o).OSD, (o, v) => ((GetOSDResponse)o).OSD = (SharpOnvifCommon.Onvif.OSDConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.OSDConfiguration(), () => new SharpOnvifCommon.Onvif.OSDConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((GetOSDResponse)o).Any, (o, v) => ((GetOSDResponse)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4370,6 +7038,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetOSDsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetOSDs", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetOSDsRequest)o).ConfigurationToken, (o, v) => ((GetOSDsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4429,6 +7129,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.oSDsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetOSDsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetOSDsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSDs", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.OSDConfiguration[]), typeof(SharpOnvifCommon.Onvif.OSDConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "OSDs", Ns.Ver10Media, 0, true, o => ((GetOSDsResponse)o).OSDs, (o, v) => ((GetOSDsResponse)o).OSDs = (SharpOnvifCommon.Onvif.OSDConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.OSDConfiguration[0], () => new SharpOnvifCommon.Onvif.OSDConfiguration(), n => new SharpOnvifCommon.Onvif.OSDConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4473,6 +7205,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetProfile", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetProfileRequest)o).ProfileToken, (o, v) => ((GetProfileRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4521,6 +7285,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetProfileResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Profile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.Profile), typeof(SharpOnvifCommon.Onvif.Profile), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Profile", Ns.Ver10Media, 0, false, o => ((GetProfileResponse)o).Profile, (o, v) => ((GetProfileResponse)o).Profile = (SharpOnvifCommon.Onvif.Profile)v, null, null, () => new SharpOnvifCommon.Onvif.Profile(), () => new SharpOnvifCommon.Onvif.Profile(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4534,6 +7330,37 @@ namespace SharpOnvifServer.Media
     {
         public GetProfilesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetProfilesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetProfiles", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -4596,6 +7423,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.profilesField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetProfilesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetProfilesResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Profiles", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.Profile[]), typeof(SharpOnvifCommon.Onvif.Profile), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Profiles", Ns.Ver10Media, 0, true, o => ((GetProfilesResponse)o).Profiles, (o, v) => ((GetProfilesResponse)o).Profiles = (SharpOnvifCommon.Onvif.Profile[])v, null, null, () => new SharpOnvifCommon.Onvif.Profile[0], () => new SharpOnvifCommon.Onvif.Profile(), n => new SharpOnvifCommon.Onvif.Profile[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4606,6 +7465,37 @@ namespace SharpOnvifServer.Media
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -4652,6 +7542,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Capabilities), typeof(Capabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Media, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (Capabilities)v, null, null, () => new Capabilities(), () => new Capabilities(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4708,6 +7630,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSnapshotUriRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSnapshotUri", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((GetSnapshotUriRequest)o).ProfileToken, (o, v) => ((GetSnapshotUriRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4756,6 +7710,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSnapshotUriResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSnapshotUriResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("MediaUri", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MediaUri), typeof(SharpOnvifCommon.Onvif.MediaUri), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "MediaUri", Ns.Ver10Media, 0, false, o => ((GetSnapshotUriResponse)o).MediaUri, (o, v) => ((GetSnapshotUriResponse)o).MediaUri = (SharpOnvifCommon.Onvif.MediaUri)v, null, null, () => new SharpOnvifCommon.Onvif.MediaUri(), () => new SharpOnvifCommon.Onvif.MediaUri(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4833,6 +7819,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetStreamUriRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetStreamUri", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("StreamSetup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.StreamSetup), typeof(SharpOnvifCommon.Onvif.StreamSetup), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "StreamSetup", Ns.Ver10Media, 0, false, o => ((GetStreamUriRequest)o).StreamSetup, (o, v) => ((GetStreamUriRequest)o).StreamSetup = (SharpOnvifCommon.Onvif.StreamSetup)v, null, null, () => new SharpOnvifCommon.Onvif.StreamSetup(), () => new SharpOnvifCommon.Onvif.StreamSetup(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, false, o => ((GetStreamUriRequest)o).ProfileToken, (o, v) => ((GetStreamUriRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4886,6 +7905,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetStreamUriResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetStreamUriResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("MediaUri", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MediaUri), typeof(SharpOnvifCommon.Onvif.MediaUri), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "MediaUri", Ns.Ver10Media, 0, false, o => ((GetStreamUriResponse)o).MediaUri, (o, v) => ((GetStreamUriResponse)o).MediaUri = (SharpOnvifCommon.Onvif.MediaUri)v, null, null, () => new SharpOnvifCommon.Onvif.MediaUri(), () => new SharpOnvifCommon.Onvif.MediaUri(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4931,6 +7982,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoAnalyticsConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoAnalyticsConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetVideoAnalyticsConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetVideoAnalyticsConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -4980,6 +8063,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoAnalyticsConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoAnalyticsConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration), typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetVideoAnalyticsConfigurationResponse)o).Configuration, (o, v) => ((GetVideoAnalyticsConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration(), () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -4992,6 +8107,37 @@ namespace SharpOnvifServer.Media
     {
         public GetVideoAnalyticsConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoAnalyticsConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoAnalyticsConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -5051,6 +8197,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.configurationsField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoAnalyticsConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoAnalyticsConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[]), typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetVideoAnalyticsConfigurationsResponse)o).Configurations, (o, v) => ((GetVideoAnalyticsConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[0], () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration(), n => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -5126,6 +8304,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoEncoderConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoEncoderConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetVideoEncoderConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetVideoEncoderConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetVideoEncoderConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetVideoEncoderConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5176,6 +8387,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoEncoderConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoEncoderConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoEncoderConfigurationOptions), typeof(SharpOnvifCommon.Onvif.VideoEncoderConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetVideoEncoderConfigurationOptionsResponse)o).Options, (o, v) => ((GetVideoEncoderConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.VideoEncoderConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.VideoEncoderConfigurationOptions(), () => new SharpOnvifCommon.Onvif.VideoEncoderConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5221,6 +8464,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetVideoEncoderConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetVideoEncoderConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -5270,6 +8545,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration), typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetVideoEncoderConfigurationResponse)o).Configuration, (o, v) => ((GetVideoEncoderConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.VideoEncoderConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration(), () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5282,6 +8589,37 @@ namespace SharpOnvifServer.Media
     {
         public GetVideoEncoderConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoEncoderConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoEncoderConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -5341,6 +8679,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.configurationsField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoEncoderConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoEncoderConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration[]), typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetVideoEncoderConfigurationsResponse)o).Configurations, (o, v) => ((GetVideoEncoderConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.VideoEncoderConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration[0], () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration(), n => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -5412,6 +8782,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceConfigurationOptionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceConfigurationOptions", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, true, o => ((GetVideoSourceConfigurationOptionsRequest)o).ConfigurationToken, (o, v) => ((GetVideoSourceConfigurationOptionsRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 1, true, o => ((GetVideoSourceConfigurationOptionsRequest)o).ProfileToken, (o, v) => ((GetVideoSourceConfigurationOptionsRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5464,6 +8867,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceConfigurationOptionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceConfigurationOptionsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Options", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions), typeof(SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Options", Ns.Ver10Media, 0, false, o => ((GetVideoSourceConfigurationOptionsResponse)o).Options, (o, v) => ((GetVideoSourceConfigurationOptionsResponse)o).Options = (SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions)v, null, null, () => new SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions(), () => new SharpOnvifCommon.Onvif.VideoSourceConfigurationOptions(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5509,6 +8944,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ConfigurationToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ConfigurationToken", Ns.Ver10Media, 0, false, o => ((GetVideoSourceConfigurationRequest)o).ConfigurationToken, (o, v) => ((GetVideoSourceConfigurationRequest)o).ConfigurationToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -5558,6 +9025,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration), typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((GetVideoSourceConfigurationResponse)o).Configuration, (o, v) => ((GetVideoSourceConfigurationResponse)o).Configuration = (SharpOnvifCommon.Onvif.VideoSourceConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration(), () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5569,6 +9068,37 @@ namespace SharpOnvifServer.Media
     {
         public GetVideoSourceConfigurationsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceConfigurationsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceConfigurations", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -5629,6 +9159,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.configurationsField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceConfigurationsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceConfigurationsResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configurations", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration[]), typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Configurations", Ns.Ver10Media, 0, true, o => ((GetVideoSourceConfigurationsResponse)o).Configurations, (o, v) => ((GetVideoSourceConfigurationsResponse)o).Configurations = (SharpOnvifCommon.Onvif.VideoSourceConfiguration[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration[0], () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration(), n => new SharpOnvifCommon.Onvif.VideoSourceConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5675,6 +9237,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceModesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceModes", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Media, 0, false, o => ((GetVideoSourceModesRequest)o).VideoSourceToken, (o, v) => ((GetVideoSourceModesRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -5736,6 +9330,38 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.videoSourceModesField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourceModesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourceModesResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceModes", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(VideoSourceMode[]), typeof(VideoSourceMode), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "VideoSourceModes", Ns.Ver10Media, 0, false, o => ((GetVideoSourceModesResponse)o).VideoSourceModes, (o, v) => ((GetVideoSourceModesResponse)o).VideoSourceModes = (VideoSourceMode[])v, null, null, () => new VideoSourceMode[0], () => new VideoSourceMode(), n => new VideoSourceMode[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5746,6 +9372,37 @@ namespace SharpOnvifServer.Media
     {
         public GetVideoSourcesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourcesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSources", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -5803,6 +9460,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.videoSourcesField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetVideoSourcesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetVideoSourcesResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSources", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoSource[]), typeof(SharpOnvifCommon.Onvif.VideoSource), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "VideoSources", Ns.Ver10Media, 0, true, o => ((GetVideoSourcesResponse)o).VideoSources, (o, v) => ((GetVideoSourcesResponse)o).VideoSources = (SharpOnvifCommon.Onvif.VideoSource[])v, null, null, () => new SharpOnvifCommon.Onvif.VideoSource[0], () => new SharpOnvifCommon.Onvif.VideoSource(), n => new SharpOnvifCommon.Onvif.VideoSource[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -5896,6 +9585,35 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ProfileCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ProfileCapabilities)o).Any, (o, v) => ((ProfileCapabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaximumNumberOfProfiles", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaximumNumberOfProfiles", null, 0, true, o => ((ProfileCapabilities)o).MaximumNumberOfProfiles, (o, v) => ((ProfileCapabilities)o).MaximumNumberOfProfiles = (int)v, o => ((ProfileCapabilities)o).MaximumNumberOfProfilesSpecified, (o, v) => ((ProfileCapabilities)o).MaximumNumberOfProfilesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ProfileCapabilities)o).AnyAttr, (o, v) => ((ProfileCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5945,6 +9663,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioDecoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioDecoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveAudioDecoderConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveAudioDecoderConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -5957,6 +9707,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveAudioDecoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioDecoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioDecoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6007,6 +9788,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveAudioEncoderConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveAudioEncoderConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6019,6 +9832,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveAudioEncoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6069,6 +9913,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioOutputConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioOutputConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveAudioOutputConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveAudioOutputConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6081,6 +9957,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveAudioOutputConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioOutputConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioOutputConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6132,6 +10039,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveAudioSourceConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveAudioSourceConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6145,6 +10084,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveAudioSourceConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveAudioSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveAudioSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6195,6 +10165,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveMetadataConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveMetadataConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveMetadataConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveMetadataConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6207,6 +10209,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveMetadataConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveMetadataConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveMetadataConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6256,6 +10289,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemovePTZConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemovePTZConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemovePTZConfigurationRequest)o).ProfileToken, (o, v) => ((RemovePTZConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6267,6 +10332,37 @@ namespace SharpOnvifServer.Media
     {
         public RemovePTZConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemovePTZConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemovePTZConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6318,6 +10414,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveVideoAnalyticsConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveVideoAnalyticsConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveVideoAnalyticsConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveVideoAnalyticsConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6330,6 +10458,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveVideoAnalyticsConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveVideoAnalyticsConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveVideoAnalyticsConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6380,6 +10539,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveVideoEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveVideoEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveVideoEncoderConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveVideoEncoderConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6392,6 +10583,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveVideoEncoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveVideoEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveVideoEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6443,6 +10665,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveVideoSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveVideoSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((RemoveVideoSourceConfigurationRequest)o).ProfileToken, (o, v) => ((RemoveVideoSourceConfigurationRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6456,6 +10710,37 @@ namespace SharpOnvifServer.Media
     {
         public RemoveVideoSourceConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RemoveVideoSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("RemoveVideoSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6523,6 +10808,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioDecoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioDecoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration), typeof(SharpOnvifCommon.Onvif.AudioDecoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetAudioDecoderConfigurationRequest)o).Configuration, (o, v) => ((SetAudioDecoderConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.AudioDecoderConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration(), () => new SharpOnvifCommon.Onvif.AudioDecoderConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetAudioDecoderConfigurationRequest)o).ForcePersistence, (o, v) => ((SetAudioDecoderConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6534,6 +10852,37 @@ namespace SharpOnvifServer.Media
     {
         public SetAudioDecoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioDecoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioDecoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6604,6 +10953,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration), typeof(SharpOnvifCommon.Onvif.AudioEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetAudioEncoderConfigurationRequest)o).Configuration, (o, v) => ((SetAudioEncoderConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.AudioEncoderConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration(), () => new SharpOnvifCommon.Onvif.AudioEncoderConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetAudioEncoderConfigurationRequest)o).ForcePersistence, (o, v) => ((SetAudioEncoderConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6618,6 +11000,37 @@ namespace SharpOnvifServer.Media
     {
         public SetAudioEncoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6685,6 +11098,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioOutputConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioOutputConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration), typeof(SharpOnvifCommon.Onvif.AudioOutputConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetAudioOutputConfigurationRequest)o).Configuration, (o, v) => ((SetAudioOutputConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.AudioOutputConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration(), () => new SharpOnvifCommon.Onvif.AudioOutputConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetAudioOutputConfigurationRequest)o).ForcePersistence, (o, v) => ((SetAudioOutputConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6696,6 +11142,37 @@ namespace SharpOnvifServer.Media
     {
         public SetAudioOutputConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioOutputConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioOutputConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6766,6 +11243,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration), typeof(SharpOnvifCommon.Onvif.AudioSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetAudioSourceConfigurationRequest)o).Configuration, (o, v) => ((SetAudioSourceConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.AudioSourceConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration(), () => new SharpOnvifCommon.Onvif.AudioSourceConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetAudioSourceConfigurationRequest)o).ForcePersistence, (o, v) => ((SetAudioSourceConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6780,6 +11290,37 @@ namespace SharpOnvifServer.Media
     {
         public SetAudioSourceConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAudioSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAudioSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6851,6 +11392,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetMetadataConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetMetadataConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MetadataConfiguration), typeof(SharpOnvifCommon.Onvif.MetadataConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetMetadataConfigurationRequest)o).Configuration, (o, v) => ((SetMetadataConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.MetadataConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.MetadataConfiguration(), () => new SharpOnvifCommon.Onvif.MetadataConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetMetadataConfigurationRequest)o).ForcePersistence, (o, v) => ((SetMetadataConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6866,6 +11440,37 @@ namespace SharpOnvifServer.Media
     {
         public SetMetadataConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetMetadataConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetMetadataConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -6931,6 +11536,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetOSDRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetOSD", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("OSD", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.OSDConfiguration), typeof(SharpOnvifCommon.Onvif.OSDConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "OSD", Ns.Ver10Media, 0, false, o => ((SetOSDRequest)o).OSD, (o, v) => ((SetOSDRequest)o).OSD = (SharpOnvifCommon.Onvif.OSDConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.OSDConfiguration(), () => new SharpOnvifCommon.Onvif.OSDConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((SetOSDRequest)o).Any, (o, v) => ((SetOSDRequest)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -6971,6 +11609,38 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetOSDResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetOSDResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((SetOSDResponse)o).Any, (o, v) => ((SetOSDResponse)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -7028,6 +11698,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetSynchronizationPointRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSynchronizationPoint", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((SetSynchronizationPointRequest)o).ProfileToken, (o, v) => ((SetSynchronizationPointRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7047,6 +11749,37 @@ namespace SharpOnvifServer.Media
     {
         public SetSynchronizationPointResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetSynchronizationPointResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSynchronizationPointResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -7118,6 +11851,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoAnalyticsConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoAnalyticsConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration), typeof(SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetVideoAnalyticsConfigurationRequest)o).Configuration, (o, v) => ((SetVideoAnalyticsConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration(), () => new SharpOnvifCommon.Onvif.VideoAnalyticsConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetVideoAnalyticsConfigurationRequest)o).ForcePersistence, (o, v) => ((SetVideoAnalyticsConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7133,6 +11899,37 @@ namespace SharpOnvifServer.Media
     {
         public SetVideoAnalyticsConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoAnalyticsConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoAnalyticsConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -7207,6 +12004,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoEncoderConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoEncoderConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration), typeof(SharpOnvifCommon.Onvif.VideoEncoderConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetVideoEncoderConfigurationRequest)o).Configuration, (o, v) => ((SetVideoEncoderConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.VideoEncoderConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration(), () => new SharpOnvifCommon.Onvif.VideoEncoderConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetVideoEncoderConfigurationRequest)o).ForcePersistence, (o, v) => ((SetVideoEncoderConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7225,6 +12055,37 @@ namespace SharpOnvifServer.Media
     {
         public SetVideoEncoderConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoEncoderConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoEncoderConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -7295,6 +12156,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoSourceConfigurationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoSourceConfiguration", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration), typeof(SharpOnvifCommon.Onvif.VideoSourceConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Media, 0, false, o => ((SetVideoSourceConfigurationRequest)o).Configuration, (o, v) => ((SetVideoSourceConfigurationRequest)o).Configuration = (SharpOnvifCommon.Onvif.VideoSourceConfiguration)v, null, null, () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration(), () => new SharpOnvifCommon.Onvif.VideoSourceConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ForcePersistence", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ForcePersistence", Ns.Ver10Media, 1, false, o => ((SetVideoSourceConfigurationRequest)o).ForcePersistence, (o, v) => ((SetVideoSourceConfigurationRequest)o).ForcePersistence = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7309,6 +12203,37 @@ namespace SharpOnvifServer.Media
     {
         public SetVideoSourceConfigurationResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoSourceConfigurationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoSourceConfigurationResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -7377,6 +12302,39 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoSourceModeRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoSourceMode", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceToken", Ns.Ver10Media, 0, false, o => ((SetVideoSourceModeRequest)o).VideoSourceToken, (o, v) => ((SetVideoSourceModeRequest)o).VideoSourceToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("VideoSourceModeToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "VideoSourceModeToken", Ns.Ver10Media, 1, false, o => ((SetVideoSourceModeRequest)o).VideoSourceModeToken, (o, v) => ((SetVideoSourceModeRequest)o).VideoSourceModeToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7424,6 +12382,38 @@ namespace SharpOnvifServer.Media
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetVideoSourceModeResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetVideoSourceModeResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Reboot", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Reboot", Ns.Ver10Media, 0, false, o => ((SetVideoSourceModeResponse)o).Reboot, (o, v) => ((SetVideoSourceModeResponse)o).Reboot = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -7476,6 +12466,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StartMulticastStreamingRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("StartMulticastStreaming", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((StartMulticastStreamingRequest)o).ProfileToken, (o, v) => ((StartMulticastStreamingRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7490,6 +12512,37 @@ namespace SharpOnvifServer.Media
     {
         public StartMulticastStreamingResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StartMulticastStreamingResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("StartMulticastStreamingResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -7538,6 +12591,38 @@ namespace SharpOnvifServer.Media
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StopMulticastStreamingRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("StopMulticastStreaming", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ProfileToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ProfileToken", Ns.Ver10Media, 0, false, o => ((StopMulticastStreamingRequest)o).ProfileToken, (o, v) => ((StopMulticastStreamingRequest)o).ProfileToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -7548,6 +12633,37 @@ namespace SharpOnvifServer.Media
     {
         public StopMulticastStreamingResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StopMulticastStreamingResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("StopMulticastStreamingResponse", "http://www.onvif.org/ver10/media/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -7773,6 +12889,39 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new StreamingCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((StreamingCapabilities)o).Any, (o, v) => ((StreamingCapabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RTPMulticast", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RTPMulticast", null, 0, true, o => ((StreamingCapabilities)o).RTPMulticast, (o, v) => ((StreamingCapabilities)o).RTPMulticast = (bool)v, o => ((StreamingCapabilities)o).RTPMulticastSpecified, (o, v) => ((StreamingCapabilities)o).RTPMulticastSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RTP_TCP", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RTP_TCP", null, 0, true, o => ((StreamingCapabilities)o).RTP_TCP, (o, v) => ((StreamingCapabilities)o).RTP_TCP = (bool)v, o => ((StreamingCapabilities)o).RTP_TCPSpecified, (o, v) => ((StreamingCapabilities)o).RTP_TCPSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RTP_RTSP_TCP", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RTP_RTSP_TCP", null, 0, true, o => ((StreamingCapabilities)o).RTP_RTSP_TCP, (o, v) => ((StreamingCapabilities)o).RTP_RTSP_TCP = (bool)v, o => ((StreamingCapabilities)o).RTP_RTSP_TCPSpecified, (o, v) => ((StreamingCapabilities)o).RTP_RTSP_TCPSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("NonAggregateControl", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NonAggregateControl", null, 0, true, o => ((StreamingCapabilities)o).NonAggregateControl, (o, v) => ((StreamingCapabilities)o).NonAggregateControl = (bool)v, o => ((StreamingCapabilities)o).NonAggregateControlSpecified, (o, v) => ((StreamingCapabilities)o).NonAggregateControlSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("NoRTSPStreaming", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NoRTSPStreaming", null, 0, true, o => ((StreamingCapabilities)o).NoRTSPStreaming, (o, v) => ((StreamingCapabilities)o).NoRTSPStreaming = (bool)v, o => ((StreamingCapabilities)o).NoRTSPStreamingSpecified, (o, v) => ((StreamingCapabilities)o).NoRTSPStreamingSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((StreamingCapabilities)o).AnyAttr, (o, v) => ((StreamingCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
@@ -7975,6 +13124,41 @@ namespace SharpOnvifServer.Media
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new VideoSourceMode();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("MaxFramerate", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxFramerate", Ns.Ver10Media, 0, false, o => ((VideoSourceMode)o).MaxFramerate, (o, v) => ((VideoSourceMode)o).MaxFramerate = (float)v, null, null, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResolution", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.VideoResolution), typeof(SharpOnvifCommon.Onvif.VideoResolution), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "MaxResolution", Ns.Ver10Media, 1, false, o => ((VideoSourceMode)o).MaxResolution, (o, v) => ((VideoSourceMode)o).MaxResolution = (SharpOnvifCommon.Onvif.VideoResolution)v, null, null, () => new SharpOnvifCommon.Onvif.VideoResolution(), () => new SharpOnvifCommon.Onvif.VideoResolution(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Encodings", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string[]), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Encodings", Ns.Ver10Media, 2, false, o => ((VideoSourceMode)o).Encodings, (o, v) => ((VideoSourceMode)o).Encodings = (string[])v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Reboot", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Reboot", Ns.Ver10Media, 3, false, o => ((VideoSourceMode)o).Reboot, (o, v) => ((VideoSourceMode)o).Reboot = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Description", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Description", Ns.Ver10Media, 4, true, o => ((VideoSourceMode)o).Description, (o, v) => ((VideoSourceMode)o).Description = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(VideoSourceModeExtension), typeof(VideoSourceModeExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Media, 5, true, o => ((VideoSourceMode)o).Extension, (o, v) => ((VideoSourceMode)o).Extension = (VideoSourceModeExtension)v, null, null, () => new VideoSourceModeExtension(), () => new VideoSourceModeExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("token", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "token", null, 0, false, o => ((VideoSourceMode)o).token, (o, v) => ((VideoSourceMode)o).token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Enabled", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Enabled", null, 0, true, o => ((VideoSourceMode)o).Enabled, (o, v) => ((VideoSourceMode)o).Enabled = (bool)v, o => ((VideoSourceMode)o).EnabledSpecified, (o, v) => ((VideoSourceMode)o).EnabledSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((VideoSourceMode)o).AnyAttr, (o, v) => ((VideoSourceMode)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/media/wsdl")]
@@ -8007,6 +13191,33 @@ namespace SharpOnvifServer.Media
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new VideoSourceModeExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((VideoSourceModeExtension)o).Any, (o, v) => ((VideoSourceModeExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }

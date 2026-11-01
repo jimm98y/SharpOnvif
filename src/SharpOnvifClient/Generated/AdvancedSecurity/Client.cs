@@ -62,6 +62,41 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static AdvancedSecurityServiceClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new AdvancedSecurityServiceClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "AdvancedSecurityService", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AdvancedSecurityServiceClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the security configuraiton service. The result is returned in a typed
         /// answer.
         /// </summary>
@@ -160,6 +195,44 @@ namespace SharpOnvifClient.AdvancedSecurity
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static AuthorizationServerClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new AuthorizationServerClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetAuthorizationServerConfigurations", "AuthorizationServer", SoapActions.GetAuthorizationServerConfigurations, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAuthorizationServerConfigurations", typeof(GetAuthorizationServerConfigurationsRequest), typeof(GetAuthorizationServerConfigurationsResponse), () => new GetAuthorizationServerConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthorizationServerClient)c).GetAuthorizationServerConfigurationsAsync((GetAuthorizationServerConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateAuthorizationServerConfiguration", "AuthorizationServer", SoapActions.CreateAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateAuthorizationServerConfiguration", typeof(CreateAuthorizationServerConfigurationRequest), typeof(CreateAuthorizationServerConfigurationResponse), () => new CreateAuthorizationServerConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthorizationServerClient)c).CreateAuthorizationServerConfigurationAsync((CreateAuthorizationServerConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetAuthorizationServerConfiguration", "AuthorizationServer", SoapActions.SetAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetAuthorizationServerConfiguration", typeof(SetAuthorizationServerConfigurationRequest), typeof(SetAuthorizationServerConfigurationResponse), () => new SetAuthorizationServerConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthorizationServerClient)c).SetAuthorizationServerConfigurationAsync((SetAuthorizationServerConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteAuthorizationServerConfiguration", "AuthorizationServer", SoapActions.DeleteAuthorizationServerConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteAuthorizationServerConfiguration", typeof(DeleteAuthorizationServerConfigurationRequest), typeof(DeleteAuthorizationServerConfigurationResponse), () => new DeleteAuthorizationServerConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthorizationServerClient)c).DeleteAuthorizationServerConfigurationAsync((DeleteAuthorizationServerConfigurationRequest)r, ct))),
+            };
         }
 
         /// <summary>
@@ -410,6 +483,47 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static Dot1XClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new Dot1XClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("AddDot1XConfiguration", "Dot1X", SoapActions.AddDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddDot1XConfiguration", typeof(AddDot1XConfigurationRequest), typeof(AddDot1XConfigurationResponse), () => new AddDot1XConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).AddDot1XConfigurationAsync((AddDot1XConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllDot1XConfigurations", "Dot1X", SoapActions.GetAllDot1XConfigurations, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllDot1XConfigurations", typeof(GetAllDot1XConfigurationsRequest), typeof(GetAllDot1XConfigurationsResponse), () => new GetAllDot1XConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).GetAllDot1XConfigurationsAsync((GetAllDot1XConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDot1XConfiguration", "Dot1X", SoapActions.GetDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetDot1XConfiguration", typeof(GetDot1XConfigurationRequest), typeof(GetDot1XConfigurationResponse), () => new GetDot1XConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).GetDot1XConfigurationAsync((GetDot1XConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteDot1XConfiguration", "Dot1X", SoapActions.DeleteDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteDot1XConfiguration", typeof(DeleteDot1XConfigurationRequest), typeof(DeleteDot1XConfigurationResponse), () => new DeleteDot1XConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).DeleteDot1XConfigurationAsync((DeleteDot1XConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetNetworkInterfaceDot1XConfiguration", "Dot1X", SoapActions.SetNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetNetworkInterfaceDot1XConfiguration", typeof(SetNetworkInterfaceDot1XConfigurationRequest), typeof(SetNetworkInterfaceDot1XConfigurationResponse), () => new SetNetworkInterfaceDot1XConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).SetNetworkInterfaceDot1XConfigurationAsync((SetNetworkInterfaceDot1XConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetNetworkInterfaceDot1XConfiguration", "Dot1X", SoapActions.GetNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetNetworkInterfaceDot1XConfiguration", typeof(GetNetworkInterfaceDot1XConfigurationRequest), typeof(GetNetworkInterfaceDot1XConfigurationResponse), () => new GetNetworkInterfaceDot1XConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).GetNetworkInterfaceDot1XConfigurationAsync((GetNetworkInterfaceDot1XConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteNetworkInterfaceDot1XConfiguration", "Dot1X", SoapActions.DeleteNetworkInterfaceDot1XConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteNetworkInterfaceDot1XConfiguration", typeof(DeleteNetworkInterfaceDot1XConfigurationRequest), typeof(DeleteNetworkInterfaceDot1XConfigurationResponse), () => new DeleteNetworkInterfaceDot1XConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((Dot1XClient)c).DeleteNetworkInterfaceDot1XConfigurationAsync((DeleteNetworkInterfaceDot1XConfigurationRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation adds an IEEE 802.1X configuration to the device. Configurations are uniquely
         /// identified using IEEE 802.1X configuration IDs. The device shall ignore Dot1XID in the request, if
         /// present, and shall generate a unique configuration ID for the added configuration. If the command
@@ -653,6 +767,42 @@ namespace SharpOnvifClient.AdvancedSecurity
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static JWTClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new JWTClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetJWTConfiguration", "JWT", SoapActions.GetJWTConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetJWTConfiguration", typeof(GetJWTConfigurationRequest), typeof(GetJWTConfigurationResponse), () => new GetJWTConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((JWTClient)c).GetJWTConfigurationAsync((GetJWTConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetJWTConfiguration", "JWT", SoapActions.SetJWTConfiguration, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetJWTConfiguration", typeof(SetJWTConfigurationRequest), typeof(SetJWTConfigurationResponse), () => new SetJWTConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((JWTClient)c).SetJWTConfigurationAsync((SetJWTConfigurationRequest)r, ct))),
+            };
         }
 
         /// <summary>
@@ -1240,6 +1390,71 @@ namespace SharpOnvifClient.AdvancedSecurity
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static KeystoreClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new KeystoreClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("CreateRSAKeyPair", "Keystore", SoapActions.CreateRSAKeyPair, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateRSAKeyPair", typeof(CreateRSAKeyPairRequest), typeof(CreateRSAKeyPairResponse), () => new CreateRSAKeyPairRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).CreateRSAKeyPairAsync((CreateRSAKeyPairRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateECCKeyPair", "Keystore", SoapActions.CreateECCKeyPair, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateECCKeyPair", typeof(CreateECCKeyPairRequest), typeof(CreateECCKeyPairResponse), () => new CreateECCKeyPairRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).CreateECCKeyPairAsync((CreateECCKeyPairRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("UploadKeyPairInPKCS8", "Keystore", SoapActions.UploadKeyPairInPKCS8, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadKeyPairInPKCS8", typeof(UploadKeyPairInPKCS8Request), typeof(UploadKeyPairInPKCS8Response), () => new UploadKeyPairInPKCS8Request(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).UploadKeyPairInPKCS8Async((UploadKeyPairInPKCS8Request)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("UploadCertificateWithPrivateKeyInPKCS12", "Keystore", SoapActions.UploadCertificateWithPrivateKeyInPKCS12, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificateWithPrivateKeyInPKCS12", typeof(UploadCertificateWithPrivateKeyInPKCS12Request), typeof(UploadCertificateWithPrivateKeyInPKCS12Response), () => new UploadCertificateWithPrivateKeyInPKCS12Request(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).UploadCertificateWithPrivateKeyInPKCS12Async((UploadCertificateWithPrivateKeyInPKCS12Request)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetKeyStatus", "Keystore", SoapActions.GetKeyStatus, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetKeyStatus", typeof(GetKeyStatusRequest), typeof(GetKeyStatusResponse), () => new GetKeyStatusRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetKeyStatusAsync((GetKeyStatusRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPrivateKeyStatus", "Keystore", SoapActions.GetPrivateKeyStatus, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetPrivateKeyStatus", typeof(GetPrivateKeyStatusRequest), typeof(GetPrivateKeyStatusResponse), () => new GetPrivateKeyStatusRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetPrivateKeyStatusAsync((GetPrivateKeyStatusRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllKeys", "Keystore", SoapActions.GetAllKeys, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllKeys", typeof(GetAllKeysRequest), typeof(GetAllKeysResponse), () => new GetAllKeysRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetAllKeysAsync((GetAllKeysRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteKey", "Keystore", SoapActions.DeleteKey, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteKey", typeof(DeleteKeyRequest), typeof(DeleteKeyResponse), () => new DeleteKeyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).DeleteKeyAsync((DeleteKeyRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreatePKCS10CSR", "Keystore", SoapActions.CreatePKCS10CSR, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreatePKCS10CSR", typeof(CreatePKCS10CSRRequest), typeof(CreatePKCS10CSRResponse), () => new CreatePKCS10CSRRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).CreatePKCS10CSRAsync((CreatePKCS10CSRRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateSelfSignedCertificate", "Keystore", SoapActions.CreateSelfSignedCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateSelfSignedCertificate", typeof(CreateSelfSignedCertificateRequest), typeof(CreateSelfSignedCertificateResponse), () => new CreateSelfSignedCertificateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).CreateSelfSignedCertificateAsync((CreateSelfSignedCertificateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("UploadCertificate", "Keystore", SoapActions.UploadCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCertificate", typeof(UploadCertificateRequest), typeof(UploadCertificateResponse), () => new UploadCertificateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).UploadCertificateAsync((UploadCertificateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCertificate", "Keystore", SoapActions.GetCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificate", typeof(GetCertificateRequest), typeof(GetCertificateResponse), () => new GetCertificateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetCertificateAsync((GetCertificateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllCertificates", "Keystore", SoapActions.GetAllCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificates", typeof(GetAllCertificatesRequest), typeof(GetAllCertificatesResponse), () => new GetAllCertificatesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetAllCertificatesAsync((GetAllCertificatesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteCertificate", "Keystore", SoapActions.DeleteCertificate, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificate", typeof(DeleteCertificateRequest), typeof(DeleteCertificateResponse), () => new DeleteCertificateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).DeleteCertificateAsync((DeleteCertificateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateCertificationPath", "Keystore", SoapActions.CreateCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertificationPath", typeof(CreateCertificationPathRequest), typeof(CreateCertificationPathResponse), () => new CreateCertificationPathRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).CreateCertificationPathAsync((CreateCertificationPathRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCertificationPath", "Keystore", SoapActions.GetCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertificationPath", typeof(GetCertificationPathRequest), typeof(GetCertificationPathResponse), () => new GetCertificationPathRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetCertificationPathAsync((GetCertificationPathRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllCertificationPaths", "Keystore", SoapActions.GetAllCertificationPaths, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertificationPaths", typeof(GetAllCertificationPathsRequest), typeof(GetAllCertificationPathsResponse), () => new GetAllCertificationPathsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetAllCertificationPathsAsync((GetAllCertificationPathsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetCertificationPath", "Keystore", SoapActions.SetCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertificationPath", typeof(SetCertificationPathRequest), typeof(SetCertificationPathResponse), () => new SetCertificationPathRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).SetCertificationPathAsync((SetCertificationPathRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteCertificationPath", "Keystore", SoapActions.DeleteCertificationPath, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertificationPath", typeof(DeleteCertificationPathRequest), typeof(DeleteCertificationPathResponse), () => new DeleteCertificationPathRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).DeleteCertificationPathAsync((DeleteCertificationPathRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("UploadPassphrase", "Keystore", SoapActions.UploadPassphrase, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadPassphrase", typeof(UploadPassphraseRequest), typeof(UploadPassphraseResponse), () => new UploadPassphraseRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).UploadPassphraseAsync((UploadPassphraseRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllPassphrases", "Keystore", SoapActions.GetAllPassphrases, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllPassphrases", typeof(GetAllPassphrasesRequest), typeof(GetAllPassphrasesResponse), () => new GetAllPassphrasesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetAllPassphrasesAsync((GetAllPassphrasesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeletePassphrase", "Keystore", SoapActions.DeletePassphrase, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeletePassphrase", typeof(DeletePassphraseRequest), typeof(DeletePassphraseResponse), () => new DeletePassphraseRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).DeletePassphraseAsync((DeletePassphraseRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("UploadCRL", "Keystore", SoapActions.UploadCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "UploadCRL", typeof(UploadCRLRequest), typeof(UploadCRLResponse), () => new UploadCRLRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).UploadCRLAsync((UploadCRLRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCRL", "Keystore", SoapActions.GetCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCRL", typeof(GetCRLRequest), typeof(GetCRLResponse), () => new GetCRLRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetCRLAsync((GetCRLRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllCRLs", "Keystore", SoapActions.GetAllCRLs, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCRLs", typeof(GetAllCRLsRequest), typeof(GetAllCRLsResponse), () => new GetAllCRLsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetAllCRLsAsync((GetAllCRLsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteCRL", "Keystore", SoapActions.DeleteCRL, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCRL", typeof(DeleteCRLRequest), typeof(DeleteCRLResponse), () => new DeleteCRLRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).DeleteCRLAsync((DeleteCRLRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateCertPathValidationPolicy", "Keystore", SoapActions.CreateCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "CreateCertPathValidationPolicy", typeof(CreateCertPathValidationPolicyRequest), typeof(CreateCertPathValidationPolicyResponse), () => new CreateCertPathValidationPolicyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).CreateCertPathValidationPolicyAsync((CreateCertPathValidationPolicyRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCertPathValidationPolicy", "Keystore", SoapActions.GetCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCertPathValidationPolicy", typeof(GetCertPathValidationPolicyRequest), typeof(GetCertPathValidationPolicyResponse), () => new GetCertPathValidationPolicyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetCertPathValidationPolicyAsync((GetCertPathValidationPolicyRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAllCertPathValidationPolicies", "Keystore", SoapActions.GetAllCertPathValidationPolicies, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAllCertPathValidationPolicies", typeof(GetAllCertPathValidationPoliciesRequest), typeof(GetAllCertPathValidationPoliciesResponse), () => new GetAllCertPathValidationPoliciesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).GetAllCertPathValidationPoliciesAsync((GetAllCertPathValidationPoliciesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetCertPathValidationPolicy", "Keystore", SoapActions.SetCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCertPathValidationPolicy", typeof(SetCertPathValidationPolicyRequest), typeof(SetCertPathValidationPolicyResponse), () => new SetCertPathValidationPolicyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).SetCertPathValidationPolicyAsync((SetCertPathValidationPolicyRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteCertPathValidationPolicy", "Keystore", SoapActions.DeleteCertPathValidationPolicy, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "DeleteCertPathValidationPolicy", typeof(DeleteCertPathValidationPolicyRequest), typeof(DeleteCertPathValidationPolicyResponse), () => new DeleteCertPathValidationPolicyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((KeystoreClient)c).DeleteCertPathValidationPolicyAsync((DeleteCertPathValidationPolicyRequest)r, ct))),
+            };
         }
 
         /// <summary>
@@ -2058,6 +2273,43 @@ namespace SharpOnvifClient.AdvancedSecurity
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static MediaSigningClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new MediaSigningClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("AddMediaSigningCertificateAssignment", "MediaSigning", SoapActions.AddMediaSigningCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddMediaSigningCertificateAssignment", typeof(AddMediaSigningCertificateAssignmentRequest), typeof(AddMediaSigningCertificateAssignmentResponse), () => new AddMediaSigningCertificateAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((MediaSigningClient)c).AddMediaSigningCertificateAssignmentAsync((AddMediaSigningCertificateAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RemoveMediaSigningCertificateAssignment", "MediaSigning", SoapActions.RemoveMediaSigningCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveMediaSigningCertificateAssignment", typeof(RemoveMediaSigningCertificateAssignmentRequest), typeof(RemoveMediaSigningCertificateAssignmentResponse), () => new RemoveMediaSigningCertificateAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((MediaSigningClient)c).RemoveMediaSigningCertificateAssignmentAsync((RemoveMediaSigningCertificateAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAssignedMediaSigningCertificates", "MediaSigning", SoapActions.GetAssignedMediaSigningCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedMediaSigningCertificates", typeof(GetAssignedMediaSigningCertificatesRequest), typeof(GetAssignedMediaSigningCertificatesResponse), () => new GetAssignedMediaSigningCertificatesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((MediaSigningClient)c).GetAssignedMediaSigningCertificatesAsync((GetAssignedMediaSigningCertificatesRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation assigns certification path (certificate chain) to use for media signing, replacing
         /// the one that is provisioned during factory production. The leaf certificate in the chain and its
         /// associated private key shall be used for signing media as described in the [Media Signing
@@ -2391,6 +2643,54 @@ namespace SharpOnvifClient.AdvancedSecurity
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static TLSServerClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new TLSServerClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("AddServerCertificateAssignment", "TLSServer", SoapActions.AddServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddServerCertificateAssignment", typeof(AddServerCertificateAssignmentRequest), typeof(AddServerCertificateAssignmentResponse), () => new AddServerCertificateAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).AddServerCertificateAssignmentAsync((AddServerCertificateAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RemoveServerCertificateAssignment", "TLSServer", SoapActions.RemoveServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveServerCertificateAssignment", typeof(RemoveServerCertificateAssignmentRequest), typeof(RemoveServerCertificateAssignmentResponse), () => new RemoveServerCertificateAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).RemoveServerCertificateAssignmentAsync((RemoveServerCertificateAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ReplaceServerCertificateAssignment", "TLSServer", SoapActions.ReplaceServerCertificateAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceServerCertificateAssignment", typeof(ReplaceServerCertificateAssignmentRequest), typeof(ReplaceServerCertificateAssignmentResponse), () => new ReplaceServerCertificateAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).ReplaceServerCertificateAssignmentAsync((ReplaceServerCertificateAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetEnabledTLSVersions", "TLSServer", SoapActions.SetEnabledTLSVersions, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetEnabledTLSVersions", typeof(SetEnabledTLSVersionsRequest), typeof(SetEnabledTLSVersionsResponse), () => new SetEnabledTLSVersionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).SetEnabledTLSVersionsAsync((SetEnabledTLSVersionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetEnabledTLSVersions", "TLSServer", SoapActions.GetEnabledTLSVersions, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetEnabledTLSVersions", typeof(GetEnabledTLSVersionsRequest), typeof(GetEnabledTLSVersionsResponse), () => new GetEnabledTLSVersionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).GetEnabledTLSVersionsAsync((GetEnabledTLSVersionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAssignedServerCertificates", "TLSServer", SoapActions.GetAssignedServerCertificates, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedServerCertificates", typeof(GetAssignedServerCertificatesRequest), typeof(GetAssignedServerCertificatesResponse), () => new GetAssignedServerCertificatesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).GetAssignedServerCertificatesAsync((GetAssignedServerCertificatesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetClientAuthenticationRequired", "TLSServer", SoapActions.SetClientAuthenticationRequired, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetClientAuthenticationRequired", typeof(SetClientAuthenticationRequiredRequest), typeof(SetClientAuthenticationRequiredResponse), () => new SetClientAuthenticationRequiredRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).SetClientAuthenticationRequiredAsync((SetClientAuthenticationRequiredRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetClientAuthenticationRequired", "TLSServer", SoapActions.GetClientAuthenticationRequired, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetClientAuthenticationRequired", typeof(GetClientAuthenticationRequiredRequest), typeof(GetClientAuthenticationRequiredResponse), () => new GetClientAuthenticationRequiredRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).GetClientAuthenticationRequiredAsync((GetClientAuthenticationRequiredRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetCnMapsToUser", "TLSServer", SoapActions.SetCnMapsToUser, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "SetCnMapsToUser", typeof(SetCnMapsToUserRequest), typeof(SetCnMapsToUserResponse), () => new SetCnMapsToUserRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).SetCnMapsToUserAsync((SetCnMapsToUserRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCnMapsToUser", "TLSServer", SoapActions.GetCnMapsToUser, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetCnMapsToUser", typeof(GetCnMapsToUserRequest), typeof(GetCnMapsToUserResponse), () => new GetCnMapsToUserRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).GetCnMapsToUserAsync((GetCnMapsToUserRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("AddCertPathValidationPolicyAssignment", "TLSServer", SoapActions.AddCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "AddCertPathValidationPolicyAssignment", typeof(AddCertPathValidationPolicyAssignmentRequest), typeof(AddCertPathValidationPolicyAssignmentResponse), () => new AddCertPathValidationPolicyAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).AddCertPathValidationPolicyAssignmentAsync((AddCertPathValidationPolicyAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RemoveCertPathValidationPolicyAssignment", "TLSServer", SoapActions.RemoveCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "RemoveCertPathValidationPolicyAssignment", typeof(RemoveCertPathValidationPolicyAssignmentRequest), typeof(RemoveCertPathValidationPolicyAssignmentResponse), () => new RemoveCertPathValidationPolicyAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).RemoveCertPathValidationPolicyAssignmentAsync((RemoveCertPathValidationPolicyAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ReplaceCertPathValidationPolicyAssignment", "TLSServer", SoapActions.ReplaceCertPathValidationPolicyAssignment, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "ReplaceCertPathValidationPolicyAssignment", typeof(ReplaceCertPathValidationPolicyAssignmentRequest), typeof(ReplaceCertPathValidationPolicyAssignmentResponse), () => new ReplaceCertPathValidationPolicyAssignmentRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).ReplaceCertPathValidationPolicyAssignmentAsync((ReplaceCertPathValidationPolicyAssignmentRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAssignedCertPathValidationPolicies", "TLSServer", SoapActions.GetAssignedCertPathValidationPolicies, "http://www.onvif.org/ver10/advancedsecurity/wsdl", "GetAssignedCertPathValidationPolicies", typeof(GetAssignedCertPathValidationPoliciesRequest), typeof(GetAssignedCertPathValidationPoliciesResponse), () => new GetAssignedCertPathValidationPoliciesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((TLSServerClient)c).GetAssignedCertPathValidationPoliciesAsync((GetAssignedCertPathValidationPoliciesRequest)r, ct))),
+            };
         }
 
         /// <summary>

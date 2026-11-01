@@ -3,6 +3,8 @@
     <TargetFramework>net10.0</TargetFramework>
 	<IsPackable>false</IsPackable>
 	<GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+	<!-- dotnet publish -r win-x64 gives a native executable, with no reflection left to trim around -->
+	<PublishAot>true</PublishAot>
   </PropertyGroup>
   <ItemGroup>
     <Content Include="vaultboy.jpg">

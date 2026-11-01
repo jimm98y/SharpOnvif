@@ -105,6 +105,35 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionConfigDescription();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ParameterDescription", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.ItemListDescription), typeof(SharpOnvifCommon.Onvif.ItemListDescription), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ParameterDescription", Ns.Ver10Actionengine, 0, false, o => ((ActionConfigDescription)o).ParameterDescription, (o, v) => ((ActionConfigDescription)o).ParameterDescription = (SharpOnvifCommon.Onvif.ItemListDescription)v, null, null, () => new SharpOnvifCommon.Onvif.ItemListDescription(), () => new SharpOnvifCommon.Onvif.ItemListDescription(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(System.Xml.XmlQualifiedName), typeof(System.Xml.XmlQualifiedName), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", null, 0, false, o => ((ActionConfigDescription)o).Name, (o, v) => ((ActionConfigDescription)o).Name = (System.Xml.XmlQualifiedName)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionConfigDescription)o).AnyAttr, (o, v) => ((ActionConfigDescription)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -219,6 +248,37 @@ namespace SharpOnvifServer.ActionEngine
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionConfiguration();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Parameters", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.ItemList), typeof(SharpOnvifCommon.Onvif.ItemList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Parameters", Ns.Ver10Actionengine, 0, false, o => ((ActionConfiguration)o).Parameters, (o, v) => ((ActionConfiguration)o).Parameters = (SharpOnvifCommon.Onvif.ItemList)v, null, null, () => new SharpOnvifCommon.Onvif.ItemList(), () => new SharpOnvifCommon.Onvif.ItemList(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((ActionConfiguration)o).Any, (o, v) => ((ActionConfiguration)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", null, 0, false, o => ((ActionConfiguration)o).Name, (o, v) => ((ActionConfiguration)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Type", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(System.Xml.XmlQualifiedName), typeof(System.Xml.XmlQualifiedName), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Type", null, 0, false, o => ((ActionConfiguration)o).Type, (o, v) => ((ActionConfiguration)o).Type = (System.Xml.XmlQualifiedName)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionConfiguration)o).AnyAttr, (o, v) => ((ActionConfiguration)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -346,6 +406,37 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionEngineCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActionCapabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTypeLimits[]), typeof(ActionTypeLimits), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ActionCapabilities", Ns.Ver10Actionengine, 0, true, o => ((ActionEngineCapabilities)o).ActionCapabilities, (o, v) => ((ActionEngineCapabilities)o).ActionCapabilities = (ActionTypeLimits[])v, null, null, () => new ActionTypeLimits[0], () => new ActionTypeLimits(), n => new ActionTypeLimits[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionEngineCapabilitiesExtension), typeof(ActionEngineCapabilitiesExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Actionengine, 1, true, o => ((ActionEngineCapabilities)o).Extension, (o, v) => ((ActionEngineCapabilities)o).Extension = (ActionEngineCapabilitiesExtension)v, null, null, () => new ActionEngineCapabilitiesExtension(), () => new ActionEngineCapabilitiesExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaximumTriggers", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaximumTriggers", null, 0, true, o => ((ActionEngineCapabilities)o).MaximumTriggers, (o, v) => ((ActionEngineCapabilities)o).MaximumTriggers = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaximumActions", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaximumActions", null, 0, true, o => ((ActionEngineCapabilities)o).MaximumActions, (o, v) => ((ActionEngineCapabilities)o).MaximumActions = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionEngineCapabilities)o).AnyAttr, (o, v) => ((ActionEngineCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
@@ -399,6 +490,34 @@ namespace SharpOnvifServer.ActionEngine
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionEngineCapabilitiesExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ActionEngineCapabilitiesExtension)o).Any, (o, v) => ((ActionEngineCapabilitiesExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionEngineCapabilitiesExtension)o).AnyAttr, (o, v) => ((ActionEngineCapabilitiesExtension)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -498,6 +617,36 @@ namespace SharpOnvifServer.ActionEngine
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionTrigger();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTriggerConfiguration), typeof(ActionTriggerConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Actionengine, 0, false, o => ((ActionTrigger)o).Configuration, (o, v) => ((ActionTrigger)o).Configuration = (ActionTriggerConfiguration)v, null, null, () => new ActionTriggerConfiguration(), () => new ActionTriggerConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((ActionTrigger)o).Any, (o, v) => ((ActionTrigger)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", null, 0, false, o => ((ActionTrigger)o).Token, (o, v) => ((ActionTrigger)o).Token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionTrigger)o).AnyAttr, (o, v) => ((ActionTrigger)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -624,6 +773,37 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionTriggerConfiguration();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("TopicExpression", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.TopicExpressionType), typeof(SharpOnvifCommon.Onvif.TopicExpressionType), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "TopicExpression", Ns.Ver10Actionengine, 0, false, o => ((ActionTriggerConfiguration)o).TopicExpression, (o, v) => ((ActionTriggerConfiguration)o).TopicExpression = (SharpOnvifCommon.Onvif.TopicExpressionType)v, null, null, () => new SharpOnvifCommon.Onvif.TopicExpressionType(), () => new SharpOnvifCommon.Onvif.TopicExpressionType(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ContentExpression", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.QueryExpressionType1), typeof(SharpOnvifCommon.Onvif.QueryExpressionType1), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ContentExpression", Ns.Ver10Actionengine, 1, true, o => ((ActionTriggerConfiguration)o).ContentExpression, (o, v) => ((ActionTriggerConfiguration)o).ContentExpression = (SharpOnvifCommon.Onvif.QueryExpressionType1)v, null, null, () => new SharpOnvifCommon.Onvif.QueryExpressionType1(), () => new SharpOnvifCommon.Onvif.QueryExpressionType1(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ActionToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "ActionToken", Ns.Ver10Actionengine, 2, true, o => ((ActionTriggerConfiguration)o).ActionToken, (o, v) => ((ActionTriggerConfiguration)o).ActionToken = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTriggerConfigurationExtension), typeof(ActionTriggerConfigurationExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Actionengine, 3, true, o => ((ActionTriggerConfiguration)o).Extension, (o, v) => ((ActionTriggerConfiguration)o).Extension = (ActionTriggerConfigurationExtension)v, null, null, () => new ActionTriggerConfigurationExtension(), () => new ActionTriggerConfigurationExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionTriggerConfiguration)o).AnyAttr, (o, v) => ((ActionTriggerConfiguration)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
@@ -677,6 +857,34 @@ namespace SharpOnvifServer.ActionEngine
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionTriggerConfigurationExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ActionTriggerConfigurationExtension)o).Any, (o, v) => ((ActionTriggerConfigurationExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionTriggerConfigurationExtension)o).AnyAttr, (o, v) => ((ActionTriggerConfigurationExtension)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -793,6 +1001,37 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ActionTypeLimits();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ActionTypeLimits)o).Any, (o, v) => ((ActionTypeLimits)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Type", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(System.Xml.XmlQualifiedName), typeof(System.Xml.XmlQualifiedName), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Type", null, 0, false, o => ((ActionTypeLimits)o).Type, (o, v) => ((ActionTypeLimits)o).Type = (System.Xml.XmlQualifiedName)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Maximum", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Maximum", null, 0, false, o => ((ActionTypeLimits)o).Maximum, (o, v) => ((ActionTypeLimits)o).Maximum = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("InUse", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "InUse", null, 0, true, o => ((ActionTypeLimits)o).InUse, (o, v) => ((ActionTypeLimits)o).InUse = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ActionTypeLimits)o).AnyAttr, (o, v) => ((ActionTypeLimits)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -851,6 +1090,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.actionTriggerField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateActionTriggersRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateActionTriggers", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActionTrigger", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTriggerConfiguration[]), typeof(ActionTriggerConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ActionTrigger", Ns.Ver10Actionengine, 0, false, o => ((CreateActionTriggersRequest)o).ActionTrigger, (o, v) => ((CreateActionTriggersRequest)o).ActionTrigger = (ActionTriggerConfiguration[])v, null, null, () => new ActionTriggerConfiguration[0], () => new ActionTriggerConfiguration(), n => new ActionTriggerConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -907,6 +1178,38 @@ namespace SharpOnvifServer.ActionEngine
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.actionTriggerField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateActionTriggersResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateActionTriggersResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActionTrigger", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTrigger[]), typeof(ActionTrigger), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ActionTrigger", Ns.Ver10Actionengine, 0, true, o => ((CreateActionTriggersResponse)o).ActionTrigger, (o, v) => ((CreateActionTriggersResponse)o).ActionTrigger = (ActionTrigger[])v, null, null, () => new ActionTrigger[0], () => new ActionTrigger(), n => new ActionTrigger[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -968,6 +1271,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.actionField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateActionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateActions", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Action", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionConfiguration[]), typeof(ActionConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Action", Ns.Ver10Actionengine, 0, false, o => ((CreateActionsRequest)o).Action, (o, v) => ((CreateActionsRequest)o).Action = (ActionConfiguration[])v, null, null, () => new ActionConfiguration[0], () => new ActionConfiguration(), n => new ActionConfiguration[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1025,6 +1360,38 @@ namespace SharpOnvifServer.ActionEngine
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.actionField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateActionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateActionsResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Action", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(OnvifAction[]), typeof(OnvifAction), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Action", Ns.Ver10Actionengine, 0, true, o => ((CreateActionsResponse)o).Action, (o, v) => ((CreateActionsResponse)o).Action = (OnvifAction[])v, null, null, () => new OnvifAction[0], () => new OnvifAction(), n => new OnvifAction[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1085,6 +1452,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteActionTriggersRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteActionTriggers", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Actionengine, 0, false, o => ((DeleteActionTriggersRequest)o).Token, (o, v) => ((DeleteActionTriggersRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1096,6 +1495,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public DeleteActionTriggersResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteActionTriggersResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteActionTriggersResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1156,6 +1586,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteActionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteActions", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Actionengine, 0, false, o => ((DeleteActionsRequest)o).Token, (o, v) => ((DeleteActionsRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1169,6 +1631,37 @@ namespace SharpOnvifServer.ActionEngine
         {
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteActionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteActionsResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1179,6 +1672,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public GetActionTriggersRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetActionTriggersRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetActionTriggers", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1238,6 +1762,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.actionTriggerField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetActionTriggersResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetActionTriggersResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActionTrigger", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTrigger[]), typeof(ActionTrigger), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ActionTrigger", Ns.Ver10Actionengine, 0, true, o => ((GetActionTriggersResponse)o).ActionTrigger, (o, v) => ((GetActionTriggersResponse)o).ActionTrigger = (ActionTrigger[])v, null, null, () => new ActionTrigger[0], () => new ActionTrigger(), n => new ActionTrigger[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1248,6 +1804,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public GetActionsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetActionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetActions", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1307,6 +1894,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.actionField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetActionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetActionsResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Action", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(OnvifAction[]), typeof(OnvifAction), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Action", Ns.Ver10Actionengine, 0, true, o => ((GetActionsResponse)o).Action, (o, v) => ((GetActionsResponse)o).Action = (OnvifAction[])v, null, null, () => new OnvifAction[0], () => new OnvifAction(), n => new OnvifAction[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1317,6 +1936,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1362,6 +2012,38 @@ namespace SharpOnvifServer.ActionEngine
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionEngineCapabilities), typeof(ActionEngineCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Actionengine, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (ActionEngineCapabilities)v, null, null, () => new ActionEngineCapabilities(), () => new ActionEngineCapabilities(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1376,6 +2058,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public GetSupportedActionsRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSupportedActionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSupportedActions", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1426,6 +2139,38 @@ namespace SharpOnvifServer.ActionEngine
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSupportedActionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSupportedActionsResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SupportedActions", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SupportedActions), typeof(SupportedActions), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SupportedActions", Ns.Ver10Actionengine, 0, false, o => ((GetSupportedActionsResponse)o).SupportedActions, (o, v) => ((GetSupportedActionsResponse)o).SupportedActions = (SupportedActions)v, null, null, () => new SupportedActions(), () => new SupportedActions(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1487,6 +2232,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.actionTriggerField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyActionTriggersRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyActionTriggers", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActionTrigger", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionTrigger[]), typeof(ActionTrigger), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ActionTrigger", Ns.Ver10Actionengine, 0, false, o => ((ModifyActionTriggersRequest)o).ActionTrigger, (o, v) => ((ModifyActionTriggersRequest)o).ActionTrigger = (ActionTrigger[])v, null, null, () => new ActionTrigger[0], () => new ActionTrigger(), n => new ActionTrigger[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1499,6 +2276,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public ModifyActionTriggersResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyActionTriggersResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyActionTriggersResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1562,6 +2370,38 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.actionField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyActionsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyActions", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Action", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(OnvifAction[]), typeof(OnvifAction), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Action", Ns.Ver10Actionengine, 0, false, o => ((ModifyActionsRequest)o).Action, (o, v) => ((ModifyActionsRequest)o).Action = (OnvifAction[])v, null, null, () => new OnvifAction[0], () => new OnvifAction(), n => new OnvifAction[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1576,6 +2416,37 @@ namespace SharpOnvifServer.ActionEngine
     {
         public ModifyActionsResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyActionsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyActionsResponse", "http://www.onvif.org/ver10/actionengine/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1676,6 +2547,36 @@ namespace SharpOnvifServer.ActionEngine
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new OnvifAction();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Configuration", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionConfiguration), typeof(ActionConfiguration), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Configuration", Ns.Ver10Actionengine, 0, false, o => ((OnvifAction)o).Configuration, (o, v) => ((OnvifAction)o).Configuration = (ActionConfiguration)v, null, null, () => new ActionConfiguration(), () => new ActionConfiguration(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((OnvifAction)o).Any, (o, v) => ((OnvifAction)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", null, 0, false, o => ((OnvifAction)o).Token, (o, v) => ((OnvifAction)o).Token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((OnvifAction)o).AnyAttr, (o, v) => ((OnvifAction)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1792,6 +2693,36 @@ namespace SharpOnvifServer.ActionEngine
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SupportedActions();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActionContentSchemaLocation", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "ActionContentSchemaLocation", Ns.Ver10Actionengine, 0, true, o => ((SupportedActions)o).ActionContentSchemaLocation, (o, v) => ((SupportedActions)o).ActionContentSchemaLocation = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ActionDescription", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ActionConfigDescription[]), typeof(ActionConfigDescription), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ActionDescription", Ns.Ver10Actionengine, 1, true, o => ((SupportedActions)o).ActionDescription, (o, v) => ((SupportedActions)o).ActionDescription = (ActionConfigDescription[])v, null, null, () => new ActionConfigDescription[0], () => new ActionConfigDescription(), n => new ActionConfigDescription[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SupportedActionsExtension), typeof(SupportedActionsExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Actionengine, 2, true, o => ((SupportedActions)o).Extension, (o, v) => ((SupportedActions)o).Extension = (SupportedActionsExtension)v, null, null, () => new SupportedActionsExtension(), () => new SupportedActionsExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((SupportedActions)o).AnyAttr, (o, v) => ((SupportedActions)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/actionengine/wsdl")]
@@ -1845,6 +2776,34 @@ namespace SharpOnvifServer.ActionEngine
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SupportedActionsExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((SupportedActionsExtension)o).Any, (o, v) => ((SupportedActionsExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((SupportedActionsExtension)o).AnyAttr, (o, v) => ((SupportedActionsExtension)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }

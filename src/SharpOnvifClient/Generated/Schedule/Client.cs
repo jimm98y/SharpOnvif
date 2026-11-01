@@ -266,6 +266,58 @@ namespace SharpOnvifClient.Schedule
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static SchedulePortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new SchedulePortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "SchedulePort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/schedule/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetScheduleState", "SchedulePort", SoapActions.GetScheduleState, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleState", typeof(GetScheduleStateRequest), typeof(GetScheduleStateResponse), () => new GetScheduleStateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetScheduleStateAsync((GetScheduleStateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetScheduleInfo", "SchedulePort", SoapActions.GetScheduleInfo, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfo", typeof(GetScheduleInfoRequest), typeof(GetScheduleInfoResponse), () => new GetScheduleInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetScheduleInfoAsync((GetScheduleInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetScheduleInfoList", "SchedulePort", SoapActions.GetScheduleInfoList, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleInfoList", typeof(GetScheduleInfoListRequest), typeof(GetScheduleInfoListResponse), () => new GetScheduleInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetScheduleInfoListAsync((GetScheduleInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSchedules", "SchedulePort", SoapActions.GetSchedules, "http://www.onvif.org/ver10/schedule/wsdl", "GetSchedules", typeof(GetSchedulesRequest), typeof(GetSchedulesResponse), () => new GetSchedulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetSchedulesAsync((GetSchedulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetScheduleList", "SchedulePort", SoapActions.GetScheduleList, "http://www.onvif.org/ver10/schedule/wsdl", "GetScheduleList", typeof(GetScheduleListRequest), typeof(GetScheduleListResponse), () => new GetScheduleListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetScheduleListAsync((GetScheduleListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateSchedule", "SchedulePort", SoapActions.CreateSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSchedule", typeof(CreateScheduleRequest), typeof(CreateScheduleResponse), () => new CreateScheduleRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).CreateScheduleAsync((CreateScheduleRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetSchedule", "SchedulePort", SoapActions.SetSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "SetSchedule", typeof(SetScheduleRequest), typeof(SetScheduleResponse), () => new SetScheduleRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).SetScheduleAsync((SetScheduleRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifySchedule", "SchedulePort", SoapActions.ModifySchedule, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySchedule", typeof(ModifyScheduleRequest), typeof(ModifyScheduleResponse), () => new ModifyScheduleRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).ModifyScheduleAsync((ModifyScheduleRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteSchedule", "SchedulePort", SoapActions.DeleteSchedule, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSchedule", typeof(DeleteScheduleRequest), typeof(DeleteScheduleResponse), () => new DeleteScheduleRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).DeleteScheduleAsync((DeleteScheduleRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSpecialDayGroupInfo", "SchedulePort", SoapActions.GetSpecialDayGroupInfo, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfo", typeof(GetSpecialDayGroupInfoRequest), typeof(GetSpecialDayGroupInfoResponse), () => new GetSpecialDayGroupInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetSpecialDayGroupInfoAsync((GetSpecialDayGroupInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSpecialDayGroupInfoList", "SchedulePort", SoapActions.GetSpecialDayGroupInfoList, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupInfoList", typeof(GetSpecialDayGroupInfoListRequest), typeof(GetSpecialDayGroupInfoListResponse), () => new GetSpecialDayGroupInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetSpecialDayGroupInfoListAsync((GetSpecialDayGroupInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSpecialDayGroups", "SchedulePort", SoapActions.GetSpecialDayGroups, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroups", typeof(GetSpecialDayGroupsRequest), typeof(GetSpecialDayGroupsResponse), () => new GetSpecialDayGroupsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetSpecialDayGroupsAsync((GetSpecialDayGroupsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSpecialDayGroupList", "SchedulePort", SoapActions.GetSpecialDayGroupList, "http://www.onvif.org/ver10/schedule/wsdl", "GetSpecialDayGroupList", typeof(GetSpecialDayGroupListRequest), typeof(GetSpecialDayGroupListResponse), () => new GetSpecialDayGroupListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).GetSpecialDayGroupListAsync((GetSpecialDayGroupListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateSpecialDayGroup", "SchedulePort", SoapActions.CreateSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "CreateSpecialDayGroup", typeof(CreateSpecialDayGroupRequest), typeof(CreateSpecialDayGroupResponse), () => new CreateSpecialDayGroupRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).CreateSpecialDayGroupAsync((CreateSpecialDayGroupRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetSpecialDayGroup", "SchedulePort", SoapActions.SetSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "SetSpecialDayGroup", typeof(SetSpecialDayGroupRequest), typeof(SetSpecialDayGroupResponse), () => new SetSpecialDayGroupRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).SetSpecialDayGroupAsync((SetSpecialDayGroupRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifySpecialDayGroup", "SchedulePort", SoapActions.ModifySpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "ModifySpecialDayGroup", typeof(ModifySpecialDayGroupRequest), typeof(ModifySpecialDayGroupResponse), () => new ModifySpecialDayGroupRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).ModifySpecialDayGroupAsync((ModifySpecialDayGroupRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteSpecialDayGroup", "SchedulePort", SoapActions.DeleteSpecialDayGroup, "http://www.onvif.org/ver10/schedule/wsdl", "DeleteSpecialDayGroup", typeof(DeleteSpecialDayGroupRequest), typeof(DeleteSpecialDayGroupResponse), () => new DeleteSpecialDayGroupRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SchedulePortClient)c).DeleteSpecialDayGroupAsync((DeleteSpecialDayGroupRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation returns the capabilities of the schedule service.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

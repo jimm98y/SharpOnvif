@@ -359,6 +359,64 @@ namespace SharpOnvifClient.AccessControl
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static PACSPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new PACSPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "PACSPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessPointInfo", "PACSPort", SoapActions.GetAccessPointInfo, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfo", typeof(GetAccessPointInfoRequest), typeof(GetAccessPointInfoResponse), () => new GetAccessPointInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAccessPointInfoAsync((GetAccessPointInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessPointInfoList", "PACSPort", SoapActions.GetAccessPointInfoList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointInfoList", typeof(GetAccessPointInfoListRequest), typeof(GetAccessPointInfoListResponse), () => new GetAccessPointInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAccessPointInfoListAsync((GetAccessPointInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessPoints", "PACSPort", SoapActions.GetAccessPoints, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPoints", typeof(GetAccessPointsRequest), typeof(GetAccessPointsResponse), () => new GetAccessPointsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAccessPointsAsync((GetAccessPointsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessPointList", "PACSPort", SoapActions.GetAccessPointList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointList", typeof(GetAccessPointListRequest), typeof(GetAccessPointListResponse), () => new GetAccessPointListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAccessPointListAsync((GetAccessPointListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateAccessPoint", "PACSPort", SoapActions.CreateAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateAccessPoint", typeof(CreateAccessPointRequest), typeof(CreateAccessPointResponse), () => new CreateAccessPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).CreateAccessPointAsync((CreateAccessPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetAccessPoint", "PACSPort", SoapActions.SetAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPoint", typeof(SetAccessPointRequest), typeof(SetAccessPointResponse), () => new SetAccessPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).SetAccessPointAsync((SetAccessPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyAccessPoint", "PACSPort", SoapActions.ModifyAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyAccessPoint", typeof(ModifyAccessPointRequest), typeof(ModifyAccessPointResponse), () => new ModifyAccessPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).ModifyAccessPointAsync((ModifyAccessPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteAccessPoint", "PACSPort", SoapActions.DeleteAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPoint", typeof(DeleteAccessPointRequest), typeof(DeleteAccessPointResponse), () => new DeleteAccessPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).DeleteAccessPointAsync((DeleteAccessPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetAccessPointAuthenticationProfile", "PACSPort", SoapActions.SetAccessPointAuthenticationProfile, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetAccessPointAuthenticationProfile", typeof(SetAccessPointAuthenticationProfileRequest), typeof(SetAccessPointAuthenticationProfileResponse), () => new SetAccessPointAuthenticationProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).SetAccessPointAuthenticationProfileAsync((SetAccessPointAuthenticationProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteAccessPointAuthenticationProfile", "PACSPort", SoapActions.DeleteAccessPointAuthenticationProfile, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteAccessPointAuthenticationProfile", typeof(DeleteAccessPointAuthenticationProfileRequest), typeof(DeleteAccessPointAuthenticationProfileResponse), () => new DeleteAccessPointAuthenticationProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).DeleteAccessPointAuthenticationProfileAsync((DeleteAccessPointAuthenticationProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAreaInfo", "PACSPort", SoapActions.GetAreaInfo, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfo", typeof(GetAreaInfoRequest), typeof(GetAreaInfoResponse), () => new GetAreaInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAreaInfoAsync((GetAreaInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAreaInfoList", "PACSPort", SoapActions.GetAreaInfoList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaInfoList", typeof(GetAreaInfoListRequest), typeof(GetAreaInfoListResponse), () => new GetAreaInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAreaInfoListAsync((GetAreaInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAreas", "PACSPort", SoapActions.GetAreas, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreas", typeof(GetAreasRequest), typeof(GetAreasResponse), () => new GetAreasRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAreasAsync((GetAreasRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAreaList", "PACSPort", SoapActions.GetAreaList, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAreaList", typeof(GetAreaListRequest), typeof(GetAreaListResponse), () => new GetAreaListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAreaListAsync((GetAreaListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateArea", "PACSPort", SoapActions.CreateArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "CreateArea", typeof(CreateAreaRequest), typeof(CreateAreaResponse), () => new CreateAreaRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).CreateAreaAsync((CreateAreaRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetArea", "PACSPort", SoapActions.SetArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "SetArea", typeof(SetAreaRequest), typeof(SetAreaResponse), () => new SetAreaRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).SetAreaAsync((SetAreaRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyArea", "PACSPort", SoapActions.ModifyArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ModifyArea", typeof(ModifyAreaRequest), typeof(ModifyAreaResponse), () => new ModifyAreaRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).ModifyAreaAsync((ModifyAreaRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteArea", "PACSPort", SoapActions.DeleteArea, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DeleteArea", typeof(DeleteAreaRequest), typeof(DeleteAreaResponse), () => new DeleteAreaRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).DeleteAreaAsync((DeleteAreaRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessPointState", "PACSPort", SoapActions.GetAccessPointState, "http://www.onvif.org/ver10/accesscontrol/wsdl", "GetAccessPointState", typeof(GetAccessPointStateRequest), typeof(GetAccessPointStateResponse), () => new GetAccessPointStateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).GetAccessPointStateAsync((GetAccessPointStateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("EnableAccessPoint", "PACSPort", SoapActions.EnableAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "EnableAccessPoint", typeof(EnableAccessPointRequest), typeof(EnableAccessPointResponse), () => new EnableAccessPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).EnableAccessPointAsync((EnableAccessPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DisableAccessPoint", "PACSPort", SoapActions.DisableAccessPoint, "http://www.onvif.org/ver10/accesscontrol/wsdl", "DisableAccessPoint", typeof(DisableAccessPointRequest), typeof(DisableAccessPointResponse), () => new DisableAccessPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).DisableAccessPointAsync((DisableAccessPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ExternalAuthorization", "PACSPort", SoapActions.ExternalAuthorization, "http://www.onvif.org/ver10/accesscontrol/wsdl", "ExternalAuthorization", typeof(ExternalAuthorizationRequest), typeof(ExternalAuthorizationResponse), () => new ExternalAuthorizationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).ExternalAuthorizationAsync((ExternalAuthorizationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Feedback", "PACSPort", SoapActions.Feedback, "http://www.onvif.org/ver10/accesscontrol/wsdl", "Feedback", typeof(FeedbackRequest), typeof(FeedbackResponse), () => new FeedbackRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PACSPortClient)c).FeedbackAsync((FeedbackRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation returns the capabilities of the access control service. A device which provides the
         /// access control service shall implement this method.
         /// </summary>

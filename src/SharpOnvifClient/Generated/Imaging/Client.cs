@@ -186,6 +186,51 @@ namespace SharpOnvifClient.Imaging
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static ImagingPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new ImagingPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "ImagingPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver20/imaging/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetImagingSettings", "ImagingPort", SoapActions.GetImagingSettings, "http://www.onvif.org/ver20/imaging/wsdl", "GetImagingSettings", typeof(GetImagingSettingsRequest), typeof(GetImagingSettingsResponse), () => new GetImagingSettingsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetImagingSettingsAsync((GetImagingSettingsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetImagingSettings", "ImagingPort", SoapActions.SetImagingSettings, "http://www.onvif.org/ver20/imaging/wsdl", "SetImagingSettings", typeof(SetImagingSettingsRequest), typeof(SetImagingSettingsResponse), () => new SetImagingSettingsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).SetImagingSettingsAsync((SetImagingSettingsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetOptions", "ImagingPort", SoapActions.GetOptions, "http://www.onvif.org/ver20/imaging/wsdl", "GetOptions", typeof(GetOptionsRequest), typeof(GetOptionsResponse), () => new GetOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetOptionsAsync((GetOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Move", "ImagingPort", SoapActions.Move, "http://www.onvif.org/ver20/imaging/wsdl", "Move", typeof(MoveRequest), typeof(MoveResponse), () => new MoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).MoveAsync((MoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetMoveOptions", "ImagingPort", SoapActions.GetMoveOptions, "http://www.onvif.org/ver20/imaging/wsdl", "GetMoveOptions", typeof(GetMoveOptionsRequest), typeof(GetMoveOptionsResponse), () => new GetMoveOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetMoveOptionsAsync((GetMoveOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Stop", "ImagingPort", SoapActions.Stop, "http://www.onvif.org/ver20/imaging/wsdl", "Stop", typeof(StopRequest), typeof(StopResponse), () => new StopRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).StopAsync((StopRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetStatus", "ImagingPort", SoapActions.GetStatus, "http://www.onvif.org/ver20/imaging/wsdl", "GetStatus", typeof(GetStatusRequest), typeof(GetStatusResponse), () => new GetStatusRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetStatusAsync((GetStatusRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPresets", "ImagingPort", SoapActions.GetPresets, "http://www.onvif.org/ver20/imaging/wsdl", "GetPresets", typeof(GetPresetsRequest), typeof(GetPresetsResponse), () => new GetPresetsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetPresetsAsync((GetPresetsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCurrentPreset", "ImagingPort", SoapActions.GetCurrentPreset, "http://www.onvif.org/ver20/imaging/wsdl", "GetCurrentPreset", typeof(GetCurrentPresetRequest), typeof(GetCurrentPresetResponse), () => new GetCurrentPresetRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).GetCurrentPresetAsync((GetCurrentPresetRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetCurrentPreset", "ImagingPort", SoapActions.SetCurrentPreset, "http://www.onvif.org/ver20/imaging/wsdl", "SetCurrentPreset", typeof(SetCurrentPresetRequest), typeof(SetCurrentPresetResponse), () => new SetCurrentPresetRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ImagingPortClient)c).SetCurrentPresetAsync((SetCurrentPresetRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the imaging service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

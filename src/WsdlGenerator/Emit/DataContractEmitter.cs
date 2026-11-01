@@ -220,7 +220,37 @@ internal sealed class DataContractEmitter
                 }
 
                 if (@enum.IsQName) EmitQualifiedEnumConverters(writer, @enum);
+
+                writer.Line();
+                EmitEnumValues(writer, @enum);
             }
+        }
+    }
+
+    /// <summary>
+    /// The values of an enum with their wire names, for the members that describe a contract.
+    /// The table is built the first time it is read, and only then: a service whose members are
+    /// never described never builds one.
+    /// </summary>
+    private void EmitEnumValues(CSharpWriter writer, CsEnum @enum)
+    {
+        string field = $"s_valuesOf{@enum.Name}";
+        string list = $"global::System.Collections.Generic.IReadOnlyList<{Runtime}.XmlEnumValue>";
+
+        writer.Line($"private static {Runtime}.XmlEnumValue[] {field};");
+        writer.Line();
+        writer.Line($"/// <summary>The values of <see cref=\"{@enum.Name}\"/> with their wire names, built on first use.</summary>");
+        writer.Line($"public static {list} ValuesOf{@enum.Name}()");
+        using (writer.Braces())
+        {
+            writer.Line($"return {field} ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref {field}, () => new {Runtime}.XmlEnumValue[]");
+            writer.Line("{");
+            foreach (var member in @enum.Members)
+            {
+                string name = CsharpNaming.Escape(member.Name);
+                writer.Line($"    new {Runtime}.XmlEnumValue({@enum.Name}.{name}, {Quote(member.Name)}, {Quote(member.XmlValue ?? member.Name)}),");
+            }
+            writer.Line("});");
         }
     }
 
@@ -459,7 +489,152 @@ internal sealed class DataContractEmitter
         EmitReadElement(writer, @class, hasBase);
         EmitReadText(writer, @class, hasBase);
         EmitEndRead(writer, @class, hasBase);
+        EmitMetadata(writer, @class);
     }
+
+    // ---------------------------------------------------------------- metadata
+
+    /// <summary>
+    /// What describes the type to code that handles any contract - its members, a new instance
+    /// of it, the element it is written as - so that nobody needs reflection to list, read or
+    /// write one.
+    /// <para>
+    /// Nothing here runs until it is asked for. The member table sits in a static field no
+    /// initializer fills: the first read of <c>GetXmlMembers()</c> builds it, and every read after
+    /// that returns it. Loading the type, or making and serializing an instance of it, builds
+    /// nothing. The lambdas in the table capture nothing, so the compiler caches each of them too.
+    /// </para>
+    /// </summary>
+    private void EmitMetadata(CSharpWriter writer, CsClass @class)
+    {
+        string list = $"global::System.Collections.Generic.IReadOnlyList<{Runtime}.XmlMember>";
+
+        writer.Line($"private static {Runtime}.XmlMember[] s_xmlMembers;");
+        writer.Line();
+        writer.Line("/// <summary>The members of this type, inherited ones first, built on first use.</summary>");
+        writer.Line($"public static new {list} GetXmlMembers()");
+        using (writer.Braces())
+        {
+            writer.Line("return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);");
+        }
+        writer.Line();
+
+        writer.Line($"public override {list} XmlMembers");
+        using (writer.Braces())
+        {
+            writer.Line("get { return GetXmlMembers(); }");
+        }
+        writer.Line();
+
+        writer.Line($"public override {Runtime}.XmlContract CreateXmlInstance()");
+        using (writer.Braces())
+        {
+            writer.Line($"return new {@class.Name}();");
+        }
+        writer.Line();
+
+        if (@class.WrapperElement is { } element)
+        {
+            writer.Line("public override global::System.Xml.XmlQualifiedName XmlRootElement");
+            using (writer.Braces())
+            {
+                writer.Line($"get {{ return new global::System.Xml.XmlQualifiedName({Quote(element.LocalName)}, {Quote(element.Namespace)}); }}");
+            }
+            writer.Line();
+        }
+
+        writer.Line($"private static {Runtime}.XmlMember[] BuildXmlMembers()");
+        using (writer.Braces())
+        {
+            writer.Line($"var own = new {Runtime}.XmlMember[]");
+            writer.Line("{");
+            foreach (var member in @class.Members)
+                writer.Line("    " + MemberDescriptor(@class, member) + ",");
+            writer.Line("};");
+
+            writer.Line(@class.BaseClass is { } baseClass
+                ? $"return {Runtime}.XmlMember.Combine({baseClass.NameFrom(_namespace)}.GetXmlMembers(), own);"
+                : "return own;");
+        }
+        writer.Line();
+    }
+
+    /// <summary>The <c>new XmlMember(...)</c> that describes one member of a class.</summary>
+    private string MemberDescriptor(CsClass @class, CsMember member)
+    {
+        string owner = @class.Name;
+        string property = CsharpNaming.Escape(member.Name);
+        string type = MemberType(member);
+        string item = member.Type.CsName;
+
+        string getSpecified = member.NeedsSpecified ? $"o => (({owner})o).{property}Specified" : "null";
+        string setSpecified = member.NeedsSpecified ? $"(o, v) => (({owner})o).{property}Specified = v" : "null";
+
+        string createItem = NewValue(member.Type) is { } newItem ? $"() => {newItem}" : "null";
+        string createValue = member.IsArray ? $"() => {NewArray(item, "0")}" : createItem;
+        string createArray = member.IsArray ? $"n => {NewArray(item, "n")}" : "null";
+
+        string enumValues = member.Type.Kind == TypeKind.Enum
+            ? $"() => {EnumHelper(member.Type)}.ValuesOf{SimpleName(member.Type)}()"
+            : "null";
+
+        string choices = member.Choices.Count == 0
+            ? "null"
+            : $"() => new {Runtime}.XmlChoiceOption[] {{ " +
+              string.Join(", ", member.Choices.Select(ChoiceDescriptor)) + " }";
+
+        string choiceIdentifier = member.ChoiceIdentifier is { } identifier ? Quote(identifier) : "null";
+
+        return $"new {Runtime}.XmlMember({Quote(member.Name)}, {Runtime}.XmlMemberKind.{member.Kind}, " +
+               $"typeof({type}), typeof({item}), {Runtime}.XmlValueKind.{ValueKind(member.Type.Kind)}, {Bool(member.IsArray)}, " +
+               $"{Quote(member.XmlName.LocalName)}, {NsRef(member.XmlName.Namespace)}, {member.Order}, {Bool(member.IsOptional)}, " +
+               $"o => (({owner})o).{property}, (o, v) => (({owner})o).{property} = ({type})v, " +
+               $"{getSpecified}, {setSpecified}, {createValue}, {createItem}, {createArray}, {enumValues}, {choices}, {choiceIdentifier})";
+    }
+
+    private string ChoiceDescriptor(CsChoiceOption option)
+    {
+        string type = option.Type is { } t ? $"typeof({t.CsName})" : "null";
+        string create = option.Type is { } optionType && NewValue(optionType) is { } value ? $"() => {value}" : "null";
+        return $"new {Runtime}.XmlChoiceOption({Quote(option.ElementName)}, {NsRef(option.Namespace)}, {type}, {create})";
+    }
+
+    /// <summary>
+    /// A new value of a type: an empty instance of a class, a value type's default. Null where
+    /// there is nothing to make - a string, raw XML, an object - which leaves the member null.
+    /// </summary>
+    private static string? NewValue(CsTypeRef type) => type.Kind switch
+    {
+        TypeKind.Class => $"new {type.CsName}()",
+        TypeKind.Enum => $"default({type.CsName})",
+        _ when type.IsValueType => $"default({type.CsName})",
+        _ => null,
+    };
+
+    /// <summary>
+    /// <c>new T[length]</c>, written where T is itself an array the way C# wants it:
+    /// an array of byte[] is <c>new byte[length][]</c>, not <c>new byte[][length]</c>.
+    /// </summary>
+    private static string NewArray(string itemType, string length)
+    {
+        int bracket = itemType.IndexOf('[');
+        return bracket < 0
+            ? $"new {itemType}[{length}]"
+            : $"new {itemType.Substring(0, bracket)}[{length}]{itemType.Substring(bracket)}";
+    }
+
+    private static string ValueKind(TypeKind kind) => kind switch
+    {
+        TypeKind.Primitive => "Primitive",
+        TypeKind.Enum => "Enum",
+        TypeKind.Class => "Contract",
+        TypeKind.XmlElement => "XmlElement",
+        TypeKind.XmlNode => "XmlNode",
+        TypeKind.XmlAttribute => "XmlAttribute",
+        _ => "Object",
+    };
+
+    private static string Bool(bool value) => value ? "true" : "false";
 
     /// <summary>
     /// Cuts the arrays read into this type to the items they hold. The reader grows them with

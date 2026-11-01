@@ -206,6 +206,38 @@ namespace SharpOnvifClient.Search
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Capabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((Capabilities)o).Any, (o, v) => ((Capabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MetadataSearch", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MetadataSearch", null, 0, true, o => ((Capabilities)o).MetadataSearch, (o, v) => ((Capabilities)o).MetadataSearch = (bool)v, o => ((Capabilities)o).MetadataSearchSpecified, (o, v) => ((Capabilities)o).MetadataSearchSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("GeneralStartEvents", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "GeneralStartEvents", null, 0, true, o => ((Capabilities)o).GeneralStartEvents, (o, v) => ((Capabilities)o).GeneralStartEvents = (bool)v, o => ((Capabilities)o).GeneralStartEventsSpecified, (o, v) => ((Capabilities)o).GeneralStartEventsSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("NLSearch", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NLSearch", null, 0, true, o => ((Capabilities)o).NLSearch, (o, v) => ((Capabilities)o).NLSearch = (bool)v, o => ((Capabilities)o).NLSearchSpecified, (o, v) => ((Capabilities)o).NLSearchSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ImageSearch", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ImageSearch", null, 0, true, o => ((Capabilities)o).ImageSearch, (o, v) => ((Capabilities)o).ImageSearch = (bool)v, o => ((Capabilities)o).ImageSearchSpecified, (o, v) => ((Capabilities)o).ImageSearchSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Capabilities)o).AnyAttr, (o, v) => ((Capabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -256,6 +288,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new EndSearchRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("EndSearch", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((EndSearchRequest)o).SearchToken, (o, v) => ((EndSearchRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -309,6 +373,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new EndSearchResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("EndSearchResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Endpoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Endpoint", Ns.Ver10Search, 0, false, o => ((EndSearchResponse)o).Endpoint, (o, v) => ((EndSearchResponse)o).Endpoint = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -507,6 +603,44 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindEventsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindEvents", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("StartPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartPoint", Ns.Ver10Search, 0, false, o => ((FindEventsRequest)o).StartPoint, (o, v) => ((FindEventsRequest)o).StartPoint = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EndPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EndPoint", Ns.Ver10Search, 1, true, o => ((FindEventsRequest)o).EndPoint, (o, v) => ((FindEventsRequest)o).EndPoint = (System.DateTime)v, o => ((FindEventsRequest)o).EndPointSpecified, (o, v) => ((FindEventsRequest)o).EndPointSpecified = v, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Scope", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.SearchScope), typeof(SharpOnvifCommon.Onvif.SearchScope), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Scope", Ns.Ver10Search, 2, false, o => ((FindEventsRequest)o).Scope, (o, v) => ((FindEventsRequest)o).Scope = (SharpOnvifCommon.Onvif.SearchScope)v, null, null, () => new SharpOnvifCommon.Onvif.SearchScope(), () => new SharpOnvifCommon.Onvif.SearchScope(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SearchFilter", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.EventFilter), typeof(SharpOnvifCommon.Onvif.EventFilter), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SearchFilter", Ns.Ver10Search, 3, false, o => ((FindEventsRequest)o).SearchFilter, (o, v) => ((FindEventsRequest)o).SearchFilter = (SharpOnvifCommon.Onvif.EventFilter)v, null, null, () => new SharpOnvifCommon.Onvif.EventFilter(), () => new SharpOnvifCommon.Onvif.EventFilter(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("IncludeStartState", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "IncludeStartState", Ns.Ver10Search, 4, false, o => ((FindEventsRequest)o).IncludeStartState, (o, v) => ((FindEventsRequest)o).IncludeStartState = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxMatches", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxMatches", Ns.Ver10Search, 5, true, o => ((FindEventsRequest)o).MaxMatches, (o, v) => ((FindEventsRequest)o).MaxMatches = (int)v, o => ((FindEventsRequest)o).MaxMatchesSpecified, (o, v) => ((FindEventsRequest)o).MaxMatchesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("KeepAliveTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "KeepAliveTime", Ns.Ver10Search, 6, false, o => ((FindEventsRequest)o).KeepAliveTime, (o, v) => ((FindEventsRequest)o).KeepAliveTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -560,6 +694,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindEventsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindEventsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((FindEventsResponse)o).SearchToken, (o, v) => ((FindEventsResponse)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -737,6 +903,43 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindMetadataRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindMetadata", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("StartPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartPoint", Ns.Ver10Search, 0, false, o => ((FindMetadataRequest)o).StartPoint, (o, v) => ((FindMetadataRequest)o).StartPoint = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EndPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EndPoint", Ns.Ver10Search, 1, true, o => ((FindMetadataRequest)o).EndPoint, (o, v) => ((FindMetadataRequest)o).EndPoint = (System.DateTime)v, o => ((FindMetadataRequest)o).EndPointSpecified, (o, v) => ((FindMetadataRequest)o).EndPointSpecified = v, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Scope", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.SearchScope), typeof(SharpOnvifCommon.Onvif.SearchScope), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Scope", Ns.Ver10Search, 2, false, o => ((FindMetadataRequest)o).Scope, (o, v) => ((FindMetadataRequest)o).Scope = (SharpOnvifCommon.Onvif.SearchScope)v, null, null, () => new SharpOnvifCommon.Onvif.SearchScope(), () => new SharpOnvifCommon.Onvif.SearchScope(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MetadataFilter", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MetadataFilter), typeof(SharpOnvifCommon.Onvif.MetadataFilter), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "MetadataFilter", Ns.Ver10Search, 3, false, o => ((FindMetadataRequest)o).MetadataFilter, (o, v) => ((FindMetadataRequest)o).MetadataFilter = (SharpOnvifCommon.Onvif.MetadataFilter)v, null, null, () => new SharpOnvifCommon.Onvif.MetadataFilter(), () => new SharpOnvifCommon.Onvif.MetadataFilter(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxMatches", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxMatches", Ns.Ver10Search, 4, true, o => ((FindMetadataRequest)o).MaxMatches, (o, v) => ((FindMetadataRequest)o).MaxMatches = (int)v, o => ((FindMetadataRequest)o).MaxMatchesSpecified, (o, v) => ((FindMetadataRequest)o).MaxMatchesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("KeepAliveTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "KeepAliveTime", Ns.Ver10Search, 5, false, o => ((FindMetadataRequest)o).KeepAliveTime, (o, v) => ((FindMetadataRequest)o).KeepAliveTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -789,6 +992,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindMetadataResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindMetadataResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((FindMetadataResponse)o).SearchToken, (o, v) => ((FindMetadataResponse)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -966,6 +1201,43 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindPTZPositionRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindPTZPosition", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("StartPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartPoint", Ns.Ver10Search, 0, false, o => ((FindPTZPositionRequest)o).StartPoint, (o, v) => ((FindPTZPositionRequest)o).StartPoint = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EndPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EndPoint", Ns.Ver10Search, 1, true, o => ((FindPTZPositionRequest)o).EndPoint, (o, v) => ((FindPTZPositionRequest)o).EndPoint = (System.DateTime)v, o => ((FindPTZPositionRequest)o).EndPointSpecified, (o, v) => ((FindPTZPositionRequest)o).EndPointSpecified = v, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Scope", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.SearchScope), typeof(SharpOnvifCommon.Onvif.SearchScope), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Scope", Ns.Ver10Search, 2, false, o => ((FindPTZPositionRequest)o).Scope, (o, v) => ((FindPTZPositionRequest)o).Scope = (SharpOnvifCommon.Onvif.SearchScope)v, null, null, () => new SharpOnvifCommon.Onvif.SearchScope(), () => new SharpOnvifCommon.Onvif.SearchScope(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SearchFilter", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.PTZPositionFilter), typeof(SharpOnvifCommon.Onvif.PTZPositionFilter), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SearchFilter", Ns.Ver10Search, 3, false, o => ((FindPTZPositionRequest)o).SearchFilter, (o, v) => ((FindPTZPositionRequest)o).SearchFilter = (SharpOnvifCommon.Onvif.PTZPositionFilter)v, null, null, () => new SharpOnvifCommon.Onvif.PTZPositionFilter(), () => new SharpOnvifCommon.Onvif.PTZPositionFilter(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxMatches", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxMatches", Ns.Ver10Search, 4, true, o => ((FindPTZPositionRequest)o).MaxMatches, (o, v) => ((FindPTZPositionRequest)o).MaxMatches = (int)v, o => ((FindPTZPositionRequest)o).MaxMatchesSpecified, (o, v) => ((FindPTZPositionRequest)o).MaxMatchesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("KeepAliveTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "KeepAliveTime", Ns.Ver10Search, 5, false, o => ((FindPTZPositionRequest)o).KeepAliveTime, (o, v) => ((FindPTZPositionRequest)o).KeepAliveTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1018,6 +1290,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindPTZPositionResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindPTZPositionResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((FindPTZPositionResponse)o).SearchToken, (o, v) => ((FindPTZPositionResponse)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1129,6 +1433,40 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindRecordingsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindRecordings", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Scope", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.SearchScope), typeof(SharpOnvifCommon.Onvif.SearchScope), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Scope", Ns.Ver10Search, 0, false, o => ((FindRecordingsRequest)o).Scope, (o, v) => ((FindRecordingsRequest)o).Scope = (SharpOnvifCommon.Onvif.SearchScope)v, null, null, () => new SharpOnvifCommon.Onvif.SearchScope(), () => new SharpOnvifCommon.Onvif.SearchScope(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxMatches", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxMatches", Ns.Ver10Search, 1, true, o => ((FindRecordingsRequest)o).MaxMatches, (o, v) => ((FindRecordingsRequest)o).MaxMatches = (int)v, o => ((FindRecordingsRequest)o).MaxMatchesSpecified, (o, v) => ((FindRecordingsRequest)o).MaxMatchesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("KeepAliveTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "KeepAliveTime", Ns.Ver10Search, 2, false, o => ((FindRecordingsRequest)o).KeepAliveTime, (o, v) => ((FindRecordingsRequest)o).KeepAliveTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1178,6 +1516,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new FindRecordingsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("FindRecordingsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((FindRecordingsResponse)o).SearchToken, (o, v) => ((FindRecordingsResponse)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1321,6 +1691,41 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetEventSearchResultsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetEventSearchResults", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetEventSearchResultsRequest)o).SearchToken, (o, v) => ((GetEventSearchResultsRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MinResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MinResults", Ns.Ver10Search, 1, true, o => ((GetEventSearchResultsRequest)o).MinResults, (o, v) => ((GetEventSearchResultsRequest)o).MinResults = (int)v, o => ((GetEventSearchResultsRequest)o).MinResultsSpecified, (o, v) => ((GetEventSearchResultsRequest)o).MinResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxResults", Ns.Ver10Search, 2, true, o => ((GetEventSearchResultsRequest)o).MaxResults, (o, v) => ((GetEventSearchResultsRequest)o).MaxResults = (int)v, o => ((GetEventSearchResultsRequest)o).MaxResultsSpecified, (o, v) => ((GetEventSearchResultsRequest)o).MaxResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("WaitTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "WaitTime", Ns.Ver10Search, 3, true, o => ((GetEventSearchResultsRequest)o).WaitTime, (o, v) => ((GetEventSearchResultsRequest)o).WaitTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1368,6 +1773,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetEventSearchResultsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetEventSearchResultsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ResultList", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FindEventResultList), typeof(SharpOnvifCommon.Onvif.FindEventResultList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ResultList", Ns.Ver10Search, 0, false, o => ((GetEventSearchResultsResponse)o).ResultList, (o, v) => ((GetEventSearchResultsResponse)o).ResultList = (SharpOnvifCommon.Onvif.FindEventResultList)v, null, null, () => new SharpOnvifCommon.Onvif.FindEventResultList(), () => new SharpOnvifCommon.Onvif.FindEventResultList(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1505,6 +1942,41 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetImageSearchResultsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetImageSearchResultsRequest", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetImageSearchResultsRequest)o).SearchToken, (o, v) => ((GetImageSearchResultsRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MinResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MinResults", Ns.Ver10Search, 1, true, o => ((GetImageSearchResultsRequest)o).MinResults, (o, v) => ((GetImageSearchResultsRequest)o).MinResults = (int)v, o => ((GetImageSearchResultsRequest)o).MinResultsSpecified, (o, v) => ((GetImageSearchResultsRequest)o).MinResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxResults", Ns.Ver10Search, 2, true, o => ((GetImageSearchResultsRequest)o).MaxResults, (o, v) => ((GetImageSearchResultsRequest)o).MaxResults = (int)v, o => ((GetImageSearchResultsRequest)o).MaxResultsSpecified, (o, v) => ((GetImageSearchResultsRequest)o).MaxResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("WaitTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "WaitTime", Ns.Ver10Search, 3, true, o => ((GetImageSearchResultsRequest)o).WaitTime, (o, v) => ((GetImageSearchResultsRequest)o).WaitTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1546,6 +2018,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetImageSearchResultsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetImageSearchResultsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ResultList", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FindObjectImageResultList), typeof(SharpOnvifCommon.Onvif.FindObjectImageResultList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ResultList", Ns.Ver10Search, 0, false, o => ((GetImageSearchResultsResponse)o).ResultList, (o, v) => ((GetImageSearchResultsResponse)o).ResultList = (SharpOnvifCommon.Onvif.FindObjectImageResultList)v, null, null, () => new SharpOnvifCommon.Onvif.FindObjectImageResultList(), () => new SharpOnvifCommon.Onvif.FindObjectImageResultList(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1621,6 +2125,39 @@ namespace SharpOnvifClient.Search
             reader.Trim(ref this.recordingTokensField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMediaAttributesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMediaAttributes", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RecordingTokens", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "RecordingTokens", Ns.Ver10Search, 0, true, o => ((GetMediaAttributesRequest)o).RecordingTokens, (o, v) => ((GetMediaAttributesRequest)o).RecordingTokens = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Time", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Time", Ns.Ver10Search, 1, false, o => ((GetMediaAttributesRequest)o).Time, (o, v) => ((GetMediaAttributesRequest)o).Time = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1677,6 +2214,38 @@ namespace SharpOnvifClient.Search
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.mediaAttributesField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMediaAttributesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMediaAttributesResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("MediaAttributes", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.MediaAttributes[]), typeof(SharpOnvifCommon.Onvif.MediaAttributes), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "MediaAttributes", Ns.Ver10Search, 0, true, o => ((GetMediaAttributesResponse)o).MediaAttributes, (o, v) => ((GetMediaAttributesResponse)o).MediaAttributes = (SharpOnvifCommon.Onvif.MediaAttributes[])v, null, null, () => new SharpOnvifCommon.Onvif.MediaAttributes[0], () => new SharpOnvifCommon.Onvif.MediaAttributes(), n => new SharpOnvifCommon.Onvif.MediaAttributes[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1821,6 +2390,41 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataSearchResultsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataSearchResults", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetMetadataSearchResultsRequest)o).SearchToken, (o, v) => ((GetMetadataSearchResultsRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MinResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MinResults", Ns.Ver10Search, 1, true, o => ((GetMetadataSearchResultsRequest)o).MinResults, (o, v) => ((GetMetadataSearchResultsRequest)o).MinResults = (int)v, o => ((GetMetadataSearchResultsRequest)o).MinResultsSpecified, (o, v) => ((GetMetadataSearchResultsRequest)o).MinResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxResults", Ns.Ver10Search, 2, true, o => ((GetMetadataSearchResultsRequest)o).MaxResults, (o, v) => ((GetMetadataSearchResultsRequest)o).MaxResults = (int)v, o => ((GetMetadataSearchResultsRequest)o).MaxResultsSpecified, (o, v) => ((GetMetadataSearchResultsRequest)o).MaxResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("WaitTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "WaitTime", Ns.Ver10Search, 3, true, o => ((GetMetadataSearchResultsRequest)o).WaitTime, (o, v) => ((GetMetadataSearchResultsRequest)o).WaitTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1869,6 +2473,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetMetadataSearchResultsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetMetadataSearchResultsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ResultList", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FindMetadataResultList), typeof(SharpOnvifCommon.Onvif.FindMetadataResultList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ResultList", Ns.Ver10Search, 0, false, o => ((GetMetadataSearchResultsResponse)o).ResultList, (o, v) => ((GetMetadataSearchResultsResponse)o).ResultList = (SharpOnvifCommon.Onvif.FindMetadataResultList)v, null, null, () => new SharpOnvifCommon.Onvif.FindMetadataResultList(), () => new SharpOnvifCommon.Onvif.FindMetadataResultList(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2006,6 +2642,41 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetNLSearchResultsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetNLSearchResultsRequest", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetNLSearchResultsRequest)o).SearchToken, (o, v) => ((GetNLSearchResultsRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MinResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MinResults", Ns.Ver10Search, 1, true, o => ((GetNLSearchResultsRequest)o).MinResults, (o, v) => ((GetNLSearchResultsRequest)o).MinResults = (int)v, o => ((GetNLSearchResultsRequest)o).MinResultsSpecified, (o, v) => ((GetNLSearchResultsRequest)o).MinResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxResults", Ns.Ver10Search, 2, true, o => ((GetNLSearchResultsRequest)o).MaxResults, (o, v) => ((GetNLSearchResultsRequest)o).MaxResults = (int)v, o => ((GetNLSearchResultsRequest)o).MaxResultsSpecified, (o, v) => ((GetNLSearchResultsRequest)o).MaxResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("WaitTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "WaitTime", Ns.Ver10Search, 3, true, o => ((GetNLSearchResultsRequest)o).WaitTime, (o, v) => ((GetNLSearchResultsRequest)o).WaitTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2047,6 +2718,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetNLSearchResultsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetNLSearchResultsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ResultList", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FindNLSearchResultList), typeof(SharpOnvifCommon.Onvif.FindNLSearchResultList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ResultList", Ns.Ver10Search, 0, false, o => ((GetNLSearchResultsResponse)o).ResultList, (o, v) => ((GetNLSearchResultsResponse)o).ResultList = (SharpOnvifCommon.Onvif.FindNLSearchResultList)v, null, null, () => new SharpOnvifCommon.Onvif.FindNLSearchResultList(), () => new SharpOnvifCommon.Onvif.FindNLSearchResultList(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2191,6 +2894,41 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPTZPositionSearchResultsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPTZPositionSearchResults", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetPTZPositionSearchResultsRequest)o).SearchToken, (o, v) => ((GetPTZPositionSearchResultsRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MinResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MinResults", Ns.Ver10Search, 1, true, o => ((GetPTZPositionSearchResultsRequest)o).MinResults, (o, v) => ((GetPTZPositionSearchResultsRequest)o).MinResults = (int)v, o => ((GetPTZPositionSearchResultsRequest)o).MinResultsSpecified, (o, v) => ((GetPTZPositionSearchResultsRequest)o).MinResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxResults", Ns.Ver10Search, 2, true, o => ((GetPTZPositionSearchResultsRequest)o).MaxResults, (o, v) => ((GetPTZPositionSearchResultsRequest)o).MaxResults = (int)v, o => ((GetPTZPositionSearchResultsRequest)o).MaxResultsSpecified, (o, v) => ((GetPTZPositionSearchResultsRequest)o).MaxResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("WaitTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "WaitTime", Ns.Ver10Search, 3, true, o => ((GetPTZPositionSearchResultsRequest)o).WaitTime, (o, v) => ((GetPTZPositionSearchResultsRequest)o).WaitTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2241,6 +2979,38 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetPTZPositionSearchResultsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetPTZPositionSearchResultsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ResultList", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FindPTZPositionResultList), typeof(SharpOnvifCommon.Onvif.FindPTZPositionResultList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ResultList", Ns.Ver10Search, 0, false, o => ((GetPTZPositionSearchResultsResponse)o).ResultList, (o, v) => ((GetPTZPositionSearchResultsResponse)o).ResultList = (SharpOnvifCommon.Onvif.FindPTZPositionResultList)v, null, null, () => new SharpOnvifCommon.Onvif.FindPTZPositionResultList(), () => new SharpOnvifCommon.Onvif.FindPTZPositionResultList(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2285,6 +3055,38 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRecordingInformationRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRecordingInformation", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RecordingToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RecordingToken", Ns.Ver10Search, 0, false, o => ((GetRecordingInformationRequest)o).RecordingToken, (o, v) => ((GetRecordingInformationRequest)o).RecordingToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2327,6 +3129,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRecordingInformationResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRecordingInformationResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RecordingInformation", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.RecordingInformation), typeof(SharpOnvifCommon.Onvif.RecordingInformation), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "RecordingInformation", Ns.Ver10Search, 0, false, o => ((GetRecordingInformationResponse)o).RecordingInformation, (o, v) => ((GetRecordingInformationResponse)o).RecordingInformation = (SharpOnvifCommon.Onvif.RecordingInformation)v, null, null, () => new SharpOnvifCommon.Onvif.RecordingInformation(), () => new SharpOnvifCommon.Onvif.RecordingInformation(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2472,6 +3306,41 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRecordingSearchResultsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRecordingSearchResults", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetRecordingSearchResultsRequest)o).SearchToken, (o, v) => ((GetRecordingSearchResultsRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MinResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MinResults", Ns.Ver10Search, 1, true, o => ((GetRecordingSearchResultsRequest)o).MinResults, (o, v) => ((GetRecordingSearchResultsRequest)o).MinResults = (int)v, o => ((GetRecordingSearchResultsRequest)o).MinResultsSpecified, (o, v) => ((GetRecordingSearchResultsRequest)o).MinResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxResults", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxResults", Ns.Ver10Search, 2, true, o => ((GetRecordingSearchResultsRequest)o).MaxResults, (o, v) => ((GetRecordingSearchResultsRequest)o).MaxResults = (int)v, o => ((GetRecordingSearchResultsRequest)o).MaxResultsSpecified, (o, v) => ((GetRecordingSearchResultsRequest)o).MaxResultsSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("WaitTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "WaitTime", Ns.Ver10Search, 3, true, o => ((GetRecordingSearchResultsRequest)o).WaitTime, (o, v) => ((GetRecordingSearchResultsRequest)o).WaitTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2523,6 +3392,38 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRecordingSearchResultsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRecordingSearchResultsResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ResultList", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.FindRecordingResultList), typeof(SharpOnvifCommon.Onvif.FindRecordingResultList), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ResultList", Ns.Ver10Search, 0, false, o => ((GetRecordingSearchResultsResponse)o).ResultList, (o, v) => ((GetRecordingSearchResultsResponse)o).ResultList = (SharpOnvifCommon.Onvif.FindRecordingResultList)v, null, null, () => new SharpOnvifCommon.Onvif.FindRecordingResultList(), () => new SharpOnvifCommon.Onvif.FindRecordingResultList(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2534,6 +3435,37 @@ namespace SharpOnvifClient.Search
     {
         public GetRecordingSummaryRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRecordingSummaryRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRecordingSummary", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2578,6 +3510,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetRecordingSummaryResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetRecordingSummaryResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Summary", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.RecordingSummary), typeof(SharpOnvifCommon.Onvif.RecordingSummary), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Summary", Ns.Ver10Search, 0, false, o => ((GetRecordingSummaryResponse)o).Summary, (o, v) => ((GetRecordingSummaryResponse)o).Summary = (SharpOnvifCommon.Onvif.RecordingSummary)v, null, null, () => new SharpOnvifCommon.Onvif.RecordingSummary(), () => new SharpOnvifCommon.Onvif.RecordingSummary(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2627,6 +3591,38 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSearchStateRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSearchState", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((GetSearchStateRequest)o).SearchToken, (o, v) => ((GetSearchStateRequest)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2671,6 +3667,38 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSearchStateResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSearchStateResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("State", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SharpOnvifCommon.Onvif.SearchState), typeof(SharpOnvifCommon.Onvif.SearchState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "State", Ns.Ver10Search, 0, false, o => ((GetSearchStateResponse)o).State, (o, v) => ((GetSearchStateResponse)o).State = (SharpOnvifCommon.Onvif.SearchState)v, null, null, () => default(SharpOnvifCommon.Onvif.SearchState), () => default(SharpOnvifCommon.Onvif.SearchState), null, () => SharpOnvifCommon.Onvif.EnumXml.ValuesOfSearchState(), null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2681,6 +3709,37 @@ namespace SharpOnvifClient.Search
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2727,6 +3786,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Capabilities), typeof(Capabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Search, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (Capabilities)v, null, null, () => new Capabilities(), () => new Capabilities(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2923,6 +4014,44 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SearchImageByImageRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SearchImageByImageRequest", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("StartPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartPoint", Ns.Ver10Search, 0, false, o => ((SearchImageByImageRequest)o).StartPoint, (o, v) => ((SearchImageByImageRequest)o).StartPoint = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EndPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EndPoint", Ns.Ver10Search, 1, true, o => ((SearchImageByImageRequest)o).EndPoint, (o, v) => ((SearchImageByImageRequest)o).EndPoint = (System.DateTime)v, o => ((SearchImageByImageRequest)o).EndPointSpecified, (o, v) => ((SearchImageByImageRequest)o).EndPointSpecified = v, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RecordingToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RecordingToken", Ns.Ver10Search, 2, true, o => ((SearchImageByImageRequest)o).RecordingToken, (o, v) => ((SearchImageByImageRequest)o).RecordingToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("TargetImageURI", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "TargetImageURI", Ns.Ver10Search, 3, true, o => ((SearchImageByImageRequest)o).TargetImageURI, (o, v) => ((SearchImageByImageRequest)o).TargetImageURI = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("TargetImageData", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(byte[]), typeof(byte[]), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "TargetImageData", Ns.Ver10Search, 4, true, o => ((SearchImageByImageRequest)o).TargetImageData, (o, v) => ((SearchImageByImageRequest)o).TargetImageData = (byte[])v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxMatches", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxMatches", Ns.Ver10Search, 5, true, o => ((SearchImageByImageRequest)o).MaxMatches, (o, v) => ((SearchImageByImageRequest)o).MaxMatches = (int)v, o => ((SearchImageByImageRequest)o).MaxMatchesSpecified, (o, v) => ((SearchImageByImageRequest)o).MaxMatchesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("KeepAliveTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "KeepAliveTime", Ns.Ver10Search, 6, false, o => ((SearchImageByImageRequest)o).KeepAliveTime, (o, v) => ((SearchImageByImageRequest)o).KeepAliveTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2967,6 +4096,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SearchImageByImageResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SearchImageByImageResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((SearchImageByImageResponse)o).SearchToken, (o, v) => ((SearchImageByImageResponse)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3177,6 +4338,44 @@ namespace SharpOnvifClient.Search
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SearchImageByNLRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SearchImageByNLRequest", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("StartPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartPoint", Ns.Ver10Search, 0, false, o => ((SearchImageByNLRequest)o).StartPoint, (o, v) => ((SearchImageByNLRequest)o).StartPoint = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("EndPoint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "EndPoint", Ns.Ver10Search, 1, true, o => ((SearchImageByNLRequest)o).EndPoint, (o, v) => ((SearchImageByNLRequest)o).EndPoint = (System.DateTime)v, o => ((SearchImageByNLRequest)o).EndPointSpecified, (o, v) => ((SearchImageByNLRequest)o).EndPointSpecified = v, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("RecordingToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RecordingToken", Ns.Ver10Search, 2, true, o => ((SearchImageByNLRequest)o).RecordingToken, (o, v) => ((SearchImageByNLRequest)o).RecordingToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Text", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Text", Ns.Ver10Search, 3, false, o => ((SearchImageByNLRequest)o).Text, (o, v) => ((SearchImageByNLRequest)o).Text = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Similarity", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(float), typeof(float), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Similarity", Ns.Ver10Search, 4, true, o => ((SearchImageByNLRequest)o).Similarity, (o, v) => ((SearchImageByNLRequest)o).Similarity = (float)v, o => ((SearchImageByNLRequest)o).SimilaritySpecified, (o, v) => ((SearchImageByNLRequest)o).SimilaritySpecified = v, () => default(float), () => default(float), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxMatches", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxMatches", Ns.Ver10Search, 5, true, o => ((SearchImageByNLRequest)o).MaxMatches, (o, v) => ((SearchImageByNLRequest)o).MaxMatches = (int)v, o => ((SearchImageByNLRequest)o).MaxMatchesSpecified, (o, v) => ((SearchImageByNLRequest)o).MaxMatchesSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("KeepAliveTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "KeepAliveTime", Ns.Ver10Search, 6, false, o => ((SearchImageByNLRequest)o).KeepAliveTime, (o, v) => ((SearchImageByNLRequest)o).KeepAliveTime = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3221,6 +4420,38 @@ namespace SharpOnvifClient.Search
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SearchImageByNLResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SearchImageByNLResponse", "http://www.onvif.org/ver10/search/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SearchToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SearchToken", Ns.Ver10Search, 0, false, o => ((SearchImageByNLResponse)o).SearchToken, (o, v) => ((SearchImageByNLResponse)o).SearchToken = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }

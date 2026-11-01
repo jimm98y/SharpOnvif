@@ -171,6 +171,49 @@ namespace SharpOnvifClient.AccessRules
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static AccessRulesPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new AccessRulesPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "AccessRulesPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/accessrules/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessProfileInfo", "AccessRulesPort", SoapActions.GetAccessProfileInfo, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfo", typeof(GetAccessProfileInfoRequest), typeof(GetAccessProfileInfoResponse), () => new GetAccessProfileInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).GetAccessProfileInfoAsync((GetAccessProfileInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessProfileInfoList", "AccessRulesPort", SoapActions.GetAccessProfileInfoList, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileInfoList", typeof(GetAccessProfileInfoListRequest), typeof(GetAccessProfileInfoListResponse), () => new GetAccessProfileInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).GetAccessProfileInfoListAsync((GetAccessProfileInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessProfiles", "AccessRulesPort", SoapActions.GetAccessProfiles, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfiles", typeof(GetAccessProfilesRequest), typeof(GetAccessProfilesResponse), () => new GetAccessProfilesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).GetAccessProfilesAsync((GetAccessProfilesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAccessProfileList", "AccessRulesPort", SoapActions.GetAccessProfileList, "http://www.onvif.org/ver10/accessrules/wsdl", "GetAccessProfileList", typeof(GetAccessProfileListRequest), typeof(GetAccessProfileListResponse), () => new GetAccessProfileListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).GetAccessProfileListAsync((GetAccessProfileListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateAccessProfile", "AccessRulesPort", SoapActions.CreateAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "CreateAccessProfile", typeof(CreateAccessProfileRequest), typeof(CreateAccessProfileResponse), () => new CreateAccessProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).CreateAccessProfileAsync((CreateAccessProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyAccessProfile", "AccessRulesPort", SoapActions.ModifyAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "ModifyAccessProfile", typeof(ModifyAccessProfileRequest), typeof(ModifyAccessProfileResponse), () => new ModifyAccessProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).ModifyAccessProfileAsync((ModifyAccessProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetAccessProfile", "AccessRulesPort", SoapActions.SetAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "SetAccessProfile", typeof(SetAccessProfileRequest), typeof(SetAccessProfileResponse), () => new SetAccessProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).SetAccessProfileAsync((SetAccessProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteAccessProfile", "AccessRulesPort", SoapActions.DeleteAccessProfile, "http://www.onvif.org/ver10/accessrules/wsdl", "DeleteAccessProfile", typeof(DeleteAccessProfileRequest), typeof(DeleteAccessProfileResponse), () => new DeleteAccessProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AccessRulesPortClient)c).DeleteAccessProfileAsync((DeleteAccessProfileRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation returns the capabilities of the access rules service.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

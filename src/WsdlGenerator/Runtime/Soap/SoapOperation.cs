@@ -1,0 +1,116 @@
+// SharpOnvif
+// Copyright (C) 2026 Lukas Volf
+//
+// Permission is hereby granted, free of charge, to any person obtaining a copy
+// of this software and associated documentation files (the "Software"), to deal
+// in the Software without restriction, including without limitation the rights
+// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+// copies of the Software, and to permit persons to whom the Software is
+// furnished to do so, subject to the following conditions:
+//
+// The above copyright notice and this permission notice shall be included in
+// all copies or substantial portions of the Software.
+//
+// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+// IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+// FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+// AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+// LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+// SOFTWARE.
+
+using System;
+using System.Threading;
+using System.Threading.Tasks;
+using __RUNTIME__.Xml;
+
+namespace __RUNTIME__.Soap
+{
+    /// <summary>
+    /// One operation of a generated client, described so it can be listed, given a request and
+    /// called without reflection: a generic tool calls any operation through this, the way the
+    /// generated method would be called by name.
+    /// <para>
+    /// A client's operations are listed by its static <c>Operations</c>, built on first use.
+    /// </para>
+    /// </summary>
+    public sealed class SoapOperation
+    {
+        private readonly Func<XmlContract> _createRequest;
+        private readonly Func<SoapClientBase, XmlContract, CancellationToken, Task<XmlContract>> _invoke;
+
+        public SoapOperation(
+            string name, string port, string soapAction, string bodyNamespace, string bodyElement,
+            Type requestType, Type responseType, Func<XmlContract> createRequest,
+            Func<SoapClientBase, XmlContract, CancellationToken, Task<XmlContract>> invoke)
+        {
+            Name = name;
+            Port = port;
+            SoapAction = soapAction;
+            BodyNamespace = bodyNamespace;
+            BodyElement = bodyElement;
+            RequestType = requestType;
+            ResponseType = responseType;
+            _createRequest = createRequest;
+            _invoke = invoke;
+        }
+
+        /// <summary>The operation's name, as the WSDL gives it: the generated method is this with Async.</summary>
+        public string Name { get; private set; }
+
+        /// <summary>The portType it belongs to, which is the name of the generated interface.</summary>
+        public string Port { get; private set; }
+
+        public string SoapAction { get; private set; }
+
+        /// <summary>Namespace of the element the request is written as in the SOAP body.</summary>
+        public string BodyNamespace { get; private set; }
+
+        /// <summary>The element the request is written as in the SOAP body.</summary>
+        public string BodyElement { get; private set; }
+
+        public Type RequestType { get; private set; }
+
+        /// <summary>The type of the response, or null for a one-way operation.</summary>
+        public Type ResponseType { get; private set; }
+
+        public bool IsOneWay
+        {
+            get { return ResponseType == null; }
+        }
+
+        /// <summary>A new, empty request.</summary>
+        public XmlContract CreateRequest()
+        {
+            return _createRequest();
+        }
+
+        /// <summary>
+        /// Calls the operation on a client of the port it belongs to, with a request of its
+        /// <see cref="RequestType"/>. Completes with the response, or with null for a one-way
+        /// operation.
+        /// </summary>
+        public Task<XmlContract> InvokeAsync(SoapClientBase client, XmlContract request, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            return _invoke(client, request, cancellationToken);
+        }
+
+        /// <summary>The generated method's task, completing with its response as a contract.</summary>
+        public static async Task<XmlContract> Response<TResponse>(Task<TResponse> call) where TResponse : XmlContract
+        {
+            return await call.ConfigureAwait(false);
+        }
+
+        /// <summary>A one-way method's task, completing with null.</summary>
+        public static async Task<XmlContract> NoResponse(Task call)
+        {
+            await call.ConfigureAwait(false);
+            return null;
+        }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+    }
+}

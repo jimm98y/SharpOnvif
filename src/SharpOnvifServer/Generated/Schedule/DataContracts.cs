@@ -68,6 +68,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateScheduleRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateSchedule", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Schedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Schedule), typeof(Schedule), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Schedule", Ns.Ver10Schedule, 0, false, o => ((CreateScheduleRequest)o).Schedule, (o, v) => ((CreateScheduleRequest)o).Schedule = (Schedule)v, null, null, () => new Schedule(), () => new Schedule(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -115,6 +147,38 @@ namespace SharpOnvifServer.Schedule
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateScheduleResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateScheduleResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Schedule, 0, false, o => ((CreateScheduleResponse)o).Token, (o, v) => ((CreateScheduleResponse)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -166,6 +230,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateSpecialDayGroupRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateSpecialDayGroup", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroup), typeof(SpecialDayGroup), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SpecialDayGroup", Ns.Ver10Schedule, 0, false, o => ((CreateSpecialDayGroupRequest)o).SpecialDayGroup, (o, v) => ((CreateSpecialDayGroupRequest)o).SpecialDayGroup = (SpecialDayGroup)v, null, null, () => new SpecialDayGroup(), () => new SpecialDayGroup(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -213,6 +309,38 @@ namespace SharpOnvifServer.Schedule
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateSpecialDayGroupResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateSpecialDayGroupResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Schedule, 0, false, o => ((CreateSpecialDayGroupResponse)o).Token, (o, v) => ((CreateSpecialDayGroupResponse)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -263,6 +391,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteScheduleRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteSchedule", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Schedule, 0, false, o => ((DeleteScheduleRequest)o).Token, (o, v) => ((DeleteScheduleRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -275,6 +435,37 @@ namespace SharpOnvifServer.Schedule
     {
         public DeleteScheduleResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteScheduleResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteScheduleResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -325,6 +516,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteSpecialDayGroupRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteSpecialDayGroup", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Schedule, 0, false, o => ((DeleteSpecialDayGroupRequest)o).Token, (o, v) => ((DeleteSpecialDayGroupRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -337,6 +560,37 @@ namespace SharpOnvifServer.Schedule
     {
         public DeleteSpecialDayGroupResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteSpecialDayGroupResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteSpecialDayGroupResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -426,6 +680,39 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleInfoListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleInfoList", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Schedule, 0, true, o => ((GetScheduleInfoListRequest)o).Limit, (o, v) => ((GetScheduleInfoListRequest)o).Limit = (int)v, o => ((GetScheduleInfoListRequest)o).LimitSpecified, (o, v) => ((GetScheduleInfoListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Schedule, 1, true, o => ((GetScheduleInfoListRequest)o).StartReference, (o, v) => ((GetScheduleInfoListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -505,6 +792,39 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.scheduleInfoField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleInfoListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleInfoListResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Schedule, 0, true, o => ((GetScheduleInfoListResponse)o).NextStartReference, (o, v) => ((GetScheduleInfoListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ScheduleInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ScheduleInfo[]), typeof(ScheduleInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ScheduleInfo", Ns.Ver10Schedule, 1, true, o => ((GetScheduleInfoListResponse)o).ScheduleInfo, (o, v) => ((GetScheduleInfoListResponse)o).ScheduleInfo = (ScheduleInfo[])v, null, null, () => new ScheduleInfo[0], () => new ScheduleInfo(), n => new ScheduleInfo[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -566,6 +886,38 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleInfoRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleInfo", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Schedule, 0, false, o => ((GetScheduleInfoRequest)o).Token, (o, v) => ((GetScheduleInfoRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -625,6 +977,38 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.scheduleInfoField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleInfoResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleInfoResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ScheduleInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ScheduleInfo[]), typeof(ScheduleInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "ScheduleInfo", Ns.Ver10Schedule, 0, true, o => ((GetScheduleInfoResponse)o).ScheduleInfo, (o, v) => ((GetScheduleInfoResponse)o).ScheduleInfo = (ScheduleInfo[])v, null, null, () => new ScheduleInfo[0], () => new ScheduleInfo(), n => new ScheduleInfo[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -714,6 +1098,39 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleList", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Schedule, 0, true, o => ((GetScheduleListRequest)o).Limit, (o, v) => ((GetScheduleListRequest)o).Limit = (int)v, o => ((GetScheduleListRequest)o).LimitSpecified, (o, v) => ((GetScheduleListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Schedule, 1, true, o => ((GetScheduleListRequest)o).StartReference, (o, v) => ((GetScheduleListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -793,6 +1210,39 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.scheduleField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleListResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Schedule, 0, true, o => ((GetScheduleListResponse)o).NextStartReference, (o, v) => ((GetScheduleListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Schedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Schedule[]), typeof(Schedule), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Schedule", Ns.Ver10Schedule, 1, true, o => ((GetScheduleListResponse)o).Schedule, (o, v) => ((GetScheduleListResponse)o).Schedule = (Schedule[])v, null, null, () => new Schedule[0], () => new Schedule(), n => new Schedule[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -839,6 +1289,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleStateRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleState", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Schedule, 0, false, o => ((GetScheduleStateRequest)o).Token, (o, v) => ((GetScheduleStateRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -883,6 +1365,38 @@ namespace SharpOnvifServer.Schedule
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetScheduleStateResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetScheduleStateResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ScheduleState", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ScheduleState), typeof(ScheduleState), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "ScheduleState", Ns.Ver10Schedule, 0, false, o => ((GetScheduleStateResponse)o).ScheduleState, (o, v) => ((GetScheduleStateResponse)o).ScheduleState = (ScheduleState)v, null, null, () => new ScheduleState(), () => new ScheduleState(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -945,6 +1459,38 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSchedulesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSchedules", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Schedule, 0, false, o => ((GetSchedulesRequest)o).Token, (o, v) => ((GetSchedulesRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1005,6 +1551,38 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.scheduleField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSchedulesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSchedulesResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Schedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Schedule[]), typeof(Schedule), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Schedule", Ns.Ver10Schedule, 0, true, o => ((GetSchedulesResponse)o).Schedule, (o, v) => ((GetSchedulesResponse)o).Schedule = (Schedule[])v, null, null, () => new Schedule[0], () => new Schedule(), n => new Schedule[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1015,6 +1593,37 @@ namespace SharpOnvifServer.Schedule
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1062,6 +1671,38 @@ namespace SharpOnvifServer.Schedule
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ServiceCapabilities), typeof(ServiceCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Schedule, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (ServiceCapabilities)v, null, null, () => new ServiceCapabilities(), () => new ServiceCapabilities(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1150,6 +1791,39 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupInfoListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupInfoList", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Schedule, 0, true, o => ((GetSpecialDayGroupInfoListRequest)o).Limit, (o, v) => ((GetSpecialDayGroupInfoListRequest)o).Limit = (int)v, o => ((GetSpecialDayGroupInfoListRequest)o).LimitSpecified, (o, v) => ((GetSpecialDayGroupInfoListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Schedule, 1, true, o => ((GetSpecialDayGroupInfoListRequest)o).StartReference, (o, v) => ((GetSpecialDayGroupInfoListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1228,6 +1902,39 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.specialDayGroupInfoField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupInfoListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupInfoListResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Schedule, 0, true, o => ((GetSpecialDayGroupInfoListResponse)o).NextStartReference, (o, v) => ((GetSpecialDayGroupInfoListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroupInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroupInfo[]), typeof(SpecialDayGroupInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SpecialDayGroupInfo", Ns.Ver10Schedule, 1, true, o => ((GetSpecialDayGroupInfoListResponse)o).SpecialDayGroupInfo, (o, v) => ((GetSpecialDayGroupInfoListResponse)o).SpecialDayGroupInfo = (SpecialDayGroupInfo[])v, null, null, () => new SpecialDayGroupInfo[0], () => new SpecialDayGroupInfo(), n => new SpecialDayGroupInfo[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1288,6 +1995,38 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupInfoRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupInfo", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Schedule, 0, false, o => ((GetSpecialDayGroupInfoRequest)o).Token, (o, v) => ((GetSpecialDayGroupInfoRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1346,6 +2085,38 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.specialDayGroupInfoField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupInfoResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupInfoResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroupInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroupInfo[]), typeof(SpecialDayGroupInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SpecialDayGroupInfo", Ns.Ver10Schedule, 0, true, o => ((GetSpecialDayGroupInfoResponse)o).SpecialDayGroupInfo, (o, v) => ((GetSpecialDayGroupInfoResponse)o).SpecialDayGroupInfo = (SpecialDayGroupInfo[])v, null, null, () => new SpecialDayGroupInfo[0], () => new SpecialDayGroupInfo(), n => new SpecialDayGroupInfo[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1435,6 +2206,39 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupList", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Schedule, 0, true, o => ((GetSpecialDayGroupListRequest)o).Limit, (o, v) => ((GetSpecialDayGroupListRequest)o).Limit = (int)v, o => ((GetSpecialDayGroupListRequest)o).LimitSpecified, (o, v) => ((GetSpecialDayGroupListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Schedule, 1, true, o => ((GetSpecialDayGroupListRequest)o).StartReference, (o, v) => ((GetSpecialDayGroupListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1514,6 +2318,39 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.specialDayGroupField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupListResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Schedule, 0, true, o => ((GetSpecialDayGroupListResponse)o).NextStartReference, (o, v) => ((GetSpecialDayGroupListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroup[]), typeof(SpecialDayGroup), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SpecialDayGroup", Ns.Ver10Schedule, 1, true, o => ((GetSpecialDayGroupListResponse)o).SpecialDayGroup, (o, v) => ((GetSpecialDayGroupListResponse)o).SpecialDayGroup = (SpecialDayGroup[])v, null, null, () => new SpecialDayGroup[0], () => new SpecialDayGroup(), n => new SpecialDayGroup[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1569,6 +2406,38 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.tokenField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroups", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Schedule, 0, false, o => ((GetSpecialDayGroupsRequest)o).Token, (o, v) => ((GetSpecialDayGroupsRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1628,6 +2497,38 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.specialDayGroupField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSpecialDayGroupsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSpecialDayGroupsResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroup[]), typeof(SpecialDayGroup), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SpecialDayGroup", Ns.Ver10Schedule, 0, true, o => ((GetSpecialDayGroupsResponse)o).SpecialDayGroup, (o, v) => ((GetSpecialDayGroupsResponse)o).SpecialDayGroup = (SpecialDayGroup[])v, null, null, () => new SpecialDayGroup[0], () => new SpecialDayGroup(), n => new SpecialDayGroup[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1674,6 +2575,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyScheduleRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifySchedule", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Schedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Schedule), typeof(Schedule), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Schedule", Ns.Ver10Schedule, 0, false, o => ((ModifyScheduleRequest)o).Schedule, (o, v) => ((ModifyScheduleRequest)o).Schedule = (Schedule)v, null, null, () => new Schedule(), () => new Schedule(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1684,6 +2617,37 @@ namespace SharpOnvifServer.Schedule
     {
         public ModifyScheduleResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyScheduleResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyScheduleResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1732,6 +2696,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifySpecialDayGroupRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifySpecialDayGroup", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroup), typeof(SpecialDayGroup), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SpecialDayGroup", Ns.Ver10Schedule, 0, false, o => ((ModifySpecialDayGroupRequest)o).SpecialDayGroup, (o, v) => ((ModifySpecialDayGroupRequest)o).SpecialDayGroup = (SpecialDayGroup)v, null, null, () => new SpecialDayGroup(), () => new SpecialDayGroup(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1742,6 +2738,37 @@ namespace SharpOnvifServer.Schedule
     {
         public ModifySpecialDayGroupResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifySpecialDayGroupResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifySpecialDayGroupResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1860,6 +2887,36 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Schedule();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Standard", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Standard", Ns.Ver10Schedule, 0, false, o => ((Schedule)o).Standard, (o, v) => ((Schedule)o).Standard = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDays", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDaysSchedule[]), typeof(SpecialDaysSchedule), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SpecialDays", Ns.Ver10Schedule, 1, true, o => ((Schedule)o).SpecialDays, (o, v) => ((Schedule)o).SpecialDays = (SpecialDaysSchedule[])v, null, null, () => new SpecialDaysSchedule[0], () => new SpecialDaysSchedule(), n => new SpecialDaysSchedule[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ScheduleExtension), typeof(ScheduleExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Schedule, 2, true, o => ((Schedule)o).Extension, (o, v) => ((Schedule)o).Extension = (ScheduleExtension)v, null, null, () => new ScheduleExtension(), () => new ScheduleExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Schedule)o).AnyAttr, (o, v) => ((Schedule)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(ScheduleInfo.GetXmlMembers(), own);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
@@ -1892,6 +2949,33 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ScheduleExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ScheduleExtension)o).Any, (o, v) => ((ScheduleExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1954,6 +3038,34 @@ namespace SharpOnvifServer.Schedule
             }
             if (base.ReadXmlElement(reader)) return true;
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ScheduleInfo();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Schedule, 0, false, o => ((ScheduleInfo)o).Name, (o, v) => ((ScheduleInfo)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Description", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Description", Ns.Ver10Schedule, 1, true, o => ((ScheduleInfo)o).Description, (o, v) => ((ScheduleInfo)o).Description = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SharpOnvifCommon.Onvif.DataEntity.GetXmlMembers(), own);
         }
 
     }
@@ -2075,6 +3187,36 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ScheduleState();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Active", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Active", Ns.Ver10Schedule, 0, false, o => ((ScheduleState)o).Active, (o, v) => ((ScheduleState)o).Active = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDay", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SpecialDay", Ns.Ver10Schedule, 1, true, o => ((ScheduleState)o).SpecialDay, (o, v) => ((ScheduleState)o).SpecialDay = (bool)v, o => ((ScheduleState)o).SpecialDaySpecified, (o, v) => ((ScheduleState)o).SpecialDaySpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ScheduleStateExtension), typeof(ScheduleStateExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Schedule, 2, true, o => ((ScheduleState)o).Extension, (o, v) => ((ScheduleState)o).Extension = (ScheduleStateExtension)v, null, null, () => new ScheduleStateExtension(), () => new ScheduleStateExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ScheduleState)o).AnyAttr, (o, v) => ((ScheduleState)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
@@ -2107,6 +3249,33 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ScheduleStateExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ScheduleStateExtension)o).Any, (o, v) => ((ScheduleStateExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2376,6 +3545,44 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ServiceCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ServiceCapabilities)o).Any, (o, v) => ((ServiceCapabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxLimit", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxLimit", null, 0, false, o => ((ServiceCapabilities)o).MaxLimit, (o, v) => ((ServiceCapabilities)o).MaxLimit = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxSchedules", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxSchedules", null, 0, false, o => ((ServiceCapabilities)o).MaxSchedules, (o, v) => ((ServiceCapabilities)o).MaxSchedules = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxTimePeriodsPerDay", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxTimePeriodsPerDay", null, 0, false, o => ((ServiceCapabilities)o).MaxTimePeriodsPerDay, (o, v) => ((ServiceCapabilities)o).MaxTimePeriodsPerDay = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxSpecialDayGroups", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxSpecialDayGroups", null, 0, false, o => ((ServiceCapabilities)o).MaxSpecialDayGroups, (o, v) => ((ServiceCapabilities)o).MaxSpecialDayGroups = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxDaysInSpecialDayGroup", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxDaysInSpecialDayGroup", null, 0, false, o => ((ServiceCapabilities)o).MaxDaysInSpecialDayGroup, (o, v) => ((ServiceCapabilities)o).MaxDaysInSpecialDayGroup = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxSpecialDaysSchedules", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxSpecialDaysSchedules", null, 0, false, o => ((ServiceCapabilities)o).MaxSpecialDaysSchedules, (o, v) => ((ServiceCapabilities)o).MaxSpecialDaysSchedules = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtendedRecurrenceSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ExtendedRecurrenceSupported", null, 0, false, o => ((ServiceCapabilities)o).ExtendedRecurrenceSupported, (o, v) => ((ServiceCapabilities)o).ExtendedRecurrenceSupported = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDaysSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SpecialDaysSupported", null, 0, false, o => ((ServiceCapabilities)o).SpecialDaysSupported, (o, v) => ((ServiceCapabilities)o).SpecialDaysSupported = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StateReportingSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StateReportingSupported", null, 0, false, o => ((ServiceCapabilities)o).StateReportingSupported, (o, v) => ((ServiceCapabilities)o).StateReportingSupported = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ClientSuppliedTokenSupported", null, 0, true, o => ((ServiceCapabilities)o).ClientSuppliedTokenSupported, (o, v) => ((ServiceCapabilities)o).ClientSuppliedTokenSupported = (bool)v, o => ((ServiceCapabilities)o).ClientSuppliedTokenSupportedSpecified, (o, v) => ((ServiceCapabilities)o).ClientSuppliedTokenSupportedSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ServiceCapabilities)o).AnyAttr, (o, v) => ((ServiceCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2422,6 +3629,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetScheduleRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSchedule", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Schedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Schedule), typeof(Schedule), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Schedule", Ns.Ver10Schedule, 0, false, o => ((SetScheduleRequest)o).Schedule, (o, v) => ((SetScheduleRequest)o).Schedule = (Schedule)v, null, null, () => new Schedule(), () => new Schedule(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2432,6 +3671,37 @@ namespace SharpOnvifServer.Schedule
     {
         public SetScheduleResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetScheduleResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetScheduleResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2480,6 +3750,38 @@ namespace SharpOnvifServer.Schedule
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetSpecialDayGroupRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSpecialDayGroup", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SpecialDayGroup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroup), typeof(SpecialDayGroup), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SpecialDayGroup", Ns.Ver10Schedule, 0, false, o => ((SetSpecialDayGroupRequest)o).SpecialDayGroup, (o, v) => ((SetSpecialDayGroupRequest)o).SpecialDayGroup = (SpecialDayGroup)v, null, null, () => new SpecialDayGroup(), () => new SpecialDayGroup(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2490,6 +3792,37 @@ namespace SharpOnvifServer.Schedule
     {
         public SetSpecialDayGroupResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetSpecialDayGroupResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSpecialDayGroupResponse", "http://www.onvif.org/ver10/schedule/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2581,6 +3914,35 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SpecialDayGroup();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Days", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Days", Ns.Ver10Schedule, 0, true, o => ((SpecialDayGroup)o).Days, (o, v) => ((SpecialDayGroup)o).Days = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDayGroupExtension), typeof(SpecialDayGroupExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Schedule, 1, true, o => ((SpecialDayGroup)o).Extension, (o, v) => ((SpecialDayGroup)o).Extension = (SpecialDayGroupExtension)v, null, null, () => new SpecialDayGroupExtension(), () => new SpecialDayGroupExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((SpecialDayGroup)o).AnyAttr, (o, v) => ((SpecialDayGroup)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SpecialDayGroupInfo.GetXmlMembers(), own);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
@@ -2613,6 +3975,33 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SpecialDayGroupExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((SpecialDayGroupExtension)o).Any, (o, v) => ((SpecialDayGroupExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2674,6 +4063,34 @@ namespace SharpOnvifServer.Schedule
             }
             if (base.ReadXmlElement(reader)) return true;
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SpecialDayGroupInfo();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Schedule, 0, false, o => ((SpecialDayGroupInfo)o).Name, (o, v) => ((SpecialDayGroupInfo)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Description", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Description", Ns.Ver10Schedule, 1, true, o => ((SpecialDayGroupInfo)o).Description, (o, v) => ((SpecialDayGroupInfo)o).Description = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SharpOnvifCommon.Onvif.DataEntity.GetXmlMembers(), own);
         }
 
     }
@@ -2784,6 +4201,36 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SpecialDaysSchedule();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("GroupToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "GroupToken", Ns.Ver10Schedule, 0, false, o => ((SpecialDaysSchedule)o).GroupToken, (o, v) => ((SpecialDaysSchedule)o).GroupToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("TimeRange", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(TimePeriod[]), typeof(TimePeriod), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "TimeRange", Ns.Ver10Schedule, 1, true, o => ((SpecialDaysSchedule)o).TimeRange, (o, v) => ((SpecialDaysSchedule)o).TimeRange = (TimePeriod[])v, null, null, () => new TimePeriod[0], () => new TimePeriod(), n => new TimePeriod[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SpecialDaysScheduleExtension), typeof(SpecialDaysScheduleExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Schedule, 2, true, o => ((SpecialDaysSchedule)o).Extension, (o, v) => ((SpecialDaysSchedule)o).Extension = (SpecialDaysScheduleExtension)v, null, null, () => new SpecialDaysScheduleExtension(), () => new SpecialDaysScheduleExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((SpecialDaysSchedule)o).AnyAttr, (o, v) => ((SpecialDaysSchedule)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
@@ -2816,6 +4263,33 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SpecialDaysScheduleExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((SpecialDaysScheduleExtension)o).Any, (o, v) => ((SpecialDaysScheduleExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2936,6 +4410,36 @@ namespace SharpOnvifServer.Schedule
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new TimePeriod();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("From", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "From", Ns.Ver10Schedule, 0, false, o => ((TimePeriod)o).From, (o, v) => ((TimePeriod)o).From = (System.DateTime)v, null, null, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Until", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(System.DateTime), typeof(System.DateTime), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Until", Ns.Ver10Schedule, 1, true, o => ((TimePeriod)o).Until, (o, v) => ((TimePeriod)o).Until = (System.DateTime)v, o => ((TimePeriod)o).UntilSpecified, (o, v) => ((TimePeriod)o).UntilSpecified = v, () => default(System.DateTime), () => default(System.DateTime), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(TimePeriodExtension), typeof(TimePeriodExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Schedule, 2, true, o => ((TimePeriod)o).Extension, (o, v) => ((TimePeriod)o).Extension = (TimePeriodExtension)v, null, null, () => new TimePeriodExtension(), () => new TimePeriodExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((TimePeriod)o).AnyAttr, (o, v) => ((TimePeriod)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/schedule/wsdl")]
@@ -2968,6 +4472,33 @@ namespace SharpOnvifServer.Schedule
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new TimePeriodExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((TimePeriodExtension)o).Any, (o, v) => ((TimePeriodExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }

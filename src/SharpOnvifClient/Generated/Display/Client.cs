@@ -169,6 +169,50 @@ namespace SharpOnvifClient.Display
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static DisplayPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new DisplayPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "DisplayPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/display/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetLayout", "DisplayPort", SoapActions.GetLayout, "http://www.onvif.org/ver10/display/wsdl", "GetLayout", typeof(GetLayoutRequest), typeof(GetLayoutResponse), () => new GetLayoutRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).GetLayoutAsync((GetLayoutRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetLayout", "DisplayPort", SoapActions.SetLayout, "http://www.onvif.org/ver10/display/wsdl", "SetLayout", typeof(SetLayoutRequest), typeof(SetLayoutResponse), () => new SetLayoutRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).SetLayoutAsync((SetLayoutRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDisplayOptions", "DisplayPort", SoapActions.GetDisplayOptions, "http://www.onvif.org/ver10/display/wsdl", "GetDisplayOptions", typeof(GetDisplayOptionsRequest), typeof(GetDisplayOptionsResponse), () => new GetDisplayOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).GetDisplayOptionsAsync((GetDisplayOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPaneConfigurations", "DisplayPort", SoapActions.GetPaneConfigurations, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfigurations", typeof(GetPaneConfigurationsRequest), typeof(GetPaneConfigurationsResponse), () => new GetPaneConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).GetPaneConfigurationsAsync((GetPaneConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPaneConfiguration", "DisplayPort", SoapActions.GetPaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "GetPaneConfiguration", typeof(GetPaneConfigurationRequest), typeof(GetPaneConfigurationResponse), () => new GetPaneConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).GetPaneConfigurationAsync((GetPaneConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetPaneConfigurations", "DisplayPort", SoapActions.SetPaneConfigurations, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfigurations", typeof(SetPaneConfigurationsRequest), typeof(SetPaneConfigurationsResponse), () => new SetPaneConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).SetPaneConfigurationsAsync((SetPaneConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetPaneConfiguration", "DisplayPort", SoapActions.SetPaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "SetPaneConfiguration", typeof(SetPaneConfigurationRequest), typeof(SetPaneConfigurationResponse), () => new SetPaneConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).SetPaneConfigurationAsync((SetPaneConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreatePaneConfiguration", "DisplayPort", SoapActions.CreatePaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "CreatePaneConfiguration", typeof(CreatePaneConfigurationRequest), typeof(CreatePaneConfigurationResponse), () => new CreatePaneConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).CreatePaneConfigurationAsync((CreatePaneConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeletePaneConfiguration", "DisplayPort", SoapActions.DeletePaneConfiguration, "http://www.onvif.org/ver10/display/wsdl", "DeletePaneConfiguration", typeof(DeletePaneConfigurationRequest), typeof(DeletePaneConfigurationResponse), () => new DeletePaneConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DisplayPortClient)c).DeletePaneConfigurationAsync((DeletePaneConfigurationRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the display service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

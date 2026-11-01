@@ -135,6 +135,48 @@ namespace SharpOnvifClient.Thermal
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static ThermalPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new ThermalPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "ThermalPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/thermal/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetConfigurationOptions", "ThermalPort", SoapActions.GetConfigurationOptions, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurationOptions", typeof(GetConfigurationOptionsRequest), typeof(GetConfigurationOptionsResponse), () => new GetConfigurationOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).GetConfigurationOptionsAsync((GetConfigurationOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetConfiguration", "ThermalPort", SoapActions.GetConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfiguration", typeof(GetConfigurationRequest), typeof(GetConfigurationResponse), () => new GetConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).GetConfigurationAsync((GetConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetConfigurations", "ThermalPort", SoapActions.GetConfigurations, "http://www.onvif.org/ver10/thermal/wsdl", "GetConfigurations", typeof(GetConfigurationsRequest), typeof(GetConfigurationsResponse), () => new GetConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).GetConfigurationsAsync((GetConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetConfiguration", "ThermalPort", SoapActions.SetConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "SetConfiguration", typeof(SetConfigurationRequest), typeof(SetConfigurationResponse), () => new SetConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).SetConfigurationAsync((SetConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRadiometryConfigurationOptions", "ThermalPort", SoapActions.GetRadiometryConfigurationOptions, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfigurationOptions", typeof(GetRadiometryConfigurationOptionsRequest), typeof(GetRadiometryConfigurationOptionsResponse), () => new GetRadiometryConfigurationOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).GetRadiometryConfigurationOptionsAsync((GetRadiometryConfigurationOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRadiometryConfiguration", "ThermalPort", SoapActions.GetRadiometryConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "GetRadiometryConfiguration", typeof(GetRadiometryConfigurationRequest), typeof(GetRadiometryConfigurationResponse), () => new GetRadiometryConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).GetRadiometryConfigurationAsync((GetRadiometryConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetRadiometryConfiguration", "ThermalPort", SoapActions.SetRadiometryConfiguration, "http://www.onvif.org/ver10/thermal/wsdl", "SetRadiometryConfiguration", typeof(SetRadiometryConfigurationRequest), typeof(SetRadiometryConfigurationResponse), () => new SetRadiometryConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ThermalPortClient)c).SetRadiometryConfigurationAsync((SetRadiometryConfigurationRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the thermal service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

@@ -135,6 +135,48 @@ namespace SharpOnvifClient.Receiver
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static ReceiverPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new ReceiverPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "ReceiverPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/receiver/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetReceivers", "ReceiverPort", SoapActions.GetReceivers, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceivers", typeof(GetReceiversRequest), typeof(GetReceiversResponse), () => new GetReceiversRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).GetReceiversAsync((GetReceiversRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetReceiver", "ReceiverPort", SoapActions.GetReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiver", typeof(GetReceiverRequest), typeof(GetReceiverResponse), () => new GetReceiverRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).GetReceiverAsync((GetReceiverRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateReceiver", "ReceiverPort", SoapActions.CreateReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "CreateReceiver", typeof(CreateReceiverRequest), typeof(CreateReceiverResponse), () => new CreateReceiverRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).CreateReceiverAsync((CreateReceiverRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteReceiver", "ReceiverPort", SoapActions.DeleteReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "DeleteReceiver", typeof(DeleteReceiverRequest), typeof(DeleteReceiverResponse), () => new DeleteReceiverRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).DeleteReceiverAsync((DeleteReceiverRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ConfigureReceiver", "ReceiverPort", SoapActions.ConfigureReceiver, "http://www.onvif.org/ver10/receiver/wsdl", "ConfigureReceiver", typeof(ConfigureReceiverRequest), typeof(ConfigureReceiverResponse), () => new ConfigureReceiverRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).ConfigureReceiverAsync((ConfigureReceiverRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetReceiverMode", "ReceiverPort", SoapActions.SetReceiverMode, "http://www.onvif.org/ver10/receiver/wsdl", "SetReceiverMode", typeof(SetReceiverModeRequest), typeof(SetReceiverModeResponse), () => new SetReceiverModeRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).SetReceiverModeAsync((SetReceiverModeRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetReceiverState", "ReceiverPort", SoapActions.GetReceiverState, "http://www.onvif.org/ver10/receiver/wsdl", "GetReceiverState", typeof(GetReceiverStateRequest), typeof(GetReceiverStateResponse), () => new GetReceiverStateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReceiverPortClient)c).GetReceiverStateAsync((GetReceiverStateRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the receiver service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

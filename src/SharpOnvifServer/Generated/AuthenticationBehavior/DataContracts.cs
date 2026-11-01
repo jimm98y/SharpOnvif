@@ -127,6 +127,36 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AuthenticationPolicy();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ScheduleToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ScheduleToken", Ns.Ver10Authenticationbehavior, 0, false, o => ((AuthenticationPolicy)o).ScheduleToken, (o, v) => ((AuthenticationPolicy)o).ScheduleToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevelConstraint", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevelConstraint[]), typeof(SecurityLevelConstraint), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SecurityLevelConstraint", Ns.Ver10Authenticationbehavior, 1, false, o => ((AuthenticationPolicy)o).SecurityLevelConstraint, (o, v) => ((AuthenticationPolicy)o).SecurityLevelConstraint = (SecurityLevelConstraint[])v, null, null, () => new SecurityLevelConstraint[0], () => new SecurityLevelConstraint(), n => new SecurityLevelConstraint[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationPolicyExtension), typeof(AuthenticationPolicyExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Authenticationbehavior, 2, true, o => ((AuthenticationPolicy)o).Extension, (o, v) => ((AuthenticationPolicy)o).Extension = (AuthenticationPolicyExtension)v, null, null, () => new AuthenticationPolicyExtension(), () => new AuthenticationPolicyExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((AuthenticationPolicy)o).AnyAttr, (o, v) => ((AuthenticationPolicy)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -159,6 +189,33 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AuthenticationPolicyExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((AuthenticationPolicyExtension)o).Any, (o, v) => ((AuthenticationPolicyExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -274,6 +331,36 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AuthenticationProfile();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("DefaultSecurityLevelToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DefaultSecurityLevelToken", Ns.Ver10Authenticationbehavior, 0, false, o => ((AuthenticationProfile)o).DefaultSecurityLevelToken, (o, v) => ((AuthenticationProfile)o).DefaultSecurityLevelToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationPolicy", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationPolicy[]), typeof(AuthenticationPolicy), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AuthenticationPolicy", Ns.Ver10Authenticationbehavior, 1, true, o => ((AuthenticationProfile)o).AuthenticationPolicy, (o, v) => ((AuthenticationProfile)o).AuthenticationPolicy = (AuthenticationPolicy[])v, null, null, () => new AuthenticationPolicy[0], () => new AuthenticationPolicy(), n => new AuthenticationPolicy[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfileExtension), typeof(AuthenticationProfileExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Authenticationbehavior, 2, true, o => ((AuthenticationProfile)o).Extension, (o, v) => ((AuthenticationProfile)o).Extension = (AuthenticationProfileExtension)v, null, null, () => new AuthenticationProfileExtension(), () => new AuthenticationProfileExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((AuthenticationProfile)o).AnyAttr, (o, v) => ((AuthenticationProfile)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(AuthenticationProfileInfo.GetXmlMembers(), own);
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -306,6 +393,33 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AuthenticationProfileExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((AuthenticationProfileExtension)o).Any, (o, v) => ((AuthenticationProfileExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -370,6 +484,34 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AuthenticationProfileInfo();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Authenticationbehavior, 0, false, o => ((AuthenticationProfileInfo)o).Name, (o, v) => ((AuthenticationProfileInfo)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Description", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Description", Ns.Ver10Authenticationbehavior, 1, true, o => ((AuthenticationProfileInfo)o).Description, (o, v) => ((AuthenticationProfileInfo)o).Description = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SharpOnvifCommon.Onvif.DataEntity.GetXmlMembers(), own);
+        }
+
     }
 
     /// <summary>
@@ -417,6 +559,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateAuthenticationProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateAuthenticationProfile", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfile), typeof(AuthenticationProfile), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "AuthenticationProfile", Ns.Ver10Authenticationbehavior, 0, false, o => ((CreateAuthenticationProfileRequest)o).AuthenticationProfile, (o, v) => ((CreateAuthenticationProfileRequest)o).AuthenticationProfile = (AuthenticationProfile)v, null, null, () => new AuthenticationProfile(), () => new AuthenticationProfile(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -468,6 +642,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateAuthenticationProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateAuthenticationProfileResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((CreateAuthenticationProfileResponse)o).Token, (o, v) => ((CreateAuthenticationProfileResponse)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -515,6 +721,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateSecurityLevelRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateSecurityLevel", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevel", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevel), typeof(SecurityLevel), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SecurityLevel", Ns.Ver10Authenticationbehavior, 0, false, o => ((CreateSecurityLevelRequest)o).SecurityLevel, (o, v) => ((CreateSecurityLevelRequest)o).SecurityLevel = (SecurityLevel)v, null, null, () => new SecurityLevel(), () => new SecurityLevel(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -566,6 +804,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateSecurityLevelResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateSecurityLevelResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((CreateSecurityLevelResponse)o).Token, (o, v) => ((CreateSecurityLevelResponse)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -615,6 +885,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteAuthenticationProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteAuthenticationProfile", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((DeleteAuthenticationProfileRequest)o).Token, (o, v) => ((DeleteAuthenticationProfileRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -628,6 +930,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public DeleteAuthenticationProfileResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteAuthenticationProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteAuthenticationProfileResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -679,6 +1012,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteSecurityLevelRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteSecurityLevel", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((DeleteSecurityLevelRequest)o).Token, (o, v) => ((DeleteSecurityLevelRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -692,6 +1057,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public DeleteSecurityLevelResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteSecurityLevelResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteSecurityLevelResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -781,6 +1177,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfileInfoListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfileInfoList", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetAuthenticationProfileInfoListRequest)o).Limit, (o, v) => ((GetAuthenticationProfileInfoListRequest)o).Limit = (int)v, o => ((GetAuthenticationProfileInfoListRequest)o).LimitSpecified, (o, v) => ((GetAuthenticationProfileInfoListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetAuthenticationProfileInfoListRequest)o).StartReference, (o, v) => ((GetAuthenticationProfileInfoListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -860,6 +1289,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.authenticationProfileInfoField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfileInfoListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfileInfoListResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetAuthenticationProfileInfoListResponse)o).NextStartReference, (o, v) => ((GetAuthenticationProfileInfoListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfileInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfileInfo[]), typeof(AuthenticationProfileInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AuthenticationProfileInfo", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetAuthenticationProfileInfoListResponse)o).AuthenticationProfileInfo, (o, v) => ((GetAuthenticationProfileInfoListResponse)o).AuthenticationProfileInfo = (AuthenticationProfileInfo[])v, null, null, () => new AuthenticationProfileInfo[0], () => new AuthenticationProfileInfo(), n => new AuthenticationProfileInfo[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -919,6 +1381,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfileInfoRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfileInfo", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((GetAuthenticationProfileInfoRequest)o).Token, (o, v) => ((GetAuthenticationProfileInfoRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -976,6 +1470,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.authenticationProfileInfoField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfileInfoResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfileInfoResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfileInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfileInfo[]), typeof(AuthenticationProfileInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AuthenticationProfileInfo", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetAuthenticationProfileInfoResponse)o).AuthenticationProfileInfo, (o, v) => ((GetAuthenticationProfileInfoResponse)o).AuthenticationProfileInfo = (AuthenticationProfileInfo[])v, null, null, () => new AuthenticationProfileInfo[0], () => new AuthenticationProfileInfo(), n => new AuthenticationProfileInfo[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1065,6 +1591,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfileListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfileList", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetAuthenticationProfileListRequest)o).Limit, (o, v) => ((GetAuthenticationProfileListRequest)o).Limit = (int)v, o => ((GetAuthenticationProfileListRequest)o).LimitSpecified, (o, v) => ((GetAuthenticationProfileListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetAuthenticationProfileListRequest)o).StartReference, (o, v) => ((GetAuthenticationProfileListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1144,6 +1703,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.authenticationProfileField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfileListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfileListResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetAuthenticationProfileListResponse)o).NextStartReference, (o, v) => ((GetAuthenticationProfileListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfile[]), typeof(AuthenticationProfile), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AuthenticationProfile", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetAuthenticationProfileListResponse)o).AuthenticationProfile, (o, v) => ((GetAuthenticationProfileListResponse)o).AuthenticationProfile = (AuthenticationProfile[])v, null, null, () => new AuthenticationProfile[0], () => new AuthenticationProfile(), n => new AuthenticationProfile[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1203,6 +1795,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfilesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfiles", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((GetAuthenticationProfilesRequest)o).Token, (o, v) => ((GetAuthenticationProfilesRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1260,6 +1884,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.authenticationProfileField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetAuthenticationProfilesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetAuthenticationProfilesResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfile[]), typeof(AuthenticationProfile), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "AuthenticationProfile", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetAuthenticationProfilesResponse)o).AuthenticationProfile, (o, v) => ((GetAuthenticationProfilesResponse)o).AuthenticationProfile = (AuthenticationProfile[])v, null, null, () => new AuthenticationProfile[0], () => new AuthenticationProfile(), n => new AuthenticationProfile[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1349,6 +2005,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelInfoListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelInfoList", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetSecurityLevelInfoListRequest)o).Limit, (o, v) => ((GetSecurityLevelInfoListRequest)o).Limit = (int)v, o => ((GetSecurityLevelInfoListRequest)o).LimitSpecified, (o, v) => ((GetSecurityLevelInfoListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetSecurityLevelInfoListRequest)o).StartReference, (o, v) => ((GetSecurityLevelInfoListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1428,6 +2117,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.securityLevelInfoField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelInfoListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelInfoListResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetSecurityLevelInfoListResponse)o).NextStartReference, (o, v) => ((GetSecurityLevelInfoListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevelInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevelInfo[]), typeof(SecurityLevelInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SecurityLevelInfo", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetSecurityLevelInfoListResponse)o).SecurityLevelInfo, (o, v) => ((GetSecurityLevelInfoListResponse)o).SecurityLevelInfo = (SecurityLevelInfo[])v, null, null, () => new SecurityLevelInfo[0], () => new SecurityLevelInfo(), n => new SecurityLevelInfo[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1487,6 +2209,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelInfoRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelInfo", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((GetSecurityLevelInfoRequest)o).Token, (o, v) => ((GetSecurityLevelInfoRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1544,6 +2298,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.securityLevelInfoField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelInfoResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelInfoResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevelInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevelInfo[]), typeof(SecurityLevelInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SecurityLevelInfo", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetSecurityLevelInfoResponse)o).SecurityLevelInfo, (o, v) => ((GetSecurityLevelInfoResponse)o).SecurityLevelInfo = (SecurityLevelInfo[])v, null, null, () => new SecurityLevelInfo[0], () => new SecurityLevelInfo(), n => new SecurityLevelInfo[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1633,6 +2419,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelList", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetSecurityLevelListRequest)o).Limit, (o, v) => ((GetSecurityLevelListRequest)o).Limit = (int)v, o => ((GetSecurityLevelListRequest)o).LimitSpecified, (o, v) => ((GetSecurityLevelListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetSecurityLevelListRequest)o).StartReference, (o, v) => ((GetSecurityLevelListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1712,6 +2531,39 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.securityLevelField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelListResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetSecurityLevelListResponse)o).NextStartReference, (o, v) => ((GetSecurityLevelListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevel", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevel[]), typeof(SecurityLevel), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SecurityLevel", Ns.Ver10Authenticationbehavior, 1, true, o => ((GetSecurityLevelListResponse)o).SecurityLevel, (o, v) => ((GetSecurityLevelListResponse)o).SecurityLevel = (SecurityLevel[])v, null, null, () => new SecurityLevel[0], () => new SecurityLevel(), n => new SecurityLevel[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1769,6 +2621,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.tokenField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevels", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Authenticationbehavior, 0, false, o => ((GetSecurityLevelsRequest)o).Token, (o, v) => ((GetSecurityLevelsRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1830,6 +2714,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.securityLevelField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetSecurityLevelsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetSecurityLevelsResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevel", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevel[]), typeof(SecurityLevel), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "SecurityLevel", Ns.Ver10Authenticationbehavior, 0, true, o => ((GetSecurityLevelsResponse)o).SecurityLevel, (o, v) => ((GetSecurityLevelsResponse)o).SecurityLevel = (SecurityLevel[])v, null, null, () => new SecurityLevel[0], () => new SecurityLevel(), n => new SecurityLevel[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1840,6 +2756,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1887,6 +2834,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ServiceCapabilities), typeof(ServiceCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Authenticationbehavior, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (ServiceCapabilities)v, null, null, () => new ServiceCapabilities(), () => new ServiceCapabilities(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1938,6 +2917,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyAuthenticationProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyAuthenticationProfile", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfile), typeof(AuthenticationProfile), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "AuthenticationProfile", Ns.Ver10Authenticationbehavior, 0, false, o => ((ModifyAuthenticationProfileRequest)o).AuthenticationProfile, (o, v) => ((ModifyAuthenticationProfileRequest)o).AuthenticationProfile = (AuthenticationProfile)v, null, null, () => new AuthenticationProfile(), () => new AuthenticationProfile(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1951,6 +2962,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public ModifyAuthenticationProfileResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyAuthenticationProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyAuthenticationProfileResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2001,6 +3043,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifySecurityLevelRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifySecurityLevel", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevel", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevel), typeof(SecurityLevel), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SecurityLevel", Ns.Ver10Authenticationbehavior, 0, false, o => ((ModifySecurityLevelRequest)o).SecurityLevel, (o, v) => ((ModifySecurityLevelRequest)o).SecurityLevel = (SecurityLevel)v, null, null, () => new SecurityLevel(), () => new SecurityLevel(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2013,6 +3087,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public ModifySecurityLevelResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifySecurityLevelResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifySecurityLevelResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2099,6 +3204,35 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RecognitionGroup();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RecognitionMethod", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RecognitionMethod[]), typeof(RecognitionMethod), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "RecognitionMethod", Ns.Ver10Authenticationbehavior, 0, true, o => ((RecognitionGroup)o).RecognitionMethod, (o, v) => ((RecognitionGroup)o).RecognitionMethod = (RecognitionMethod[])v, null, null, () => new RecognitionMethod[0], () => new RecognitionMethod(), n => new RecognitionMethod[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RecognitionGroupExtension), typeof(RecognitionGroupExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Authenticationbehavior, 1, true, o => ((RecognitionGroup)o).Extension, (o, v) => ((RecognitionGroup)o).Extension = (RecognitionGroupExtension)v, null, null, () => new RecognitionGroupExtension(), () => new RecognitionGroupExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((RecognitionGroup)o).AnyAttr, (o, v) => ((RecognitionGroup)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2131,6 +3265,33 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RecognitionGroupExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((RecognitionGroupExtension)o).Any, (o, v) => ((RecognitionGroupExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2237,6 +3398,36 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RecognitionMethod();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RecognitionType", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "RecognitionType", Ns.Ver10Authenticationbehavior, 0, false, o => ((RecognitionMethod)o).RecognitionType, (o, v) => ((RecognitionMethod)o).RecognitionType = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Order", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Order", Ns.Ver10Authenticationbehavior, 1, false, o => ((RecognitionMethod)o).Order, (o, v) => ((RecognitionMethod)o).Order = (int)v, null, null, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RecognitionMethodExtension), typeof(RecognitionMethodExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Authenticationbehavior, 2, true, o => ((RecognitionMethod)o).Extension, (o, v) => ((RecognitionMethod)o).Extension = (RecognitionMethodExtension)v, null, null, () => new RecognitionMethodExtension(), () => new RecognitionMethodExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((RecognitionMethod)o).AnyAttr, (o, v) => ((RecognitionMethod)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2269,6 +3460,33 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new RecognitionMethodExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((RecognitionMethodExtension)o).Any, (o, v) => ((RecognitionMethodExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2364,6 +3582,35 @@ namespace SharpOnvifServer.AuthenticationBehavior
             base.EndXmlRead(reader);
             reader.Trim(ref this.recognitionGroupField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SecurityLevel();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("RecognitionGroup", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(RecognitionGroup[]), typeof(RecognitionGroup), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "RecognitionGroup", Ns.Ver10Authenticationbehavior, 0, true, o => ((SecurityLevel)o).RecognitionGroup, (o, v) => ((SecurityLevel)o).RecognitionGroup = (RecognitionGroup[])v, null, null, () => new RecognitionGroup[0], () => new RecognitionGroup(), n => new RecognitionGroup[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevelExtension), typeof(SecurityLevelExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Authenticationbehavior, 1, true, o => ((SecurityLevel)o).Extension, (o, v) => ((SecurityLevel)o).Extension = (SecurityLevelExtension)v, null, null, () => new SecurityLevelExtension(), () => new SecurityLevelExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((SecurityLevel)o).AnyAttr, (o, v) => ((SecurityLevel)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SecurityLevelInfo.GetXmlMembers(), own);
         }
 
     }
@@ -2503,6 +3750,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SecurityLevelConstraint();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ActiveRegularSchedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ActiveRegularSchedule", Ns.Ver10Authenticationbehavior, 0, false, o => ((SecurityLevelConstraint)o).ActiveRegularSchedule, (o, v) => ((SecurityLevelConstraint)o).ActiveRegularSchedule = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ActiveSpecialDaySchedule", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ActiveSpecialDaySchedule", Ns.Ver10Authenticationbehavior, 1, false, o => ((SecurityLevelConstraint)o).ActiveSpecialDaySchedule, (o, v) => ((SecurityLevelConstraint)o).ActiveSpecialDaySchedule = (bool)v, null, null, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationMode", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AuthenticationMode", Ns.Ver10Authenticationbehavior, 2, true, o => ((SecurityLevelConstraint)o).AuthenticationMode, (o, v) => ((SecurityLevelConstraint)o).AuthenticationMode = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevelToken", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SecurityLevelToken", Ns.Ver10Authenticationbehavior, 3, false, o => ((SecurityLevelConstraint)o).SecurityLevelToken, (o, v) => ((SecurityLevelConstraint)o).SecurityLevelToken = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevelConstraintExtension), typeof(SecurityLevelConstraintExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Authenticationbehavior, 4, true, o => ((SecurityLevelConstraint)o).Extension, (o, v) => ((SecurityLevelConstraint)o).Extension = (SecurityLevelConstraintExtension)v, null, null, () => new SecurityLevelConstraintExtension(), () => new SecurityLevelConstraintExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((SecurityLevelConstraint)o).AnyAttr, (o, v) => ((SecurityLevelConstraint)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2537,6 +3816,33 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SecurityLevelConstraintExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((SecurityLevelConstraintExtension)o).Any, (o, v) => ((SecurityLevelConstraintExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/authenticationbehavior/wsdl")]
@@ -2569,6 +3875,33 @@ namespace SharpOnvifServer.AuthenticationBehavior
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SecurityLevelExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((SecurityLevelExtension)o).Any, (o, v) => ((SecurityLevelExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2652,6 +3985,35 @@ namespace SharpOnvifServer.AuthenticationBehavior
             }
             if (base.ReadXmlElement(reader)) return true;
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SecurityLevelInfo();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Authenticationbehavior, 0, false, o => ((SecurityLevelInfo)o).Name, (o, v) => ((SecurityLevelInfo)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Priority", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Priority", Ns.Ver10Authenticationbehavior, 1, false, o => ((SecurityLevelInfo)o).Priority, (o, v) => ((SecurityLevelInfo)o).Priority = (int)v, null, null, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Description", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Description", Ns.Ver10Authenticationbehavior, 2, true, o => ((SecurityLevelInfo)o).Description, (o, v) => ((SecurityLevelInfo)o).Description = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SharpOnvifCommon.Onvif.DataEntity.GetXmlMembers(), own);
         }
 
     }
@@ -2875,6 +4237,42 @@ namespace SharpOnvifServer.AuthenticationBehavior
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ServiceCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ServiceCapabilities)o).Any, (o, v) => ((ServiceCapabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxLimit", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxLimit", null, 0, false, o => ((ServiceCapabilities)o).MaxLimit, (o, v) => ((ServiceCapabilities)o).MaxLimit = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxAuthenticationProfiles", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxAuthenticationProfiles", null, 0, false, o => ((ServiceCapabilities)o).MaxAuthenticationProfiles, (o, v) => ((ServiceCapabilities)o).MaxAuthenticationProfiles = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxPoliciesPerAuthenticationProfile", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxPoliciesPerAuthenticationProfile", null, 0, false, o => ((ServiceCapabilities)o).MaxPoliciesPerAuthenticationProfile, (o, v) => ((ServiceCapabilities)o).MaxPoliciesPerAuthenticationProfile = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxSecurityLevels", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxSecurityLevels", null, 0, false, o => ((ServiceCapabilities)o).MaxSecurityLevels, (o, v) => ((ServiceCapabilities)o).MaxSecurityLevels = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxRecognitionGroupsPerSecurityLevel", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxRecognitionGroupsPerSecurityLevel", null, 0, false, o => ((ServiceCapabilities)o).MaxRecognitionGroupsPerSecurityLevel, (o, v) => ((ServiceCapabilities)o).MaxRecognitionGroupsPerSecurityLevel = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxRecognitionMethodsPerRecognitionGroup", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxRecognitionMethodsPerRecognitionGroup", null, 0, false, o => ((ServiceCapabilities)o).MaxRecognitionMethodsPerRecognitionGroup, (o, v) => ((ServiceCapabilities)o).MaxRecognitionMethodsPerRecognitionGroup = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ClientSuppliedTokenSupported", null, 0, true, o => ((ServiceCapabilities)o).ClientSuppliedTokenSupported, (o, v) => ((ServiceCapabilities)o).ClientSuppliedTokenSupported = (bool)v, o => ((ServiceCapabilities)o).ClientSuppliedTokenSupportedSpecified, (o, v) => ((ServiceCapabilities)o).ClientSuppliedTokenSupportedSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("SupportedAuthenticationModes", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(string[]), typeof(string[]), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "SupportedAuthenticationModes", null, 0, true, o => ((ServiceCapabilities)o).SupportedAuthenticationModes, (o, v) => ((ServiceCapabilities)o).SupportedAuthenticationModes = (string[])v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ServiceCapabilities)o).AnyAttr, (o, v) => ((ServiceCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2926,6 +4324,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAuthenticationProfileRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAuthenticationProfile", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("AuthenticationProfile", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AuthenticationProfile), typeof(AuthenticationProfile), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "AuthenticationProfile", Ns.Ver10Authenticationbehavior, 0, false, o => ((SetAuthenticationProfileRequest)o).AuthenticationProfile, (o, v) => ((SetAuthenticationProfileRequest)o).AuthenticationProfile = (AuthenticationProfile)v, null, null, () => new AuthenticationProfile(), () => new AuthenticationProfile(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2941,6 +4371,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public SetAuthenticationProfileResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetAuthenticationProfileResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetAuthenticationProfileResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2994,6 +4455,38 @@ namespace SharpOnvifServer.AuthenticationBehavior
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetSecurityLevelRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSecurityLevel", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("SecurityLevel", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(SecurityLevel), typeof(SecurityLevel), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "SecurityLevel", Ns.Ver10Authenticationbehavior, 0, false, o => ((SetSecurityLevelRequest)o).SecurityLevel, (o, v) => ((SetSecurityLevelRequest)o).SecurityLevel = (SecurityLevel)v, null, null, () => new SecurityLevel(), () => new SecurityLevel(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3009,6 +4502,37 @@ namespace SharpOnvifServer.AuthenticationBehavior
     {
         public SetSecurityLevelResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetSecurityLevelResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetSecurityLevelResponse", "http://www.onvif.org/ver10/authenticationbehavior/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
