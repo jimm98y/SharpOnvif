@@ -140,6 +140,22 @@ namespace OnvifService.Onvif
             return new GetVideoEncoderConfigurationResponse(GetMyVideoEncoderConfiguration(Profiles.Values.First(x => x.VideoEncoderToken == ConfigurationToken)));
         }
 
+        public override GetAudioSourceConfigurationResponse GetAudioSourceConfiguration(string ConfigurationToken)
+        {
+            if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.AudioSourceToken == ConfigurationToken) == null)
+                OnvifErrors.ReturnSenderInvalidArg();
+
+            return new GetAudioSourceConfigurationResponse(GetMyAudioSourceConfiguration(Profiles.Values.First(x => x.AudioSourceToken == ConfigurationToken)));
+        }
+
+        public override GetAudioEncoderConfigurationResponse GetAudioEncoderConfiguration(string ConfigurationToken)
+        {
+            if (ConfigurationToken == null || Profiles == null || Profiles.Values.FirstOrDefault(x => x.AudioEncoderToken == ConfigurationToken) == null)
+                OnvifErrors.ReturnSenderInvalidArg();
+
+            return new GetAudioEncoderConfigurationResponse(GetMyAudioEncoderConfiguration(Profiles.Values.First(x => x.AudioEncoderToken == ConfigurationToken)));
+        }
+
         public override GetVideoEncoderConfigurationOptionsResponse GetVideoEncoderConfigurationOptions(string ConfigurationToken, string ProfileToken)
         {
             if (Profiles == null || !Profiles.ContainsKey(ProfileToken) || Profiles.Values.FirstOrDefault(x => x.VideoEncoderToken == ConfigurationToken) == null)
@@ -276,6 +292,24 @@ namespace OnvifService.Onvif
         {
             _logger.LogInformation("MediaImpl: SetVideoEncoderConfiguration");
             return new SetVideoEncoderConfigurationResponse();
+        }
+
+        public override SetVideoSourceConfigurationResponse SetVideoSourceConfiguration(VideoSourceConfiguration Configuration, bool ForcePersistence)
+        {
+            _logger.LogInformation("MediaImpl: SetVideoSourceConfiguration");
+            return new SetVideoSourceConfigurationResponse();
+        }
+
+        public override SetAudioEncoderConfigurationResponse SetAudioEncoderConfiguration(AudioEncoderConfiguration Configuration, bool ForcePersistence)
+        {
+            _logger.LogInformation("MediaImpl: SetAudioEncoderConfiguration");
+            return new SetAudioEncoderConfigurationResponse();
+        }
+
+        public override SetAudioSourceConfigurationResponse SetAudioSourceConfiguration(AudioSourceConfiguration Configuration, bool ForcePersistence)
+        {
+            _logger.LogInformation("MediaImpl: SetAudioSourceConfiguration");
+            return new SetAudioSourceConfigurationResponse();
         }
 
         public override AddPTZConfigurationResponse AddPTZConfiguration(string ProfileToken, string ConfigurationToken)
