@@ -57,6 +57,41 @@ namespace SharpOnvifClient.Events
             return XmlTypeFactory.Create(ns, name);
         }
 
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static CreatePullPointClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new CreatePullPointClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("CreatePullPoint", "CreatePullPoint", SoapActions.CreatePullPoint, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPoint", typeof(CreatePullPointRequest), typeof(CreatePullPointResponse), () => new CreatePullPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((CreatePullPointClient)c).CreatePullPointAsync((CreatePullPointRequest)r, ct))),
+            };
+        }
+
         public System.Threading.Tasks.Task<CreatePullPointResponse> CreatePullPointAsync(CreatePullPointRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return InvokeAsync(SoapActions.CreatePullPoint, "http://docs.oasis-open.org/wsn/b-2", "CreatePullPoint", request,
@@ -179,6 +214,46 @@ namespace SharpOnvifClient.Events
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static EventPortTypeClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new EventPortTypeClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "EventPortType", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/events/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((EventPortTypeClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreatePullPointSubscription", "EventPortType", SoapActions.CreatePullPointSubscription, "http://www.onvif.org/ver10/events/wsdl", "CreatePullPointSubscription", typeof(CreatePullPointSubscriptionRequest), typeof(CreatePullPointSubscriptionResponse), () => new CreatePullPointSubscriptionRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((EventPortTypeClient)c).CreatePullPointSubscriptionAsync((CreatePullPointSubscriptionRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetEventProperties", "EventPortType", SoapActions.GetEventProperties, "http://www.onvif.org/ver10/events/wsdl", "GetEventProperties", typeof(GetEventPropertiesRequest), typeof(GetEventPropertiesResponse), () => new GetEventPropertiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((EventPortTypeClient)c).GetEventPropertiesAsync((GetEventPropertiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("AddEventBroker", "EventPortType", SoapActions.AddEventBroker, "http://www.onvif.org/ver10/events/wsdl", "AddEventBroker", typeof(AddEventBrokerRequest), typeof(AddEventBrokerResponse), () => new AddEventBrokerRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((EventPortTypeClient)c).AddEventBrokerAsync((AddEventBrokerRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteEventBroker", "EventPortType", SoapActions.DeleteEventBroker, "http://www.onvif.org/ver10/events/wsdl", "DeleteEventBroker", typeof(DeleteEventBrokerRequest), typeof(DeleteEventBrokerResponse), () => new DeleteEventBrokerRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((EventPortTypeClient)c).DeleteEventBrokerAsync((DeleteEventBrokerRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetEventBrokers", "EventPortType", SoapActions.GetEventBrokers, "http://www.onvif.org/ver10/events/wsdl", "GetEventBrokers", typeof(GetEventBrokersRequest), typeof(GetEventBrokersResponse), () => new GetEventBrokersRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((EventPortTypeClient)c).GetEventBrokersAsync((GetEventBrokersRequest)r, ct))),
+            };
         }
 
         /// <summary>
@@ -340,6 +415,41 @@ namespace SharpOnvifClient.Events
             return XmlTypeFactory.Create(ns, name);
         }
 
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static NotificationConsumerClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new NotificationConsumerClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("Notify", "NotificationConsumer", SoapActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", typeof(NotifyRequest), null, () => new NotifyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.NoResponse(((NotificationConsumerClient)c).NotifyAsync((NotifyRequest)r, ct))),
+            };
+        }
+
         public System.Threading.Tasks.Task NotifyAsync(NotifyRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
         {
             return InvokeAsync(SoapActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", request, cancellationToken);
@@ -406,6 +516,42 @@ namespace SharpOnvifClient.Events
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static NotificationProducerClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new NotificationProducerClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("Subscribe", "NotificationProducer", SoapActions.Subscribe, "http://docs.oasis-open.org/wsn/b-2", "Subscribe", typeof(SubscribeRequest), typeof(SubscribeResponse), () => new SubscribeRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((NotificationProducerClient)c).SubscribeAsync((SubscribeRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCurrentMessage", "NotificationProducer", SoapActions.GetCurrentMessage, "http://docs.oasis-open.org/wsn/b-2", "GetCurrentMessage", typeof(GetCurrentMessageRequest), typeof(GetCurrentMessageResponse), () => new GetCurrentMessageRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((NotificationProducerClient)c).GetCurrentMessageAsync((GetCurrentMessageRequest)r, ct))),
+            };
         }
 
         public System.Threading.Tasks.Task<SubscribeResponse> SubscribeAsync(SubscribeRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -503,6 +649,44 @@ namespace SharpOnvifClient.Events
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static PausableSubscriptionManagerClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new PausableSubscriptionManagerClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("Renew", "PausableSubscriptionManager", SoapActions.Renew, "http://docs.oasis-open.org/wsn/b-2", "Renew", typeof(RenewRequest), typeof(RenewResponse), () => new RenewRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PausableSubscriptionManagerClient)c).RenewAsync((RenewRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Unsubscribe", "PausableSubscriptionManager", SoapActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", typeof(UnsubscribeRequest), typeof(UnsubscribeResponse), () => new UnsubscribeRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PausableSubscriptionManagerClient)c).UnsubscribeAsync((UnsubscribeRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("PauseSubscription", "PausableSubscriptionManager", SoapActions.PauseSubscription, "http://docs.oasis-open.org/wsn/b-2", "PauseSubscription", typeof(PauseSubscriptionRequest), typeof(PauseSubscriptionResponse), () => new PauseSubscriptionRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PausableSubscriptionManagerClient)c).PauseSubscriptionAsync((PauseSubscriptionRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ResumeSubscription", "PausableSubscriptionManager", SoapActions.ResumeSubscription, "http://docs.oasis-open.org/wsn/b-2", "ResumeSubscription", typeof(ResumeSubscriptionRequest), typeof(ResumeSubscriptionResponse), () => new ResumeSubscriptionRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PausableSubscriptionManagerClient)c).ResumeSubscriptionAsync((ResumeSubscriptionRequest)r, ct))),
+            };
         }
 
         public System.Threading.Tasks.Task<RenewResponse> RenewAsync(RenewRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -621,6 +805,43 @@ namespace SharpOnvifClient.Events
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static PullPointClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new PullPointClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetMessages", "PullPoint", SoapActions.GetMessages, "http://docs.oasis-open.org/wsn/b-2", "GetMessages", typeof(GetMessagesRequest), typeof(GetMessagesResponse), () => new GetMessagesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PullPointClient)c).GetMessagesAsync((GetMessagesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DestroyPullPoint", "PullPoint", SoapActions.DestroyPullPoint, "http://docs.oasis-open.org/wsn/b-2", "DestroyPullPoint", typeof(DestroyPullPointRequest), typeof(DestroyPullPointResponse), () => new DestroyPullPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PullPointClient)c).DestroyPullPointAsync((DestroyPullPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Notify", "PullPoint", SoapActions.Notify, "http://docs.oasis-open.org/wsn/b-2", "Notify", typeof(NotifyRequest), null, () => new NotifyRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.NoResponse(((PullPointClient)c).NotifyAsync((NotifyRequest)r, ct))),
+            };
         }
 
         public System.Threading.Tasks.Task<GetMessagesResponse> GetMessagesAsync(GetMessagesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -764,6 +985,44 @@ namespace SharpOnvifClient.Events
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static PullPointSubscriptionClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new PullPointSubscriptionClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("PullMessages", "PullPointSubscription", SoapActions.PullMessages, "http://www.onvif.org/ver10/events/wsdl", "PullMessages", typeof(PullMessagesRequest), typeof(PullMessagesResponse), () => new PullMessagesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PullPointSubscriptionClient)c).PullMessagesAsync((PullMessagesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Seek", "PullPointSubscription", SoapActions.Seek, "http://www.onvif.org/ver10/events/wsdl", "Seek", typeof(SeekRequest), typeof(SeekResponse), () => new SeekRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PullPointSubscriptionClient)c).SeekAsync((SeekRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetSynchronizationPoint", "PullPointSubscription", SoapActions.SetSynchronizationPoint, "http://www.onvif.org/ver10/events/wsdl", "SetSynchronizationPoint", typeof(SetSynchronizationPointRequest), typeof(SetSynchronizationPointResponse), () => new SetSynchronizationPointRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PullPointSubscriptionClient)c).SetSynchronizationPointAsync((SetSynchronizationPointRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Unsubscribe", "PullPointSubscription", SoapActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", typeof(UnsubscribeRequest), typeof(UnsubscribeResponse), () => new UnsubscribeRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PullPointSubscriptionClient)c).UnsubscribeAsync((UnsubscribeRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This method pulls one or more messages from a PullPoint. The device shall provide the following
         /// PullMessages command for all SubscriptionManager endpoints returned by the
         /// CreatePullPointSubscription command. This method shall not wait until the requested number of
@@ -902,6 +1161,42 @@ namespace SharpOnvifClient.Events
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static SubscriptionManagerClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new SubscriptionManagerClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("Renew", "SubscriptionManager", SoapActions.Renew, "http://docs.oasis-open.org/wsn/b-2", "Renew", typeof(RenewRequest), typeof(RenewResponse), () => new RenewRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SubscriptionManagerClient)c).RenewAsync((RenewRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Unsubscribe", "SubscriptionManager", SoapActions.Unsubscribe, "http://docs.oasis-open.org/wsn/b-2", "Unsubscribe", typeof(UnsubscribeRequest), typeof(UnsubscribeResponse), () => new UnsubscribeRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SubscriptionManagerClient)c).UnsubscribeAsync((UnsubscribeRequest)r, ct))),
+            };
         }
 
         public System.Threading.Tasks.Task<RenewResponse> RenewAsync(RenewRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

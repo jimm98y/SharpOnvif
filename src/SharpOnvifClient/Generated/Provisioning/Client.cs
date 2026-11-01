@@ -131,6 +131,48 @@ namespace SharpOnvifClient.Provisioning
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static ProvisioningServiceClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new ProvisioningServiceClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "ProvisioningService", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/provisioning/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("PanMove", "ProvisioningService", SoapActions.PanMove, "http://www.onvif.org/ver10/provisioning/wsdl", "PanMove", typeof(PanMoveRequest), typeof(PanMoveResponse), () => new PanMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).PanMoveAsync((PanMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("TiltMove", "ProvisioningService", SoapActions.TiltMove, "http://www.onvif.org/ver10/provisioning/wsdl", "TiltMove", typeof(TiltMoveRequest), typeof(TiltMoveResponse), () => new TiltMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).TiltMoveAsync((TiltMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ZoomMove", "ProvisioningService", SoapActions.ZoomMove, "http://www.onvif.org/ver10/provisioning/wsdl", "ZoomMove", typeof(ZoomMoveRequest), typeof(ZoomMoveResponse), () => new ZoomMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).ZoomMoveAsync((ZoomMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RollMove", "ProvisioningService", SoapActions.RollMove, "http://www.onvif.org/ver10/provisioning/wsdl", "RollMove", typeof(RollMoveRequest), typeof(RollMoveResponse), () => new RollMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).RollMoveAsync((RollMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("FocusMove", "ProvisioningService", SoapActions.FocusMove, "http://www.onvif.org/ver10/provisioning/wsdl", "FocusMove", typeof(FocusMoveRequest), typeof(FocusMoveResponse), () => new FocusMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).FocusMoveAsync((FocusMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Stop", "ProvisioningService", SoapActions.Stop, "http://www.onvif.org/ver10/provisioning/wsdl", "Stop", typeof(StopRequest), typeof(StopResponse), () => new StopRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).StopAsync((StopRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetUsage", "ProvisioningService", SoapActions.GetUsage, "http://www.onvif.org/ver10/provisioning/wsdl", "GetUsage", typeof(GetUsageRequest), typeof(GetUsageResponse), () => new GetUsageRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ProvisioningServiceClient)c).GetUsageAsync((GetUsageRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the provisioning service.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

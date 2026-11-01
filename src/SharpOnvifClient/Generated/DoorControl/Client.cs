@@ -320,6 +320,59 @@ namespace SharpOnvifClient.DoorControl
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static DoorControlPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new DoorControlPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "DoorControlPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDoorInfoList", "DoorControlPort", SoapActions.GetDoorInfoList, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfoList", typeof(GetDoorInfoListRequest), typeof(GetDoorInfoListResponse), () => new GetDoorInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).GetDoorInfoListAsync((GetDoorInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDoorInfo", "DoorControlPort", SoapActions.GetDoorInfo, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorInfo", typeof(GetDoorInfoRequest), typeof(GetDoorInfoResponse), () => new GetDoorInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).GetDoorInfoAsync((GetDoorInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDoorList", "DoorControlPort", SoapActions.GetDoorList, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorList", typeof(GetDoorListRequest), typeof(GetDoorListResponse), () => new GetDoorListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).GetDoorListAsync((GetDoorListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDoors", "DoorControlPort", SoapActions.GetDoors, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoors", typeof(GetDoorsRequest), typeof(GetDoorsResponse), () => new GetDoorsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).GetDoorsAsync((GetDoorsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateDoor", "DoorControlPort", SoapActions.CreateDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "CreateDoor", typeof(CreateDoorRequest), typeof(CreateDoorResponse), () => new CreateDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).CreateDoorAsync((CreateDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetDoor", "DoorControlPort", SoapActions.SetDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "SetDoor", typeof(SetDoorRequest), typeof(SetDoorResponse), () => new SetDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).SetDoorAsync((SetDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyDoor", "DoorControlPort", SoapActions.ModifyDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "ModifyDoor", typeof(ModifyDoorRequest), typeof(ModifyDoorResponse), () => new ModifyDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).ModifyDoorAsync((ModifyDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteDoor", "DoorControlPort", SoapActions.DeleteDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DeleteDoor", typeof(DeleteDoorRequest), typeof(DeleteDoorResponse), () => new DeleteDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).DeleteDoorAsync((DeleteDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDoorState", "DoorControlPort", SoapActions.GetDoorState, "http://www.onvif.org/ver10/doorcontrol/wsdl", "GetDoorState", typeof(GetDoorStateRequest), typeof(GetDoorStateResponse), () => new GetDoorStateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).GetDoorStateAsync((GetDoorStateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("AccessDoor", "DoorControlPort", SoapActions.AccessDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "AccessDoor", typeof(AccessDoorRequest), typeof(AccessDoorResponse), () => new AccessDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).AccessDoorAsync((AccessDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("LockDoor", "DoorControlPort", SoapActions.LockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDoor", typeof(LockDoorRequest), typeof(LockDoorResponse), () => new LockDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).LockDoorAsync((LockDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("UnlockDoor", "DoorControlPort", SoapActions.UnlockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "UnlockDoor", typeof(UnlockDoorRequest), typeof(UnlockDoorResponse), () => new UnlockDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).UnlockDoorAsync((UnlockDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("BlockDoor", "DoorControlPort", SoapActions.BlockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "BlockDoor", typeof(BlockDoorRequest), typeof(BlockDoorResponse), () => new BlockDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).BlockDoorAsync((BlockDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("LockDownDoor", "DoorControlPort", SoapActions.LockDownDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownDoor", typeof(LockDownDoorRequest), typeof(LockDownDoorResponse), () => new LockDownDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).LockDownDoorAsync((LockDownDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("LockDownReleaseDoor", "DoorControlPort", SoapActions.LockDownReleaseDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockDownReleaseDoor", typeof(LockDownReleaseDoorRequest), typeof(LockDownReleaseDoorResponse), () => new LockDownReleaseDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).LockDownReleaseDoorAsync((LockDownReleaseDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("LockOpenDoor", "DoorControlPort", SoapActions.LockOpenDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenDoor", typeof(LockOpenDoorRequest), typeof(LockOpenDoorResponse), () => new LockOpenDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).LockOpenDoorAsync((LockOpenDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("LockOpenReleaseDoor", "DoorControlPort", SoapActions.LockOpenReleaseDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "LockOpenReleaseDoor", typeof(LockOpenReleaseDoorRequest), typeof(LockOpenReleaseDoorResponse), () => new LockOpenReleaseDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).LockOpenReleaseDoorAsync((LockOpenReleaseDoorRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DoubleLockDoor", "DoorControlPort", SoapActions.DoubleLockDoor, "http://www.onvif.org/ver10/doorcontrol/wsdl", "DoubleLockDoor", typeof(DoubleLockDoorRequest), typeof(DoubleLockDoorResponse), () => new DoubleLockDoorRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((DoorControlPortClient)c).DoubleLockDoorAsync((DoubleLockDoorRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation returns the capabilities of the service. An ONVIF compliant device which provides the
         /// Door Control service shall implement this method.
         /// </summary>

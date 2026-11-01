@@ -93,6 +93,44 @@ namespace SharpOnvifClient.Replay
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static ReplayPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new ReplayPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "ReplayPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/replay/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReplayPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetReplayUri", "ReplayPort", SoapActions.GetReplayUri, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayUri", typeof(GetReplayUriRequest), typeof(GetReplayUriResponse), () => new GetReplayUriRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReplayPortClient)c).GetReplayUriAsync((GetReplayUriRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetReplayConfiguration", "ReplayPort", SoapActions.GetReplayConfiguration, "http://www.onvif.org/ver10/replay/wsdl", "GetReplayConfiguration", typeof(GetReplayConfigurationRequest), typeof(GetReplayConfigurationResponse), () => new GetReplayConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReplayPortClient)c).GetReplayConfigurationAsync((GetReplayConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetReplayConfiguration", "ReplayPort", SoapActions.SetReplayConfiguration, "http://www.onvif.org/ver10/replay/wsdl", "SetReplayConfiguration", typeof(SetReplayConfigurationRequest), typeof(SetReplayConfigurationResponse), () => new SetReplayConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ReplayPortClient)c).SetReplayConfigurationAsync((SetReplayConfigurationRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the replay service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

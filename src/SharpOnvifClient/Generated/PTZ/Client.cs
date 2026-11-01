@@ -413,6 +413,69 @@ namespace SharpOnvifClient.PTZ
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static PTZClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new PTZClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "PTZ", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver20/ptz/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetNodes", "PTZ", SoapActions.GetNodes, "http://www.onvif.org/ver20/ptz/wsdl", "GetNodes", typeof(GetNodesRequest), typeof(GetNodesResponse), () => new GetNodesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetNodesAsync((GetNodesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetNode", "PTZ", SoapActions.GetNode, "http://www.onvif.org/ver20/ptz/wsdl", "GetNode", typeof(GetNodeRequest), typeof(GetNodeResponse), () => new GetNodeRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetNodeAsync((GetNodeRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetConfiguration", "PTZ", SoapActions.GetConfiguration, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfiguration", typeof(GetConfigurationRequest), typeof(GetConfigurationResponse), () => new GetConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetConfigurationAsync((GetConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetConfigurations", "PTZ", SoapActions.GetConfigurations, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurations", typeof(GetConfigurationsRequest), typeof(GetConfigurationsResponse), () => new GetConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetConfigurationsAsync((GetConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetConfiguration", "PTZ", SoapActions.SetConfiguration, "http://www.onvif.org/ver20/ptz/wsdl", "SetConfiguration", typeof(SetConfigurationRequest), typeof(SetConfigurationResponse), () => new SetConfigurationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).SetConfigurationAsync((SetConfigurationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetConfigurationOptions", "PTZ", SoapActions.GetConfigurationOptions, "http://www.onvif.org/ver20/ptz/wsdl", "GetConfigurationOptions", typeof(GetConfigurationOptionsRequest), typeof(GetConfigurationOptionsResponse), () => new GetConfigurationOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetConfigurationOptionsAsync((GetConfigurationOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SendAuxiliaryCommand", "PTZ", SoapActions.SendAuxiliaryCommand, "http://www.onvif.org/ver20/ptz/wsdl", "SendAuxiliaryCommand", typeof(SendAuxiliaryCommandRequest), typeof(SendAuxiliaryCommandResponse), () => new SendAuxiliaryCommandRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).SendAuxiliaryCommandAsync((SendAuxiliaryCommandRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPresets", "PTZ", SoapActions.GetPresets, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresets", typeof(GetPresetsRequest), typeof(GetPresetsResponse), () => new GetPresetsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetPresetsAsync((GetPresetsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetPreset", "PTZ", SoapActions.SetPreset, "http://www.onvif.org/ver20/ptz/wsdl", "SetPreset", typeof(SetPresetRequest), typeof(SetPresetResponse), () => new SetPresetRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).SetPresetAsync((SetPresetRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RemovePreset", "PTZ", SoapActions.RemovePreset, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePreset", typeof(RemovePresetRequest), typeof(RemovePresetResponse), () => new RemovePresetRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).RemovePresetAsync((RemovePresetRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GotoPreset", "PTZ", SoapActions.GotoPreset, "http://www.onvif.org/ver20/ptz/wsdl", "GotoPreset", typeof(GotoPresetRequest), typeof(GotoPresetResponse), () => new GotoPresetRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GotoPresetAsync((GotoPresetRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GotoHomePosition", "PTZ", SoapActions.GotoHomePosition, "http://www.onvif.org/ver20/ptz/wsdl", "GotoHomePosition", typeof(GotoHomePositionRequest), typeof(GotoHomePositionResponse), () => new GotoHomePositionRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GotoHomePositionAsync((GotoHomePositionRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetHomePosition", "PTZ", SoapActions.SetHomePosition, "http://www.onvif.org/ver20/ptz/wsdl", "SetHomePosition", typeof(SetHomePositionRequest), typeof(SetHomePositionResponse), () => new SetHomePositionRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).SetHomePositionAsync((SetHomePositionRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ContinuousMove", "PTZ", SoapActions.ContinuousMove, "http://www.onvif.org/ver20/ptz/wsdl", "ContinuousMove", typeof(ContinuousMoveRequest), typeof(ContinuousMoveResponse), () => new ContinuousMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).ContinuousMoveAsync((ContinuousMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RelativeMove", "PTZ", SoapActions.RelativeMove, "http://www.onvif.org/ver20/ptz/wsdl", "RelativeMove", typeof(RelativeMoveRequest), typeof(RelativeMoveResponse), () => new RelativeMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).RelativeMoveAsync((RelativeMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetStatus", "PTZ", SoapActions.GetStatus, "http://www.onvif.org/ver20/ptz/wsdl", "GetStatus", typeof(GetStatusRequest), typeof(GetStatusResponse), () => new GetStatusRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetStatusAsync((GetStatusRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("AbsoluteMove", "PTZ", SoapActions.AbsoluteMove, "http://www.onvif.org/ver20/ptz/wsdl", "AbsoluteMove", typeof(AbsoluteMoveRequest), typeof(AbsoluteMoveResponse), () => new AbsoluteMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).AbsoluteMoveAsync((AbsoluteMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GeoMove", "PTZ", SoapActions.GeoMove, "http://www.onvif.org/ver20/ptz/wsdl", "GeoMove", typeof(GeoMoveRequest), typeof(GeoMoveResponse), () => new GeoMoveRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GeoMoveAsync((GeoMoveRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Stop", "PTZ", SoapActions.Stop, "http://www.onvif.org/ver20/ptz/wsdl", "Stop", typeof(StopRequest), typeof(StopResponse), () => new StopRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).StopAsync((StopRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPresetTours", "PTZ", SoapActions.GetPresetTours, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTours", typeof(GetPresetToursRequest), typeof(GetPresetToursResponse), () => new GetPresetToursRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetPresetToursAsync((GetPresetToursRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPresetTour", "PTZ", SoapActions.GetPresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTour", typeof(GetPresetTourRequest), typeof(GetPresetTourResponse), () => new GetPresetTourRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetPresetTourAsync((GetPresetTourRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPresetTourOptions", "PTZ", SoapActions.GetPresetTourOptions, "http://www.onvif.org/ver20/ptz/wsdl", "GetPresetTourOptions", typeof(GetPresetTourOptionsRequest), typeof(GetPresetTourOptionsResponse), () => new GetPresetTourOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetPresetTourOptionsAsync((GetPresetTourOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreatePresetTour", "PTZ", SoapActions.CreatePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "CreatePresetTour", typeof(CreatePresetTourRequest), typeof(CreatePresetTourResponse), () => new CreatePresetTourRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).CreatePresetTourAsync((CreatePresetTourRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyPresetTour", "PTZ", SoapActions.ModifyPresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "ModifyPresetTour", typeof(ModifyPresetTourRequest), typeof(ModifyPresetTourResponse), () => new ModifyPresetTourRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).ModifyPresetTourAsync((ModifyPresetTourRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("OperatePresetTour", "PTZ", SoapActions.OperatePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "OperatePresetTour", typeof(OperatePresetTourRequest), typeof(OperatePresetTourResponse), () => new OperatePresetTourRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).OperatePresetTourAsync((OperatePresetTourRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("RemovePresetTour", "PTZ", SoapActions.RemovePresetTour, "http://www.onvif.org/ver20/ptz/wsdl", "RemovePresetTour", typeof(RemovePresetTourRequest), typeof(RemovePresetTourResponse), () => new RemovePresetTourRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).RemovePresetTourAsync((RemovePresetTourRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetCompatibleConfigurations", "PTZ", SoapActions.GetCompatibleConfigurations, "http://www.onvif.org/ver20/ptz/wsdl", "GetCompatibleConfigurations", typeof(GetCompatibleConfigurationsRequest), typeof(GetCompatibleConfigurationsResponse), () => new GetCompatibleConfigurationsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).GetCompatibleConfigurationsAsync((GetCompatibleConfigurationsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("MoveAndStartTracking", "PTZ", SoapActions.MoveAndStartTracking, "http://www.onvif.org/ver20/ptz/wsdl", "MoveAndStartTracking", typeof(MoveAndStartTrackingRequest), typeof(MoveAndStartTrackingResponse), () => new MoveAndStartTrackingRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((PTZClient)c).MoveAndStartTrackingAsync((MoveAndStartTrackingRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the PTZ service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

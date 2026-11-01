@@ -235,6 +235,19 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfDoorAlarmState;
+
+        /// <summary>The values of <see cref="DoorAlarmState"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfDoorAlarmState()
+        {
+            return s_valuesOfDoorAlarmState ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfDoorAlarmState, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorAlarmState.Normal, "Normal", "Normal"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorAlarmState.DoorForcedOpen, "DoorForcedOpen", "DoorForcedOpen"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorAlarmState.DoorOpenTooLong, "DoorOpenTooLong", "DoorOpenTooLong"),
+            });
+        }
+
         public static string ToXml(DoorFaultState value)
         {
             switch (value)
@@ -263,6 +276,19 @@ namespace SharpOnvifServer.DoorControl
                 default:
                     return default(DoorFaultState);
             }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfDoorFaultState;
+
+        /// <summary>The values of <see cref="DoorFaultState"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfDoorFaultState()
+        {
+            return s_valuesOfDoorFaultState ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfDoorFaultState, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorFaultState.Unknown, "Unknown", "Unknown"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorFaultState.NotInFault, "NotInFault", "NotInFault"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorFaultState.FaultDetected, "FaultDetected", "FaultDetected"),
+            });
         }
 
         public static string ToXml(DoorMode value)
@@ -315,6 +341,24 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfDoorMode;
+
+        /// <summary>The values of <see cref="DoorMode"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfDoorMode()
+        {
+            return s_valuesOfDoorMode ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfDoorMode, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.Unknown, "Unknown", "Unknown"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.Locked, "Locked", "Locked"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.Unlocked, "Unlocked", "Unlocked"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.Accessed, "Accessed", "Accessed"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.Blocked, "Blocked", "Blocked"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.LockedDown, "LockedDown", "LockedDown"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.LockedOpen, "LockedOpen", "LockedOpen"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorMode.DoubleLocked, "DoubleLocked", "DoubleLocked"),
+            });
+        }
+
         public static string ToXml(DoorPhysicalState value)
         {
             switch (value)
@@ -349,6 +393,20 @@ namespace SharpOnvifServer.DoorControl
             }
         }
 
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfDoorPhysicalState;
+
+        /// <summary>The values of <see cref="DoorPhysicalState"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfDoorPhysicalState()
+        {
+            return s_valuesOfDoorPhysicalState ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfDoorPhysicalState, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorPhysicalState.Unknown, "Unknown", "Unknown"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorPhysicalState.Open, "Open", "Open"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorPhysicalState.Closed, "Closed", "Closed"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorPhysicalState.Fault, "Fault", "Fault"),
+            });
+        }
+
         public static string ToXml(DoorTamperState value)
         {
             switch (value)
@@ -377,6 +435,19 @@ namespace SharpOnvifServer.DoorControl
                 default:
                     return default(DoorTamperState);
             }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfDoorTamperState;
+
+        /// <summary>The values of <see cref="DoorTamperState"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfDoorTamperState()
+        {
+            return s_valuesOfDoorTamperState ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfDoorTamperState, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorTamperState.Unknown, "Unknown", "Unknown"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorTamperState.NotInTamper, "NotInTamper", "NotInTamper"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(DoorTamperState.TamperDetected, "TamperDetected", "TamperDetected"),
+            });
         }
 
         public static string ToXml(LockPhysicalState value)
@@ -411,6 +482,20 @@ namespace SharpOnvifServer.DoorControl
                 default:
                     return default(LockPhysicalState);
             }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlEnumValue[] s_valuesOfLockPhysicalState;
+
+        /// <summary>The values of <see cref="LockPhysicalState"/> with their wire names, built on first use.</summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlEnumValue> ValuesOfLockPhysicalState()
+        {
+            return s_valuesOfLockPhysicalState ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_valuesOfLockPhysicalState, () => new SharpOnvifCommon.Xml.XmlEnumValue[]
+            {
+                new SharpOnvifCommon.Xml.XmlEnumValue(LockPhysicalState.Unknown, "Unknown", "Unknown"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(LockPhysicalState.Locked, "Locked", "Locked"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(LockPhysicalState.Unlocked, "Unlocked", "Unlocked"),
+                new SharpOnvifCommon.Xml.XmlEnumValue(LockPhysicalState.Fault, "Fault", "Fault"),
+            });
         }
     }
 
@@ -468,6 +553,34 @@ namespace SharpOnvifServer.DoorControl
         {
             reader.Trim(ref this.anyField);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AccessDoorExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((AccessDoorExtension)o).Any, (o, v) => ((AccessDoorExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((AccessDoorExtension)o).AnyAttr, (o, v) => ((AccessDoorExtension)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -634,6 +747,43 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AccessDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AccessDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((AccessDoorRequest)o).Token, (o, v) => ((AccessDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("UseExtendedTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "UseExtendedTime", Ns.Ver10Doorcontrol, 1, true, o => ((AccessDoorRequest)o).UseExtendedTime, (o, v) => ((AccessDoorRequest)o).UseExtendedTime = (bool)v, o => ((AccessDoorRequest)o).UseExtendedTimeSpecified, (o, v) => ((AccessDoorRequest)o).UseExtendedTimeSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AccessTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AccessTime", Ns.Ver10Doorcontrol, 2, true, o => ((AccessDoorRequest)o).AccessTime, (o, v) => ((AccessDoorRequest)o).AccessTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("OpenTooLongTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "OpenTooLongTime", Ns.Ver10Doorcontrol, 3, true, o => ((AccessDoorRequest)o).OpenTooLongTime, (o, v) => ((AccessDoorRequest)o).OpenTooLongTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PreAlarmTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PreAlarmTime", Ns.Ver10Doorcontrol, 4, true, o => ((AccessDoorRequest)o).PreAlarmTime, (o, v) => ((AccessDoorRequest)o).PreAlarmTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(AccessDoorExtension), typeof(AccessDoorExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Doorcontrol, 5, true, o => ((AccessDoorRequest)o).Extension, (o, v) => ((AccessDoorRequest)o).Extension = (AccessDoorExtension)v, null, null, () => new AccessDoorExtension(), () => new AccessDoorExtension(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -655,6 +805,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public AccessDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new AccessDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("AccessDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -707,6 +888,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new BlockDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("BlockDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((BlockDoorRequest)o).Token, (o, v) => ((BlockDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -721,6 +934,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public BlockDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new BlockDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("BlockDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -772,6 +1016,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Door", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Door), typeof(Door), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Door", Ns.Ver10Doorcontrol, 0, false, o => ((CreateDoorRequest)o).Door, (o, v) => ((CreateDoorRequest)o).Door = (Door)v, null, null, () => new Door(), () => new Door(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -819,6 +1095,38 @@ namespace SharpOnvifServer.DoorControl
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new CreateDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("CreateDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((CreateDoorResponse)o).Token, (o, v) => ((CreateDoorResponse)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -870,6 +1178,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((DeleteDoorRequest)o).Token, (o, v) => ((DeleteDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -883,6 +1223,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public DeleteDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DeleteDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DeleteDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -1005,6 +1376,37 @@ namespace SharpOnvifServer.DoorControl
         {
             base.EndXmlRead(reader);
             reader.Trim(ref this.anyAttrField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Door();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorCapabilities), typeof(DoorCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Doorcontrol, 0, false, o => ((Door)o).Capabilities, (o, v) => ((Door)o).Capabilities = (DoorCapabilities)v, null, null, () => new DoorCapabilities(), () => new DoorCapabilities(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoorType", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DoorType", Ns.Ver10Doorcontrol, 1, false, o => ((Door)o).DoorType, (o, v) => ((Door)o).DoorType = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Timings", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Timings), typeof(Timings), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Timings", Ns.Ver10Doorcontrol, 2, false, o => ((Door)o).Timings, (o, v) => ((Door)o).Timings = (Timings)v, null, null, () => new Timings(), () => new Timings(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorExtension), typeof(DoorExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Doorcontrol, 3, true, o => ((Door)o).Extension, (o, v) => ((Door)o).Extension = (DoorExtension)v, null, null, () => new DoorExtension(), () => new DoorExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Door)o).AnyAttr, (o, v) => ((Door)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(DoorInfoBase.GetXmlMembers(), own);
         }
 
     }
@@ -1536,6 +1938,48 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((DoorCapabilities)o).Any, (o, v) => ((DoorCapabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Access", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Access", null, 0, true, o => ((DoorCapabilities)o).Access, (o, v) => ((DoorCapabilities)o).Access = (bool)v, o => ((DoorCapabilities)o).AccessSpecified, (o, v) => ((DoorCapabilities)o).AccessSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AccessTimingOverride", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "AccessTimingOverride", null, 0, true, o => ((DoorCapabilities)o).AccessTimingOverride, (o, v) => ((DoorCapabilities)o).AccessTimingOverride = (bool)v, o => ((DoorCapabilities)o).AccessTimingOverrideSpecified, (o, v) => ((DoorCapabilities)o).AccessTimingOverrideSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Lock", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Lock", null, 0, true, o => ((DoorCapabilities)o).Lock, (o, v) => ((DoorCapabilities)o).Lock = (bool)v, o => ((DoorCapabilities)o).LockSpecified, (o, v) => ((DoorCapabilities)o).LockSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Unlock", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Unlock", null, 0, true, o => ((DoorCapabilities)o).Unlock, (o, v) => ((DoorCapabilities)o).Unlock = (bool)v, o => ((DoorCapabilities)o).UnlockSpecified, (o, v) => ((DoorCapabilities)o).UnlockSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Block", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Block", null, 0, true, o => ((DoorCapabilities)o).Block, (o, v) => ((DoorCapabilities)o).Block = (bool)v, o => ((DoorCapabilities)o).BlockSpecified, (o, v) => ((DoorCapabilities)o).BlockSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoubleLock", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DoubleLock", null, 0, true, o => ((DoorCapabilities)o).DoubleLock, (o, v) => ((DoorCapabilities)o).DoubleLock = (bool)v, o => ((DoorCapabilities)o).DoubleLockSpecified, (o, v) => ((DoorCapabilities)o).DoubleLockSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("LockDown", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "LockDown", null, 0, true, o => ((DoorCapabilities)o).LockDown, (o, v) => ((DoorCapabilities)o).LockDown = (bool)v, o => ((DoorCapabilities)o).LockDownSpecified, (o, v) => ((DoorCapabilities)o).LockDownSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("LockOpen", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "LockOpen", null, 0, true, o => ((DoorCapabilities)o).LockOpen, (o, v) => ((DoorCapabilities)o).LockOpen = (bool)v, o => ((DoorCapabilities)o).LockOpenSpecified, (o, v) => ((DoorCapabilities)o).LockOpenSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoorMonitor", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DoorMonitor", null, 0, true, o => ((DoorCapabilities)o).DoorMonitor, (o, v) => ((DoorCapabilities)o).DoorMonitor = (bool)v, o => ((DoorCapabilities)o).DoorMonitorSpecified, (o, v) => ((DoorCapabilities)o).DoorMonitorSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("LockMonitor", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "LockMonitor", null, 0, true, o => ((DoorCapabilities)o).LockMonitor, (o, v) => ((DoorCapabilities)o).LockMonitor = (bool)v, o => ((DoorCapabilities)o).LockMonitorSpecified, (o, v) => ((DoorCapabilities)o).LockMonitorSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoubleLockMonitor", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DoubleLockMonitor", null, 0, true, o => ((DoorCapabilities)o).DoubleLockMonitor, (o, v) => ((DoorCapabilities)o).DoubleLockMonitor = (bool)v, o => ((DoorCapabilities)o).DoubleLockMonitorSpecified, (o, v) => ((DoorCapabilities)o).DoubleLockMonitorSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Alarm", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Alarm", null, 0, true, o => ((DoorCapabilities)o).Alarm, (o, v) => ((DoorCapabilities)o).Alarm = (bool)v, o => ((DoorCapabilities)o).AlarmSpecified, (o, v) => ((DoorCapabilities)o).AlarmSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Tamper", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Tamper", null, 0, true, o => ((DoorCapabilities)o).Tamper, (o, v) => ((DoorCapabilities)o).Tamper = (bool)v, o => ((DoorCapabilities)o).TamperSpecified, (o, v) => ((DoorCapabilities)o).TamperSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Fault", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Fault", null, 0, true, o => ((DoorCapabilities)o).Fault, (o, v) => ((DoorCapabilities)o).Fault = (bool)v, o => ((DoorCapabilities)o).FaultSpecified, (o, v) => ((DoorCapabilities)o).FaultSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((DoorCapabilities)o).AnyAttr, (o, v) => ((DoorCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
@@ -1568,6 +2012,33 @@ namespace SharpOnvifServer.DoorControl
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((DoorExtension)o).Any, (o, v) => ((DoorExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -1667,6 +2138,36 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorFault();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Reason", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Reason", Ns.Ver10Doorcontrol, 0, true, o => ((DoorFault)o).Reason, (o, v) => ((DoorFault)o).Reason = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("State", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorFaultState), typeof(DoorFaultState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "State", Ns.Ver10Doorcontrol, 1, false, o => ((DoorFault)o).State, (o, v) => ((DoorFault)o).State = (DoorFaultState)v, null, null, () => default(DoorFaultState), () => default(DoorFaultState), null, () => EnumXml.ValuesOfDoorFaultState(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 2, false, o => ((DoorFault)o).Any, (o, v) => ((DoorFault)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((DoorFault)o).AnyAttr, (o, v) => ((DoorFault)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -1752,6 +2253,35 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorInfo();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorCapabilities), typeof(DoorCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Doorcontrol, 0, false, o => ((DoorInfo)o).Capabilities, (o, v) => ((DoorInfo)o).Capabilities = (DoorCapabilities)v, null, null, () => new DoorCapabilities(), () => new DoorCapabilities(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 1, false, o => ((DoorInfo)o).Any, (o, v) => ((DoorInfo)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((DoorInfo)o).AnyAttr, (o, v) => ((DoorInfo)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(DoorInfoBase.GetXmlMembers(), own);
+        }
+
     }
 
     /// <summary>
@@ -1812,6 +2342,34 @@ namespace SharpOnvifServer.DoorControl
             }
             if (base.ReadXmlElement(reader)) return true;
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorInfoBase();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Name", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Name", Ns.Ver10Doorcontrol, 0, false, o => ((DoorInfoBase)o).Name, (o, v) => ((DoorInfoBase)o).Name = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Description", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Description", Ns.Ver10Doorcontrol, 1, true, o => ((DoorInfoBase)o).Description, (o, v) => ((DoorInfoBase)o).Description = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return SharpOnvifCommon.Xml.XmlMember.Combine(SharpOnvifCommon.Onvif.DataEntity.GetXmlMembers(), own);
         }
 
     }
@@ -2065,6 +2623,41 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorState();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("DoorPhysicalState", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorPhysicalState), typeof(DoorPhysicalState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "DoorPhysicalState", Ns.Ver10Doorcontrol, 0, true, o => ((DoorState)o).DoorPhysicalState, (o, v) => ((DoorState)o).DoorPhysicalState = (DoorPhysicalState)v, o => ((DoorState)o).DoorPhysicalStateSpecified, (o, v) => ((DoorState)o).DoorPhysicalStateSpecified = v, () => default(DoorPhysicalState), () => default(DoorPhysicalState), null, () => EnumXml.ValuesOfDoorPhysicalState(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("LockPhysicalState", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(LockPhysicalState), typeof(LockPhysicalState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "LockPhysicalState", Ns.Ver10Doorcontrol, 1, true, o => ((DoorState)o).LockPhysicalState, (o, v) => ((DoorState)o).LockPhysicalState = (LockPhysicalState)v, o => ((DoorState)o).LockPhysicalStateSpecified, (o, v) => ((DoorState)o).LockPhysicalStateSpecified = v, () => default(LockPhysicalState), () => default(LockPhysicalState), null, () => EnumXml.ValuesOfLockPhysicalState(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoubleLockPhysicalState", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(LockPhysicalState), typeof(LockPhysicalState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "DoubleLockPhysicalState", Ns.Ver10Doorcontrol, 2, true, o => ((DoorState)o).DoubleLockPhysicalState, (o, v) => ((DoorState)o).DoubleLockPhysicalState = (LockPhysicalState)v, o => ((DoorState)o).DoubleLockPhysicalStateSpecified, (o, v) => ((DoorState)o).DoubleLockPhysicalStateSpecified = v, () => default(LockPhysicalState), () => default(LockPhysicalState), null, () => EnumXml.ValuesOfLockPhysicalState(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Alarm", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorAlarmState), typeof(DoorAlarmState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "Alarm", Ns.Ver10Doorcontrol, 3, true, o => ((DoorState)o).Alarm, (o, v) => ((DoorState)o).Alarm = (DoorAlarmState)v, o => ((DoorState)o).AlarmSpecified, (o, v) => ((DoorState)o).AlarmSpecified = v, () => default(DoorAlarmState), () => default(DoorAlarmState), null, () => EnumXml.ValuesOfDoorAlarmState(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Tamper", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorTamper), typeof(DoorTamper), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Tamper", Ns.Ver10Doorcontrol, 4, true, o => ((DoorState)o).Tamper, (o, v) => ((DoorState)o).Tamper = (DoorTamper)v, null, null, () => new DoorTamper(), () => new DoorTamper(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Fault", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorFault), typeof(DoorFault), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Fault", Ns.Ver10Doorcontrol, 5, true, o => ((DoorState)o).Fault, (o, v) => ((DoorState)o).Fault = (DoorFault)v, null, null, () => new DoorFault(), () => new DoorFault(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoorMode", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorMode), typeof(DoorMode), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "DoorMode", Ns.Ver10Doorcontrol, 6, false, o => ((DoorState)o).DoorMode, (o, v) => ((DoorState)o).DoorMode = (DoorMode)v, null, null, () => default(DoorMode), () => default(DoorMode), null, () => EnumXml.ValuesOfDoorMode(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 7, false, o => ((DoorState)o).Any, (o, v) => ((DoorState)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((DoorState)o).AnyAttr, (o, v) => ((DoorState)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2162,6 +2755,36 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoorTamper();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Reason", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Reason", Ns.Ver10Doorcontrol, 0, true, o => ((DoorTamper)o).Reason, (o, v) => ((DoorTamper)o).Reason = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("State", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorTamperState), typeof(DoorTamperState), SharpOnvifCommon.Xml.XmlValueKind.Enum, false, "State", Ns.Ver10Doorcontrol, 1, false, o => ((DoorTamper)o).State, (o, v) => ((DoorTamper)o).State = (DoorTamperState)v, null, null, () => default(DoorTamperState), () => default(DoorTamperState), null, () => EnumXml.ValuesOfDoorTamperState(), null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 2, false, o => ((DoorTamper)o).Any, (o, v) => ((DoorTamper)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((DoorTamper)o).AnyAttr, (o, v) => ((DoorTamper)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2213,6 +2836,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoubleLockDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DoubleLockDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((DoubleLockDoorRequest)o).Token, (o, v) => ((DoubleLockDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2228,6 +2883,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public DoubleLockDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new DoubleLockDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("DoubleLockDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2317,6 +3003,39 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorInfoListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorInfoList", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Doorcontrol, 0, true, o => ((GetDoorInfoListRequest)o).Limit, (o, v) => ((GetDoorInfoListRequest)o).Limit = (int)v, o => ((GetDoorInfoListRequest)o).LimitSpecified, (o, v) => ((GetDoorInfoListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Doorcontrol, 1, true, o => ((GetDoorInfoListRequest)o).StartReference, (o, v) => ((GetDoorInfoListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2396,6 +3115,39 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.doorInfoField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorInfoListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorInfoListResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Doorcontrol, 0, true, o => ((GetDoorInfoListResponse)o).NextStartReference, (o, v) => ((GetDoorInfoListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoorInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorInfo[]), typeof(DoorInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "DoorInfo", Ns.Ver10Doorcontrol, 1, true, o => ((GetDoorInfoListResponse)o).DoorInfo, (o, v) => ((GetDoorInfoListResponse)o).DoorInfo = (DoorInfo[])v, null, null, () => new DoorInfo[0], () => new DoorInfo(), n => new DoorInfo[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2457,6 +3209,38 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorInfoRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorInfo", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((GetDoorInfoRequest)o).Token, (o, v) => ((GetDoorInfoRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2516,6 +3300,38 @@ namespace SharpOnvifServer.DoorControl
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.doorInfoField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorInfoResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorInfoResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("DoorInfo", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorInfo[]), typeof(DoorInfo), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "DoorInfo", Ns.Ver10Doorcontrol, 0, true, o => ((GetDoorInfoResponse)o).DoorInfo, (o, v) => ((GetDoorInfoResponse)o).DoorInfo = (DoorInfo[])v, null, null, () => new DoorInfo[0], () => new DoorInfo(), n => new DoorInfo[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2605,6 +3421,39 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorListRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorList", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Limit", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(int), typeof(int), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Limit", Ns.Ver10Doorcontrol, 0, true, o => ((GetDoorListRequest)o).Limit, (o, v) => ((GetDoorListRequest)o).Limit = (int)v, o => ((GetDoorListRequest)o).LimitSpecified, (o, v) => ((GetDoorListRequest)o).LimitSpecified = v, () => default(int), () => default(int), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("StartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "StartReference", Ns.Ver10Doorcontrol, 1, true, o => ((GetDoorListRequest)o).StartReference, (o, v) => ((GetDoorListRequest)o).StartReference = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2684,6 +3533,39 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.doorField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorListResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorListResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("NextStartReference", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "NextStartReference", Ns.Ver10Doorcontrol, 0, true, o => ((GetDoorListResponse)o).NextStartReference, (o, v) => ((GetDoorListResponse)o).NextStartReference = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Door", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Door[]), typeof(Door), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Door", Ns.Ver10Doorcontrol, 1, true, o => ((GetDoorListResponse)o).Door, (o, v) => ((GetDoorListResponse)o).Door = (Door[])v, null, null, () => new Door[0], () => new Door(), n => new Door[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2732,6 +3614,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorStateRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorState", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((GetDoorStateRequest)o).Token, (o, v) => ((GetDoorStateRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2778,6 +3692,38 @@ namespace SharpOnvifServer.DoorControl
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorStateResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorStateResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("DoorState", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(DoorState), typeof(DoorState), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "DoorState", Ns.Ver10Doorcontrol, 0, false, o => ((GetDoorStateResponse)o).DoorState, (o, v) => ((GetDoorStateResponse)o).DoorState = (DoorState)v, null, null, () => new DoorState(), () => new DoorState(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -2840,6 +3786,38 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.tokenField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorsRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoors", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string[]), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, true, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((GetDoorsRequest)o).Token, (o, v) => ((GetDoorsRequest)o).Token = (string[])v, null, null, () => new string[0], null, n => new string[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2900,6 +3878,38 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.doorField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetDoorsResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetDoorsResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Door", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Door[]), typeof(Door), SharpOnvifCommon.Xml.XmlValueKind.Contract, true, "Door", Ns.Ver10Doorcontrol, 0, true, o => ((GetDoorsResponse)o).Door, (o, v) => ((GetDoorsResponse)o).Door = (Door[])v, null, null, () => new Door[0], () => new Door(), n => new Door[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -2911,6 +3921,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public GetServiceCapabilitiesRequest()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilities", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -2959,6 +4000,38 @@ namespace SharpOnvifServer.DoorControl
                     return true;
             }
             return false;
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new GetServiceCapabilitiesResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("GetServiceCapabilitiesResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Capabilities", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(ServiceCapabilities), typeof(ServiceCapabilities), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Capabilities", Ns.Ver10Doorcontrol, 0, false, o => ((GetServiceCapabilitiesResponse)o).Capabilities, (o, v) => ((GetServiceCapabilitiesResponse)o).Capabilities = (ServiceCapabilities)v, null, null, () => new ServiceCapabilities(), () => new ServiceCapabilities(), null, null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3011,6 +4084,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((LockDoorRequest)o).Token, (o, v) => ((LockDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3025,6 +4130,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public LockDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3080,6 +4216,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockDownDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockDownDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((LockDownDoorRequest)o).Token, (o, v) => ((LockDownDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3097,6 +4265,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public LockDownDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockDownDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockDownDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3147,6 +4346,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockDownReleaseDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockDownReleaseDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((LockDownReleaseDoorRequest)o).Token, (o, v) => ((LockDownReleaseDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3159,6 +4390,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public LockDownReleaseDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockDownReleaseDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockDownReleaseDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3213,6 +4475,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockOpenDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockOpenDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((LockOpenDoorRequest)o).Token, (o, v) => ((LockOpenDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3229,6 +4523,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public LockOpenDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockOpenDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockOpenDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3281,6 +4606,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockOpenReleaseDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockOpenReleaseDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((LockOpenReleaseDoorRequest)o).Token, (o, v) => ((LockOpenReleaseDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3295,6 +4652,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public LockOpenReleaseDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new LockOpenReleaseDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("LockOpenReleaseDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3346,6 +4734,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Door", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Door), typeof(Door), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Door", Ns.Ver10Doorcontrol, 0, false, o => ((ModifyDoorRequest)o).Door, (o, v) => ((ModifyDoorRequest)o).Door = (Door)v, null, null, () => new Door(), () => new Door(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3359,6 +4779,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public ModifyDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ModifyDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("ModifyDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3543,6 +4994,38 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new ServiceCapabilities();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((ServiceCapabilities)o).Any, (o, v) => ((ServiceCapabilities)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxLimit", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxLimit", null, 0, false, o => ((ServiceCapabilities)o).MaxLimit, (o, v) => ((ServiceCapabilities)o).MaxLimit = (uint)v, null, null, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("MaxDoors", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(uint), typeof(uint), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "MaxDoors", null, 0, true, o => ((ServiceCapabilities)o).MaxDoors, (o, v) => ((ServiceCapabilities)o).MaxDoors = (uint)v, o => ((ServiceCapabilities)o).MaxDoorsSpecified, (o, v) => ((ServiceCapabilities)o).MaxDoorsSpecified = v, () => default(uint), () => default(uint), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ClientSuppliedTokenSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ClientSuppliedTokenSupported", null, 0, true, o => ((ServiceCapabilities)o).ClientSuppliedTokenSupported, (o, v) => ((ServiceCapabilities)o).ClientSuppliedTokenSupported = (bool)v, o => ((ServiceCapabilities)o).ClientSuppliedTokenSupportedSpecified, (o, v) => ((ServiceCapabilities)o).ClientSuppliedTokenSupportedSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DoorManagementSupported", SharpOnvifCommon.Xml.XmlMemberKind.Attribute, typeof(bool), typeof(bool), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DoorManagementSupported", null, 0, true, o => ((ServiceCapabilities)o).DoorManagementSupported, (o, v) => ((ServiceCapabilities)o).DoorManagementSupported = (bool)v, o => ((ServiceCapabilities)o).DoorManagementSupportedSpecified, (o, v) => ((ServiceCapabilities)o).DoorManagementSupportedSpecified = v, () => default(bool), () => default(bool), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((ServiceCapabilities)o).AnyAttr, (o, v) => ((ServiceCapabilities)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3594,6 +5077,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Door", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(Door), typeof(Door), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Door", Ns.Ver10Doorcontrol, 0, false, o => ((SetDoorRequest)o).Door, (o, v) => ((SetDoorRequest)o).Door = (Door)v, null, null, () => new Door(), () => new Door(), null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3609,6 +5124,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public SetDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new SetDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("SetDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }
@@ -3784,6 +5330,40 @@ namespace SharpOnvifServer.DoorControl
             reader.Trim(ref this.anyAttrField);
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new Timings();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("ReleaseTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ReleaseTime", Ns.Ver10Doorcontrol, 0, false, o => ((Timings)o).ReleaseTime, (o, v) => ((Timings)o).ReleaseTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("OpenTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "OpenTime", Ns.Ver10Doorcontrol, 1, false, o => ((Timings)o).OpenTime, (o, v) => ((Timings)o).OpenTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtendedReleaseTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ExtendedReleaseTime", Ns.Ver10Doorcontrol, 2, true, o => ((Timings)o).ExtendedReleaseTime, (o, v) => ((Timings)o).ExtendedReleaseTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("DelayTimeBeforeRelock", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "DelayTimeBeforeRelock", Ns.Ver10Doorcontrol, 3, true, o => ((Timings)o).DelayTimeBeforeRelock, (o, v) => ((Timings)o).DelayTimeBeforeRelock = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("ExtendedOpenTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "ExtendedOpenTime", Ns.Ver10Doorcontrol, 4, true, o => ((Timings)o).ExtendedOpenTime, (o, v) => ((Timings)o).ExtendedOpenTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("PreAlarmTime", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "PreAlarmTime", Ns.Ver10Doorcontrol, 5, true, o => ((Timings)o).PreAlarmTime, (o, v) => ((Timings)o).PreAlarmTime = (string)v, null, null, null, null, null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("Extension", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(TimingsExtension), typeof(TimingsExtension), SharpOnvifCommon.Xml.XmlValueKind.Contract, false, "Extension", Ns.Ver10Doorcontrol, 6, true, o => ((Timings)o).Extension, (o, v) => ((Timings)o).Extension = (TimingsExtension)v, null, null, () => new TimingsExtension(), () => new TimingsExtension(), null, null, null, null),
+                new SharpOnvifCommon.Xml.XmlMember("AnyAttr", SharpOnvifCommon.Xml.XmlMemberKind.AnyAttribute, typeof(System.Xml.XmlAttribute[]), typeof(System.Xml.XmlAttribute), SharpOnvifCommon.Xml.XmlValueKind.XmlAttribute, true, "", null, 0, true, o => ((Timings)o).AnyAttr, (o, v) => ((Timings)o).AnyAttr = (System.Xml.XmlAttribute[])v, null, null, () => new System.Xml.XmlAttribute[0], null, n => new System.Xml.XmlAttribute[n], null, null, null),
+            };
+            return own;
+        }
+
     }
 
     [System.Xml.Serialization.XmlTypeAttribute(Namespace="http://www.onvif.org/ver10/doorcontrol/wsdl")]
@@ -3816,6 +5396,33 @@ namespace SharpOnvifServer.DoorControl
         protected override void EndXmlRead(SharpOnvifCommon.Xml.IXmlReader reader)
         {
             reader.Trim(ref this.anyField);
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new TimingsExtension();
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Any", SharpOnvifCommon.Xml.XmlMemberKind.AnyElement, typeof(System.Xml.XmlElement[]), typeof(System.Xml.XmlElement), SharpOnvifCommon.Xml.XmlValueKind.XmlElement, true, "", null, 0, false, o => ((TimingsExtension)o).Any, (o, v) => ((TimingsExtension)o).Any = (System.Xml.XmlElement[])v, null, null, () => new System.Xml.XmlElement[0], null, n => new System.Xml.XmlElement[n], null, null, null),
+            };
+            return own;
         }
 
     }
@@ -3868,6 +5475,38 @@ namespace SharpOnvifServer.DoorControl
             return false;
         }
 
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new UnlockDoorRequest();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("UnlockDoor", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+                new SharpOnvifCommon.Xml.XmlMember("Token", SharpOnvifCommon.Xml.XmlMemberKind.Element, typeof(string), typeof(string), SharpOnvifCommon.Xml.XmlValueKind.Primitive, false, "Token", Ns.Ver10Doorcontrol, 0, false, o => ((UnlockDoorRequest)o).Token, (o, v) => ((UnlockDoorRequest)o).Token = (string)v, null, null, null, null, null, null, null, null),
+            };
+            return own;
+        }
+
     }
 
     /// <summary>
@@ -3882,6 +5521,37 @@ namespace SharpOnvifServer.DoorControl
     {
         public UnlockDoorResponse()
         {
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] s_xmlMembers;
+
+        /// <summary>The members of this type, inherited ones first, built on first use.</summary>
+        public static new global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> GetXmlMembers()
+        {
+            return s_xmlMembers ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_xmlMembers, BuildXmlMembers);
+        }
+
+        public override global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Xml.XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        public override SharpOnvifCommon.Xml.XmlContract CreateXmlInstance()
+        {
+            return new UnlockDoorResponse();
+        }
+
+        public override global::System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return new global::System.Xml.XmlQualifiedName("UnlockDoorResponse", "http://www.onvif.org/ver10/doorcontrol/wsdl"); }
+        }
+
+        private static SharpOnvifCommon.Xml.XmlMember[] BuildXmlMembers()
+        {
+            var own = new SharpOnvifCommon.Xml.XmlMember[]
+            {
+            };
+            return own;
         }
 
     }

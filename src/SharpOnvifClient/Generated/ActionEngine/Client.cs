@@ -166,6 +166,50 @@ namespace SharpOnvifClient.ActionEngine
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static ActionEnginePortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new ActionEnginePortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetSupportedActions", "ActionEnginePort", SoapActions.GetSupportedActions, "http://www.onvif.org/ver10/actionengine/wsdl", "GetSupportedActions", typeof(GetSupportedActionsRequest), typeof(GetSupportedActionsResponse), () => new GetSupportedActionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).GetSupportedActionsAsync((GetSupportedActionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetActions", "ActionEnginePort", SoapActions.GetActions, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActions", typeof(GetActionsRequest), typeof(GetActionsResponse), () => new GetActionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).GetActionsAsync((GetActionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateActions", "ActionEnginePort", SoapActions.CreateActions, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActions", typeof(CreateActionsRequest), typeof(CreateActionsResponse), () => new CreateActionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).CreateActionsAsync((CreateActionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteActions", "ActionEnginePort", SoapActions.DeleteActions, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActions", typeof(DeleteActionsRequest), typeof(DeleteActionsResponse), () => new DeleteActionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).DeleteActionsAsync((DeleteActionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyActions", "ActionEnginePort", SoapActions.ModifyActions, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActions", typeof(ModifyActionsRequest), typeof(ModifyActionsResponse), () => new ModifyActionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).ModifyActionsAsync((ModifyActionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "ActionEnginePort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/actionengine/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetActionTriggers", "ActionEnginePort", SoapActions.GetActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "GetActionTriggers", typeof(GetActionTriggersRequest), typeof(GetActionTriggersResponse), () => new GetActionTriggersRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).GetActionTriggersAsync((GetActionTriggersRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateActionTriggers", "ActionEnginePort", SoapActions.CreateActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "CreateActionTriggers", typeof(CreateActionTriggersRequest), typeof(CreateActionTriggersResponse), () => new CreateActionTriggersRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).CreateActionTriggersAsync((CreateActionTriggersRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteActionTriggers", "ActionEnginePort", SoapActions.DeleteActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "DeleteActionTriggers", typeof(DeleteActionTriggersRequest), typeof(DeleteActionTriggersResponse), () => new DeleteActionTriggersRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).DeleteActionTriggersAsync((DeleteActionTriggersRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyActionTriggers", "ActionEnginePort", SoapActions.ModifyActionTriggers, "http://www.onvif.org/ver10/actionengine/wsdl", "ModifyActionTriggers", typeof(ModifyActionTriggersRequest), typeof(ModifyActionTriggersResponse), () => new ModifyActionTriggersRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((ActionEnginePortClient)c).ModifyActionTriggersAsync((ModifyActionTriggersRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// The service provider returns the supported action types. The response returns a list of Action
         /// Descriptions according to the Action Description Language. The response also contains a list of URLs
         /// that provide the location of the schema files. These schema files describe the types and elements

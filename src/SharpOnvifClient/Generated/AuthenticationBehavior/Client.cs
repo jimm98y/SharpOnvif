@@ -272,6 +272,57 @@ namespace SharpOnvifClient.AuthenticationBehavior
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static AuthenticationBehaviorPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new AuthenticationBehaviorPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "AuthenticationBehaviorPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAuthenticationProfileInfo", "AuthenticationBehaviorPort", SoapActions.GetAuthenticationProfileInfo, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfo", typeof(GetAuthenticationProfileInfoRequest), typeof(GetAuthenticationProfileInfoResponse), () => new GetAuthenticationProfileInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetAuthenticationProfileInfoAsync((GetAuthenticationProfileInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAuthenticationProfileInfoList", "AuthenticationBehaviorPort", SoapActions.GetAuthenticationProfileInfoList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileInfoList", typeof(GetAuthenticationProfileInfoListRequest), typeof(GetAuthenticationProfileInfoListResponse), () => new GetAuthenticationProfileInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetAuthenticationProfileInfoListAsync((GetAuthenticationProfileInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAuthenticationProfiles", "AuthenticationBehaviorPort", SoapActions.GetAuthenticationProfiles, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfiles", typeof(GetAuthenticationProfilesRequest), typeof(GetAuthenticationProfilesResponse), () => new GetAuthenticationProfilesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetAuthenticationProfilesAsync((GetAuthenticationProfilesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAuthenticationProfileList", "AuthenticationBehaviorPort", SoapActions.GetAuthenticationProfileList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetAuthenticationProfileList", typeof(GetAuthenticationProfileListRequest), typeof(GetAuthenticationProfileListResponse), () => new GetAuthenticationProfileListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetAuthenticationProfileListAsync((GetAuthenticationProfileListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateAuthenticationProfile", "AuthenticationBehaviorPort", SoapActions.CreateAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateAuthenticationProfile", typeof(CreateAuthenticationProfileRequest), typeof(CreateAuthenticationProfileResponse), () => new CreateAuthenticationProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).CreateAuthenticationProfileAsync((CreateAuthenticationProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetAuthenticationProfile", "AuthenticationBehaviorPort", SoapActions.SetAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetAuthenticationProfile", typeof(SetAuthenticationProfileRequest), typeof(SetAuthenticationProfileResponse), () => new SetAuthenticationProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).SetAuthenticationProfileAsync((SetAuthenticationProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyAuthenticationProfile", "AuthenticationBehaviorPort", SoapActions.ModifyAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifyAuthenticationProfile", typeof(ModifyAuthenticationProfileRequest), typeof(ModifyAuthenticationProfileResponse), () => new ModifyAuthenticationProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).ModifyAuthenticationProfileAsync((ModifyAuthenticationProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteAuthenticationProfile", "AuthenticationBehaviorPort", SoapActions.DeleteAuthenticationProfile, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteAuthenticationProfile", typeof(DeleteAuthenticationProfileRequest), typeof(DeleteAuthenticationProfileResponse), () => new DeleteAuthenticationProfileRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).DeleteAuthenticationProfileAsync((DeleteAuthenticationProfileRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSecurityLevelInfo", "AuthenticationBehaviorPort", SoapActions.GetSecurityLevelInfo, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfo", typeof(GetSecurityLevelInfoRequest), typeof(GetSecurityLevelInfoResponse), () => new GetSecurityLevelInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetSecurityLevelInfoAsync((GetSecurityLevelInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSecurityLevelInfoList", "AuthenticationBehaviorPort", SoapActions.GetSecurityLevelInfoList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelInfoList", typeof(GetSecurityLevelInfoListRequest), typeof(GetSecurityLevelInfoListResponse), () => new GetSecurityLevelInfoListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetSecurityLevelInfoListAsync((GetSecurityLevelInfoListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSecurityLevels", "AuthenticationBehaviorPort", SoapActions.GetSecurityLevels, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevels", typeof(GetSecurityLevelsRequest), typeof(GetSecurityLevelsResponse), () => new GetSecurityLevelsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetSecurityLevelsAsync((GetSecurityLevelsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSecurityLevelList", "AuthenticationBehaviorPort", SoapActions.GetSecurityLevelList, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "GetSecurityLevelList", typeof(GetSecurityLevelListRequest), typeof(GetSecurityLevelListResponse), () => new GetSecurityLevelListRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).GetSecurityLevelListAsync((GetSecurityLevelListRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateSecurityLevel", "AuthenticationBehaviorPort", SoapActions.CreateSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "CreateSecurityLevel", typeof(CreateSecurityLevelRequest), typeof(CreateSecurityLevelResponse), () => new CreateSecurityLevelRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).CreateSecurityLevelAsync((CreateSecurityLevelRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SetSecurityLevel", "AuthenticationBehaviorPort", SoapActions.SetSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "SetSecurityLevel", typeof(SetSecurityLevelRequest), typeof(SetSecurityLevelResponse), () => new SetSecurityLevelRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).SetSecurityLevelAsync((SetSecurityLevelRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifySecurityLevel", "AuthenticationBehaviorPort", SoapActions.ModifySecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "ModifySecurityLevel", typeof(ModifySecurityLevelRequest), typeof(ModifySecurityLevelResponse), () => new ModifySecurityLevelRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).ModifySecurityLevelAsync((ModifySecurityLevelRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteSecurityLevel", "AuthenticationBehaviorPort", SoapActions.DeleteSecurityLevel, "http://www.onvif.org/ver10/authenticationbehavior/wsdl", "DeleteSecurityLevel", typeof(DeleteSecurityLevelRequest), typeof(DeleteSecurityLevelResponse), () => new DeleteSecurityLevelRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AuthenticationBehaviorPortClient)c).DeleteSecurityLevelAsync((DeleteSecurityLevelRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// This operation returns the capabilities of the authentication behavior service.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

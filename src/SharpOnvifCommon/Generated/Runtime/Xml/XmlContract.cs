@@ -118,6 +118,53 @@ namespace SharpOnvifCommon.Xml
             get { return null; }
         }
 
+        // What follows describes a contract to code that handles any of them - an editor, a
+        // browser of operations - so that it needs no reflection to list, read and write one.
+        // Nothing of it is built until it is asked for: a contract nobody describes allocates none.
+
+        /// <summary>
+        /// The members of this contract's type, inherited ones first, built on first use. A
+        /// generated type answers with its own <c>GetXmlMembers()</c>.
+        /// </summary>
+        public virtual System.Collections.Generic.IReadOnlyList<XmlMember> XmlMembers
+        {
+            get { return GetXmlMembers(); }
+        }
+
+        /// <summary>
+        /// The members of a type, inherited ones first. Every generated type declares its own,
+        /// hiding this one, so the members of a type are had without an instance of it.
+        /// </summary>
+        public static System.Collections.Generic.IReadOnlyList<XmlMember> GetXmlMembers()
+        {
+            return System.Array.Empty<XmlMember>();
+        }
+
+        /// <summary>A new, empty instance of this contract's type; null for a type that does not say.</summary>
+        public virtual XmlContract CreateXmlInstance()
+        {
+            return null;
+        }
+
+        /// <summary>The schema type of this contract, or null for an anonymous type.</summary>
+        public System.Xml.XmlQualifiedName XmlType
+        {
+            get
+            {
+                string name = XmlTypeName;
+                return name == null ? null : new System.Xml.XmlQualifiedName(name, XmlTypeNamespace ?? string.Empty);
+            }
+        }
+
+        /// <summary>
+        /// The element a request or response is written as in a SOAP body, or null for a contract
+        /// that is only ever the content of another.
+        /// </summary>
+        public virtual System.Xml.XmlQualifiedName XmlRootElement
+        {
+            get { return null; }
+        }
+
         // The reader and writer drive the members above from outside the type, which protected
         // access alone does not allow. These invokers keep the overridable surface protected while
         // letting the serialization layer reach it.

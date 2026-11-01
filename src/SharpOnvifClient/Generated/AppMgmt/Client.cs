@@ -135,6 +135,48 @@ namespace SharpOnvifClient.AppMgmt
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static AppManagementClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new AppManagementClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("Uninstall", "AppManagement", SoapActions.Uninstall, "http://www.onvif.org/ver10/appmgmt/wsdl", "Uninstall", typeof(UninstallRequest), typeof(UninstallResponse), () => new UninstallRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).UninstallAsync((UninstallRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetInstalledApps", "AppManagement", SoapActions.GetInstalledApps, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetInstalledApps", typeof(GetInstalledAppsRequest), typeof(GetInstalledAppsResponse), () => new GetInstalledAppsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).GetInstalledAppsAsync((GetInstalledAppsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAppsInfo", "AppManagement", SoapActions.GetAppsInfo, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetAppsInfo", typeof(GetAppsInfoRequest), typeof(GetAppsInfoResponse), () => new GetAppsInfoRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).GetAppsInfoAsync((GetAppsInfoRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Activate", "AppManagement", SoapActions.Activate, "http://www.onvif.org/ver10/appmgmt/wsdl", "Activate", typeof(ActivateRequest), typeof(ActivateResponse), () => new ActivateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).ActivateAsync((ActivateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("Deactivate", "AppManagement", SoapActions.Deactivate, "http://www.onvif.org/ver10/appmgmt/wsdl", "Deactivate", typeof(DeactivateRequest), typeof(DeactivateResponse), () => new DeactivateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).DeactivateAsync((DeactivateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "AppManagement", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("InstallLicense", "AppManagement", SoapActions.InstallLicense, "http://www.onvif.org/ver10/appmgmt/wsdl", "InstallLicense", typeof(InstallLicenseRequest), typeof(InstallLicenseResponse), () => new InstallLicenseRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).InstallLicenseAsync((InstallLicenseRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetDeviceId", "AppManagement", SoapActions.GetDeviceId, "http://www.onvif.org/ver10/appmgmt/wsdl", "GetDeviceId", typeof(GetDeviceIdRequest), typeof(GetDeviceIdResponse), () => new GetDeviceIdRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AppManagementClient)c).GetDeviceIdAsync((GetDeviceIdRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Removes an app from a device. This method shall return immedeiately and not wait until the
         /// application is completely removed. On completion or failure the method shall generate an
         /// UninstallCompletion event.

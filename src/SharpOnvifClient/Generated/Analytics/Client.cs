@@ -150,6 +150,48 @@ namespace SharpOnvifClient.Analytics
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static AnalyticsEnginePortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new AnalyticsEnginePortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "AnalyticsEnginePort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver20/analytics/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSupportedAnalyticsModules", "AnalyticsEnginePort", SoapActions.GetSupportedAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedAnalyticsModules", typeof(GetSupportedAnalyticsModulesRequest), typeof(GetSupportedAnalyticsModulesResponse), () => new GetSupportedAnalyticsModulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).GetSupportedAnalyticsModulesAsync((GetSupportedAnalyticsModulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAnalyticsModuleOptions", "AnalyticsEnginePort", SoapActions.GetAnalyticsModuleOptions, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModuleOptions", typeof(GetAnalyticsModuleOptionsRequest), typeof(GetAnalyticsModuleOptionsResponse), () => new GetAnalyticsModuleOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).GetAnalyticsModuleOptionsAsync((GetAnalyticsModuleOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateAnalyticsModules", "AnalyticsEnginePort", SoapActions.CreateAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "CreateAnalyticsModules", typeof(CreateAnalyticsModulesRequest), typeof(CreateAnalyticsModulesResponse), () => new CreateAnalyticsModulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).CreateAnalyticsModulesAsync((CreateAnalyticsModulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteAnalyticsModules", "AnalyticsEnginePort", SoapActions.DeleteAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteAnalyticsModules", typeof(DeleteAnalyticsModulesRequest), typeof(DeleteAnalyticsModulesResponse), () => new DeleteAnalyticsModulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).DeleteAnalyticsModulesAsync((DeleteAnalyticsModulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetAnalyticsModules", "AnalyticsEnginePort", SoapActions.GetAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "GetAnalyticsModules", typeof(GetAnalyticsModulesRequest), typeof(GetAnalyticsModulesResponse), () => new GetAnalyticsModulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).GetAnalyticsModulesAsync((GetAnalyticsModulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyAnalyticsModules", "AnalyticsEnginePort", SoapActions.ModifyAnalyticsModules, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyAnalyticsModules", typeof(ModifyAnalyticsModulesRequest), typeof(ModifyAnalyticsModulesResponse), () => new ModifyAnalyticsModulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).ModifyAnalyticsModulesAsync((ModifyAnalyticsModulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSupportedMetadata", "AnalyticsEnginePort", SoapActions.GetSupportedMetadata, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedMetadata", typeof(GetSupportedMetadataRequest), typeof(GetSupportedMetadataResponse), () => new GetSupportedMetadataRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((AnalyticsEnginePortClient)c).GetSupportedMetadataAsync((GetSupportedMetadataRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the analytics service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))
@@ -408,6 +450,46 @@ namespace SharpOnvifClient.Analytics
         protected override SharpOnvifCommon.Xml.XmlContract ResolveXmlType(string ns, string name)
         {
             return XmlTypeFactory.Create(ns, name);
+        }
+
+        /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static RuleEnginePortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new RuleEnginePortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetSupportedRules", "RuleEnginePort", SoapActions.GetSupportedRules, "http://www.onvif.org/ver20/analytics/wsdl", "GetSupportedRules", typeof(GetSupportedRulesRequest), typeof(GetSupportedRulesResponse), () => new GetSupportedRulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((RuleEnginePortClient)c).GetSupportedRulesAsync((GetSupportedRulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("CreateRules", "RuleEnginePort", SoapActions.CreateRules, "http://www.onvif.org/ver20/analytics/wsdl", "CreateRules", typeof(CreateRulesRequest), typeof(CreateRulesResponse), () => new CreateRulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((RuleEnginePortClient)c).CreateRulesAsync((CreateRulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("DeleteRules", "RuleEnginePort", SoapActions.DeleteRules, "http://www.onvif.org/ver20/analytics/wsdl", "DeleteRules", typeof(DeleteRulesRequest), typeof(DeleteRulesResponse), () => new DeleteRulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((RuleEnginePortClient)c).DeleteRulesAsync((DeleteRulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRules", "RuleEnginePort", SoapActions.GetRules, "http://www.onvif.org/ver20/analytics/wsdl", "GetRules", typeof(GetRulesRequest), typeof(GetRulesResponse), () => new GetRulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((RuleEnginePortClient)c).GetRulesAsync((GetRulesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRuleOptions", "RuleEnginePort", SoapActions.GetRuleOptions, "http://www.onvif.org/ver20/analytics/wsdl", "GetRuleOptions", typeof(GetRuleOptionsRequest), typeof(GetRuleOptionsResponse), () => new GetRuleOptionsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((RuleEnginePortClient)c).GetRuleOptionsAsync((GetRuleOptionsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("ModifyRules", "RuleEnginePort", SoapActions.ModifyRules, "http://www.onvif.org/ver20/analytics/wsdl", "ModifyRules", typeof(ModifyRulesRequest), typeof(ModifyRulesResponse), () => new ModifyRulesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((RuleEnginePortClient)c).ModifyRulesAsync((ModifyRulesRequest)r, ct))),
+            };
         }
 
         /// <summary>

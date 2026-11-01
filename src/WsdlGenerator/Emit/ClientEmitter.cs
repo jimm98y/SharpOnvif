@@ -119,6 +119,9 @@ internal sealed class ClientEmitter
                 writer.Line("return XmlTypeFactory.Create(ns, name);");
             }
 
+            writer.Line();
+            EmitMetadata(writer, service, name);
+
             foreach (var operation in service.Operations)
             {
                 writer.Line();
@@ -167,6 +170,77 @@ internal sealed class ClientEmitter
         {
             writer.Line($"return {call};");
         }
+    }
+
+    /// <summary>
+    /// What describes the client to code that calls any operation - a browser of operations, a
+    /// generic editor - so that nobody needs reflection to list its operations, build their
+    /// requests or call them.
+    /// <para>
+    /// The table of operations sits in a static field no initializer fills: the first read of
+    /// <c>Operations</c> builds it. A client that is only ever called through its methods builds
+    /// nothing. Each call in the table goes through the typed method, so it is checked by the
+    /// compiler like any other call of it.
+    /// </para>
+    /// </summary>
+    private void EmitMetadata(CSharpWriter writer, CsService service, string client)
+    {
+        string operation = $"{Runtime}.SoapOperation";
+
+        writer.Doc("Creates a client - what code that has only the client's type, not its constructor, calls.");
+        writer.Line($"public static {client} Create(string endpointUri, {Runtime}.IClientSettings settings)");
+        using (writer.Braces())
+        {
+            writer.Line($"return new {client}(endpointUri, settings);");
+        }
+        writer.Line();
+
+        writer.Doc("A contract of the schema type an xsi:type names, as a response of this client reads it; null for a type it does not know.");
+        writer.Line($"public static {Xml}.XmlContract CreateXmlType(string ns, string name)");
+        using (writer.Braces())
+        {
+            writer.Line("return XmlTypeFactory.Create(ns, name);");
+        }
+        writer.Line();
+
+        writer.Line($"private static {operation}[] s_operations;");
+        writer.Line();
+        writer.Doc("The operations of the client, to list and to call without reflection; built on first use.");
+        writer.Line($"public static global::System.Collections.Generic.IReadOnlyList<{operation}> Operations");
+        using (writer.Braces())
+        {
+            writer.Line("get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }");
+        }
+        writer.Line();
+
+        writer.Line($"private static {operation}[] BuildOperations()");
+        using (writer.Braces())
+        {
+            writer.Line($"return new {operation}[]");
+            writer.Line("{");
+            foreach (var op in service.Operations)
+                writer.Line("    " + OperationDescriptor(service, op, client) + ",");
+            writer.Line("};");
+        }
+    }
+
+    /// <summary>The <c>new SoapOperation(...)</c> that describes one operation of a client.</summary>
+    private string OperationDescriptor(CsService service, CsOperation operation, string client)
+    {
+        var wrapper = operation.Request;
+        string bodyNamespace = wrapper.WrapperElement is { } element ? $"\"{element.Namespace}\"" : "null";
+        string bodyName = wrapper.WrapperElement is { } bodyElement ? $"\"{bodyElement.LocalName}\"" : $"\"{operation.Name}\"";
+
+        string method = CsharpNaming.Escape(operation.Name) + "Async";
+        string call = $"(({client})c).{method}(({operation.Request.Name})r, ct)";
+        string invoke = operation.IsOneWay
+            ? $"(c, r, ct) => {Runtime}.SoapOperation.NoResponse({call})"
+            : $"(c, r, ct) => {Runtime}.SoapOperation.Response({call})";
+        string response = operation.IsOneWay ? "null" : $"typeof({operation.Response.Name})";
+
+        return $"new {Runtime}.SoapOperation(\"{operation.Name}\", \"{service.Name}\", SoapActions.{CsharpNaming.Escape(operation.Name)}, " +
+               $"{bodyNamespace}, {bodyName}, typeof({operation.Request.Name}), {response}, " +
+               $"() => new {operation.Request.Name}(), {invoke})";
     }
 
     private static List<CsMember> Inputs(CsOperation operation) =>

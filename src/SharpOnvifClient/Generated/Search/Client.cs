@@ -305,6 +305,58 @@ namespace SharpOnvifClient.Search
         }
 
         /// <summary>
+        /// Creates a client - what code that has only the client's type, not its constructor, calls.
+        /// </summary>
+        public static SearchPortClient Create(string endpointUri, SharpOnvifCommon.Soap.IClientSettings settings)
+        {
+            return new SearchPortClient(endpointUri, settings);
+        }
+
+        /// <summary>
+        /// A contract of the schema type an xsi:type names, as a response of this client reads it; null for a
+        /// type it does not know.
+        /// </summary>
+        public static SharpOnvifCommon.Xml.XmlContract CreateXmlType(string ns, string name)
+        {
+            return XmlTypeFactory.Create(ns, name);
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] s_operations;
+
+        /// <summary>
+        /// The operations of the client, to list and to call without reflection; built on first use.
+        /// </summary>
+        public static global::System.Collections.Generic.IReadOnlyList<SharpOnvifCommon.Soap.SoapOperation> Operations
+        {
+            get { return s_operations ?? global::System.Threading.LazyInitializer.EnsureInitialized(ref s_operations, BuildOperations); }
+        }
+
+        private static SharpOnvifCommon.Soap.SoapOperation[] BuildOperations()
+        {
+            return new SharpOnvifCommon.Soap.SoapOperation[]
+            {
+                new SharpOnvifCommon.Soap.SoapOperation("GetServiceCapabilities", "SearchPort", SoapActions.GetServiceCapabilities, "http://www.onvif.org/ver10/search/wsdl", "GetServiceCapabilities", typeof(GetServiceCapabilitiesRequest), typeof(GetServiceCapabilitiesResponse), () => new GetServiceCapabilitiesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetServiceCapabilitiesAsync((GetServiceCapabilitiesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRecordingSummary", "SearchPort", SoapActions.GetRecordingSummary, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSummary", typeof(GetRecordingSummaryRequest), typeof(GetRecordingSummaryResponse), () => new GetRecordingSummaryRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetRecordingSummaryAsync((GetRecordingSummaryRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRecordingInformation", "SearchPort", SoapActions.GetRecordingInformation, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingInformation", typeof(GetRecordingInformationRequest), typeof(GetRecordingInformationResponse), () => new GetRecordingInformationRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetRecordingInformationAsync((GetRecordingInformationRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetMediaAttributes", "SearchPort", SoapActions.GetMediaAttributes, "http://www.onvif.org/ver10/search/wsdl", "GetMediaAttributes", typeof(GetMediaAttributesRequest), typeof(GetMediaAttributesResponse), () => new GetMediaAttributesRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetMediaAttributesAsync((GetMediaAttributesRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("FindRecordings", "SearchPort", SoapActions.FindRecordings, "http://www.onvif.org/ver10/search/wsdl", "FindRecordings", typeof(FindRecordingsRequest), typeof(FindRecordingsResponse), () => new FindRecordingsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).FindRecordingsAsync((FindRecordingsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetRecordingSearchResults", "SearchPort", SoapActions.GetRecordingSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetRecordingSearchResults", typeof(GetRecordingSearchResultsRequest), typeof(GetRecordingSearchResultsResponse), () => new GetRecordingSearchResultsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetRecordingSearchResultsAsync((GetRecordingSearchResultsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("FindEvents", "SearchPort", SoapActions.FindEvents, "http://www.onvif.org/ver10/search/wsdl", "FindEvents", typeof(FindEventsRequest), typeof(FindEventsResponse), () => new FindEventsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).FindEventsAsync((FindEventsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetEventSearchResults", "SearchPort", SoapActions.GetEventSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetEventSearchResults", typeof(GetEventSearchResultsRequest), typeof(GetEventSearchResultsResponse), () => new GetEventSearchResultsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetEventSearchResultsAsync((GetEventSearchResultsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("FindPTZPosition", "SearchPort", SoapActions.FindPTZPosition, "http://www.onvif.org/ver10/search/wsdl", "FindPTZPosition", typeof(FindPTZPositionRequest), typeof(FindPTZPositionResponse), () => new FindPTZPositionRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).FindPTZPositionAsync((FindPTZPositionRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetPTZPositionSearchResults", "SearchPort", SoapActions.GetPTZPositionSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetPTZPositionSearchResults", typeof(GetPTZPositionSearchResultsRequest), typeof(GetPTZPositionSearchResultsResponse), () => new GetPTZPositionSearchResultsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetPTZPositionSearchResultsAsync((GetPTZPositionSearchResultsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetSearchState", "SearchPort", SoapActions.GetSearchState, "http://www.onvif.org/ver10/search/wsdl", "GetSearchState", typeof(GetSearchStateRequest), typeof(GetSearchStateResponse), () => new GetSearchStateRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetSearchStateAsync((GetSearchStateRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("EndSearch", "SearchPort", SoapActions.EndSearch, "http://www.onvif.org/ver10/search/wsdl", "EndSearch", typeof(EndSearchRequest), typeof(EndSearchResponse), () => new EndSearchRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).EndSearchAsync((EndSearchRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("FindMetadata", "SearchPort", SoapActions.FindMetadata, "http://www.onvif.org/ver10/search/wsdl", "FindMetadata", typeof(FindMetadataRequest), typeof(FindMetadataResponse), () => new FindMetadataRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).FindMetadataAsync((FindMetadataRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetMetadataSearchResults", "SearchPort", SoapActions.GetMetadataSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetMetadataSearchResults", typeof(GetMetadataSearchResultsRequest), typeof(GetMetadataSearchResultsResponse), () => new GetMetadataSearchResultsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetMetadataSearchResultsAsync((GetMetadataSearchResultsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SearchImageByNL", "SearchPort", SoapActions.SearchImageByNL, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByNLRequest", typeof(SearchImageByNLRequest), typeof(SearchImageByNLResponse), () => new SearchImageByNLRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).SearchImageByNLAsync((SearchImageByNLRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetNLSearchResults", "SearchPort", SoapActions.GetNLSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetNLSearchResultsRequest", typeof(GetNLSearchResultsRequest), typeof(GetNLSearchResultsResponse), () => new GetNLSearchResultsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetNLSearchResultsAsync((GetNLSearchResultsRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("SearchImageByImage", "SearchPort", SoapActions.SearchImageByImage, "http://www.onvif.org/ver10/search/wsdl", "SearchImageByImageRequest", typeof(SearchImageByImageRequest), typeof(SearchImageByImageResponse), () => new SearchImageByImageRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).SearchImageByImageAsync((SearchImageByImageRequest)r, ct))),
+                new SharpOnvifCommon.Soap.SoapOperation("GetImageSearchResults", "SearchPort", SoapActions.GetImageSearchResults, "http://www.onvif.org/ver10/search/wsdl", "GetImageSearchResultsRequest", typeof(GetImageSearchResultsRequest), typeof(GetImageSearchResultsResponse), () => new GetImageSearchResultsRequest(), (c, r, ct) => SharpOnvifCommon.Soap.SoapOperation.Response(((SearchPortClient)c).GetImageSearchResultsAsync((GetImageSearchResultsRequest)r, ct))),
+            };
+        }
+
+        /// <summary>
         /// Returns the capabilities of the search service. The result is returned in a typed answer.
         /// </summary>
         public System.Threading.Tasks.Task<GetServiceCapabilitiesResponse> GetServiceCapabilitiesAsync(GetServiceCapabilitiesRequest request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken))

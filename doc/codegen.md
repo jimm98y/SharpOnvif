@@ -149,6 +149,7 @@ compiling it that way.
 | `Soap/SoapClientBase.cs` | The base class a generated client derives from. |
 | `Xml/XmlContract.cs` | The base class every generated contract derives from. |
 | `Xml/SoapFault.cs`, `Soap/SoapTransportException.cs`, `Xml/XmlNamespaceDeclaration.cs` | What a caller catches and inspects. |
+| `Xml/XmlMember.cs`, `Soap/SoapOperation.cs` | How a contract's members and a client's operations describe themselves, below. |
 
 Nothing that implements those interfaces is generated. ONVIF's implementations are hand-written in
 `SharpOnvifCommon`: `OnvifXmlReader`, `OnvifXmlWriter`, `SoapEnvelope`, `SoapMessageCodec`,
@@ -218,6 +219,37 @@ public virtual GetServicesResponse GetServices(bool IncludeCapability);
 
 The dispatcher calls the first. An operation nothing overrides throws `NotImplementedException`,
 which the endpoint reports as the `ter:ActionNotSupported` fault.
+
+## Describing contracts and clients
+
+A tool that handles any contract or calls any operation - an editor, a browser of operations - can do
+it without reflection. Every generated contract lists its members, and every generated client lists
+its operations:
+
+```cs
+foreach (XmlMember member in request.XmlMembers)        // or SetHostnameRequest.GetXmlMembers()
+{
+    object value = member.GetValue(request);            // member.SetValue, GetSpecified, SetSpecified
+    // member.Kind, ValueKind, XmlName, Order, EnumValues, Choices, CreateValue(), CreateItem() ...
+}
+
+SoapOperation operation = DeviceClient.Operations.Single(o => o.Name == "GetHostname");
+XmlContract response = await operation.InvokeAsync(client, operation.CreateRequest());
+```
+
+A member lists what the property, its `XxxSpecified` flag and its XmlSerializer attributes say, with
+delegates to read and write it; an operation names its port, action and body element, makes its
+request and calls the typed method. `DeviceClient.Create(uri, settings)` makes a client, and
+`DeviceClient.CreateXmlType(ns, name)` resolves an `xsi:type` the way the client does. A contract also
+says what schema type it is, `XmlType`, and a request or response which element it is sent as,
+`XmlRootElement`.
+
+Nothing of it costs anything until it is asked for. The tables sit in static fields no initializer
+fills: the first read builds them, once, and no generated type has a static constructor. Making,
+writing and reading contracts, and calling clients through their methods, builds none of it - only the
+assemblies are larger. The values of an enum and the branches of a choice are built on the first read
+of their own. `TestContractMetadata` checks the descriptions against reflection for every generated
+type, and that they stay unbuilt until read.
 
 ## Type names
 
